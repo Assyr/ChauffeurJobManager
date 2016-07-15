@@ -11,9 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Data;
-using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+
+
 
 namespace ChauffeurJobManager
 {
@@ -22,18 +22,37 @@ namespace ChauffeurJobManager
     /// </summary>
     public partial class login : Window
     {
+        MySQLManager SQLManager = new MySQLManager();
+
         public login()
         {
             InitializeComponent();
         }
 
-        welcome welcomeWindow = new welcome();
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
-            if (textBoxUsername.Text.Length == 0) { //If username field is empty
-                errormessage.Text = "Username cannot be empty.";
-                textBoxUsername.Focus(); //Set focus to email textBox
+            if (loginUsername.Text.Length == 0)
+            { //If username field is empty
+                errormessage.Text = "Username field cannot be empty.";
+                loginUsername.Focus(); //Set focus to email textBox
+            }
+            else if (loginPassword.Password.Length == 0)
+            {
+                errormessage.Text = "Password field cannot be empty.";
+                loginPassword.Focus();
+            }
+            else
+            {
+
+                string username = loginUsername.Text;
+                string password = loginPassword.Password; //Get password as SecureString - gets deleted from memory when not in use
+
+                SQLManager.openConnection();
+
+                //Authenticate login here
+
+                SQLManager.closeConnection();
             }
         }
     }
