@@ -49,10 +49,15 @@ namespace ChauffeurJobManager
                 string password = loginPassword.Password; //Get password as SecureString - gets deleted from memory when not in use
 
                 SQLManager.openConnection();
-
-                //Authenticate login here
-
-                SQLManager.closeConnection();
+                //Not sure! Must pass it as PasswordBox for better security?
+                if(SQLManager.loginAuth(username, password)) //if auth was succesful
+                {
+                    //Switch to welcome screen
+                }
+                else //If auth was unsuccesful
+                {
+                    errormessage.Text = DateTime.Now.ToString("h:mm:ss tt - ") + "Access denied - username and / or password is incorrect";
+                }
             }
         }
     }

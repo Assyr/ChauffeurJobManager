@@ -80,5 +80,36 @@ namespace ChauffeurJobManager
             }
         }
 
+        public bool loginAuth(string authUsername, string authPassword)
+        {
+            MySqlCommand selectLoginCredentials = new MySqlCommand("select * from lecdatabase.userslogindata where username = '" + authUsername + "' and password = '" + authPassword + "' ; ", connection);
+
+            MySqlDataReader myReader = selectLoginCredentials.ExecuteReader();
+
+            int x = 0;
+            while(myReader.Read())
+            {
+                x++;
+            }
+            if(x == 1)
+            {
+                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Login authentication succesful, welcome " + authUsername);
+                closeConnection();
+                return true;
+            }
+            else if(x > 1)
+            {
+                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Access denied - check for duplicate login accounts");
+                closeConnection();
+                return false;
+            }
+            else
+            {
+                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Access denied - username and / or password is incorrect");
+                closeConnection();
+                return false;
+            }
+        }
+
     }
 }

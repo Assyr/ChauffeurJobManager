@@ -14,6 +14,6 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         <TextBox Height="23" HorizontalAlignment="Left" Margin="118,115,0,0" Name="loginUsername" VerticalAlignment="Top" Width="248" />
         <PasswordBox Height="23" HorizontalAlignment="Left" Margin="118,168,0,0" Name="loginPassword" VerticalAlignment="Top" Width="248" />
         <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="118,211,0,0" Name="button1" VerticalAlignment="Top" Width="104" Click="buttonLogin_Click" />
-        <TextBlock Height="23" HorizontalAlignment="Left" x:Name ="errormessage" VerticalAlignment="Top" Width="248" Margin="118,253,0,0"  OpacityMask="Crimson" Foreground="#FFE5572C"  />
+        <TextBlock Height="63" HorizontalAlignment="Left" x:Name ="errormessage" VerticalAlignment="Top" Width="500" Margin="10,239,0,0"  OpacityMask="Crimson" Foreground="#FFE5572C"  />
     </Grid>
 </Window> 
