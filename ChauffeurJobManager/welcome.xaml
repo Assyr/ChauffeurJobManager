@@ -6,8 +6,6 @@
     <Grid>
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="WelcomeHeading" Text="Welcome:" VerticalAlignment="Top" FontSize="17" FontStretch="ExtraCondensed"/>
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="88,10,0,0" x:Name="TextBlockName"  VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" />
-        <Button x:Name="button" Content="IMS Jobs" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top" Width="99" Height="67" Click="button_Click"/>
-        <Button x:Name="button_Copy" Content="Others" HorizontalAlignment="Left" Margin="127,68,0,0" VerticalAlignment="Top" Width="99" Height="67" Click="button_Click"/>
         <TextBlock Height="25" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="WelcomeHeading_Copy" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="357"><Run Text="Please select wh"/><Run Text="ich jobs you would like to view:"/></TextBlock>
     </Grid>
 </Window>

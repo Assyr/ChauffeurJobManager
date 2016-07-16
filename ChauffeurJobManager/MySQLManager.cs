@@ -20,6 +20,8 @@ namespace ChauffeurJobManager
         private string uid;
         private string password;
 
+        private int userCompanyID;
+
 
         //Constructor
         public MySQLManager()
@@ -94,7 +96,9 @@ namespace ChauffeurJobManager
             if(x == 1)
             {
                 Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Login authentication succesful, welcome " + authUsername);
+                userCompanyID += myReader.GetInt32("customer_company_id");
                 closeConnection();
+                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "userCompanyID = " + userCompanyID + " - Username = " + authUsername + " - Password = " + authPassword);
                 return true;
             }
             else if(x > 1)
@@ -109,6 +113,11 @@ namespace ChauffeurJobManager
                 closeConnection();
                 return false;
             }
+        }
+
+        public int getUserCompanyID()
+        {
+            return userCompanyID;
         }
 
     }

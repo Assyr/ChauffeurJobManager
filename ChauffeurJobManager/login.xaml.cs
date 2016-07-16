@@ -52,7 +52,6 @@ namespace ChauffeurJobManager
                 //Not sure! Must pass it as PasswordBox for better security?
                 if(SQLManager.loginAuth(username, password)) //if auth was succesful
                 {
-
                     //Switch to welcome screen
                     welcomeScreen = new welcome();
                     welcomeScreen.TextBlockName.Text = username;
