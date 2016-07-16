@@ -23,12 +23,12 @@ namespace ChauffeurJobManager
     public partial class login : Window
     {
         MySQLManager SQLManager = new MySQLManager();
+        welcome welcomeScreen;
 
         public login()
         {
             InitializeComponent();
         }
-
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -53,6 +53,10 @@ namespace ChauffeurJobManager
                 if(SQLManager.loginAuth(username, password)) //if auth was succesful
                 {
                     //Switch to welcome screen
+                    welcomeScreen = new welcome();
+                    welcomeScreen.TextBlockName.Text = username;
+                    welcomeScreen.Show();
+                    Close();
                 }
                 else //If auth was unsuccesful
                 {
