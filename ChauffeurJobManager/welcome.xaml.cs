@@ -22,6 +22,12 @@ namespace ChauffeurJobManager
         public welcome()
         {
             InitializeComponent();
+            Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Welcome page loaded!");
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
