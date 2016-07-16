@@ -16,7 +16,7 @@ namespace ChauffeurJobManager
 
         private MySqlConnection connection;
         private string server;
-        private string database;
+        private string loginDatabase;
         private string uid;
         private string password;
 
@@ -31,12 +31,12 @@ namespace ChauffeurJobManager
         public void Initialize()
         {
             server = "127.0.0.1";
-            database = "lecdatabase";
+            loginDatabase = "chauffeurjobmanager";
             uid = "root";
             password = "test";
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            loginDatabase + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
             connection = new MySqlConnection(connectionString);
         }
 
@@ -82,7 +82,7 @@ namespace ChauffeurJobManager
 
         public bool loginAuth(string authUsername, string authPassword)
         {
-            MySqlCommand selectLoginCredentials = new MySqlCommand("select * from lecdatabase.userslogindata where username = '" + authUsername + "' and password = '" + authPassword + "' ; ", connection);
+            MySqlCommand selectLoginCredentials = new MySqlCommand("select * from " + loginDatabase + "._users where username = '" + authUsername + "' and password = '" + authPassword + "' ; ", connection);
 
             MySqlDataReader myReader = selectLoginCredentials.ExecuteReader();
 
