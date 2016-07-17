@@ -52,6 +52,9 @@ namespace ChauffeurJobManager
                 //Not sure! Must pass it as PasswordBox for better security?
                 if(SQLManager.loginAuth(username, password)) //if auth was succesful
                 {
+                    //Connect to users company database and grab all tables
+                    SQLManager.openConnection(SQLManager.userCompanyDatabase);
+
                     //Switch to welcome screen
                     welcomeScreen = new welcome();
                     welcomeScreen.TextBlockName.Text = username;

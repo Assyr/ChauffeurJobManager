@@ -19,7 +19,7 @@ namespace ChauffeurJobManager
         private MySqlConnection sqlConnect;
 
         private int userCompanyID;
-        private string userCompanyDatabase;
+        public string userCompanyDatabase;
 
         public string loginDatabase = "chauffeurjobmanager";
         private string server = "127.0.0.1";
@@ -129,16 +129,19 @@ namespace ChauffeurJobManager
             }
 
         }
-        /*
-        private DataTable getDatabaseTables()
+
+        private IList<string> getDatabaseTables()
         {
-            
-            MySqlCommand command = new MySqlCommand();
-            
-            openConnection();
-            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
-            closeConnection();
+            List<string> tables = new List<string>();
+            DataTable dt = sqlConnect.GetSchema("Tables");
+            foreach(DataRow row in dt.Rows)
+            {
+                string tableName = (string)row[2];
+                tables.Add(tableName);
+            }
+            return tables;
         }
-        */
+            
+        
     }
 }
