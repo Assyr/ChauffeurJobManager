@@ -48,7 +48,7 @@ namespace ChauffeurJobManager
                 string username = loginUsername.Text;
                 string password = loginPassword.Password; //Get password as SecureString - gets deleted from memory when not in use
 
-                SQLManager.openConnection();
+                SQLManager.openConnection(SQLManager.loginDatabase);
                 //Not sure! Must pass it as PasswordBox for better security?
                 if(SQLManager.loginAuth(username, password)) //if auth was succesful
                 {

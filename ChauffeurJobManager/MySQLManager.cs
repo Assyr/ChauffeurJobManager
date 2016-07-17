@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 using MySql.Data.MySqlClient;
 using System.Runtime.InteropServices;
 using System.Xml;
@@ -15,40 +16,32 @@ namespace ChauffeurJobManager
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
-        private MySqlConnection connection;
-        private string server;
-        private string loginDatabase;
-        private string uid;
-        private string password;
+        private MySqlConnection sqlConnect;
 
         private int userCompanyID;
-        private string userCompanyDatabaseName;
+        private string userCompanyDatabase;
 
+        public string loginDatabase = "chauffeurjobmanager";
+        private string server = "127.0.0.1";
+        private string uid = "root";
+        private string password = "test";
 
         //Constructor
         public MySQLManager()
         {
-            Initialize();
             AllocConsole();
         }
 
-        public void Initialize()
+        public bool openConnection(string _databaseName)
         {
-            server = "127.0.0.1";
-            loginDatabase = "chauffeurjobmanager";
-            uid = "root";
-            password = "test";
-            string connectionString;
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            loginDatabase + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
-            connection = new MySqlConnection(connectionString);
-        }
+            string connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+            _databaseName + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-        public bool openConnection()
-        {
+
+            sqlConnect = new MySqlConnection(connectionString);
             try
             {
-                connection.Open();
+                sqlConnect.Open();
                 Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Connection to server opened!");
                 return true;
             }
@@ -73,7 +66,7 @@ namespace ChauffeurJobManager
         {
             try
             {
-                connection.Close();
+                sqlConnect.Close();
                 Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Connection to server closed!");
                 return true;
             }
@@ -86,25 +79,25 @@ namespace ChauffeurJobManager
 
         public bool loginAuth(string authUsername, string authPassword)
         {
-            MySqlCommand selectLoginCredentials = new MySqlCommand("select * from " + loginDatabase + "._users where username = '" + authUsername + "' and password = '" + authPassword + "' ; ", connection);
+            MySqlCommand selectLoginCredentials = new MySqlCommand("select * from " + loginDatabase + "._users where username = '" + authUsername + "' and password = '" + authPassword + "' ; ", sqlConnect);
 
             MySqlDataReader myReader = selectLoginCredentials.ExecuteReader();
 
             int x = 0;
-            while(myReader.Read())
+            while (myReader.Read())
             {
                 x++;
             }
-            if(x == 1)
+            if (x == 1)
             {
                 Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Login authentication succesful, welcome " + authUsername);
                 userCompanyID += myReader.GetInt32("customer_company_id");
                 closeConnection();
                 findCustomerDatabase(userCompanyID);
-                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "userCompanyID = " + userCompanyID + " - Username = " + authUsername + " - Password = " + authPassword + " - Database = " + userCompanyDatabaseName);
+                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "userCompanyID = " + userCompanyID + " - Username = " + authUsername + " - Password = " + authPassword + " - Database = " + userCompanyDatabase);
                 return true;
             }
-            else if(x > 1)
+            else if (x > 1)
             {
                 Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Access denied - check for duplicate login accounts");
                 closeConnection();
@@ -129,13 +122,23 @@ namespace ChauffeurJobManager
             {
                 string userCompanyID = node["userCompanyID"].InnerText;
                 int intUserCompanyID = int.Parse(userCompanyID);
-                if(intUserCompanyID == id)
+                if (intUserCompanyID == id)
                 {
-                    userCompanyDatabaseName = node["databaseName"].InnerText;
+                    userCompanyDatabase = node["databaseName"].InnerText;
                 }
             }
 
         }
-
+        /*
+        private DataTable getDatabaseTables()
+        {
+            
+            MySqlCommand command = new MySqlCommand();
+            
+            openConnection();
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(command);
+            closeConnection();
+        }
+        */
     }
 }
