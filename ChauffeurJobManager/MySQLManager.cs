@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Runtime.InteropServices;
+using System.Xml;
 
 namespace ChauffeurJobManager
 {
@@ -21,6 +22,7 @@ namespace ChauffeurJobManager
         private string password;
 
         private int userCompanyID;
+        private string userCompanyDatabaseName;
 
 
         //Constructor
@@ -98,7 +100,8 @@ namespace ChauffeurJobManager
                 Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Login authentication succesful, welcome " + authUsername);
                 userCompanyID += myReader.GetInt32("customer_company_id");
                 closeConnection();
-                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "userCompanyID = " + userCompanyID + " - Username = " + authUsername + " - Password = " + authPassword);
+                findCustomerDatabase(userCompanyID);
+                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "userCompanyID = " + userCompanyID + " - Username = " + authUsername + " - Password = " + authPassword + " - Database = " + userCompanyDatabaseName);
                 return true;
             }
             else if(x > 1)
@@ -115,9 +118,23 @@ namespace ChauffeurJobManager
             }
         }
 
-        public int getUserCompanyID()
+        private void findCustomerDatabase(int id)
         {
-            return userCompanyID;
+            XmlDocument file = new XmlDocument();
+            file.Load("databases.xml");
+            XmlElement element = file.DocumentElement;
+            XmlNodeList databaseNodes = element.SelectNodes("/databases/database");
+
+            foreach (XmlNode node in databaseNodes)
+            {
+                string userCompanyID = node["userCompanyID"].InnerText;
+                int intUserCompanyID = int.Parse(userCompanyID);
+                if(intUserCompanyID == id)
+                {
+                    userCompanyDatabaseName = node["databaseName"].InnerText;
+                }
+            }
+
         }
 
     }

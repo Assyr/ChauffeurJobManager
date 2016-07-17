@@ -1,0 +1,16 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<databases>
+	<database>
+		<userCompanyID>1</userCompanyID>
+		<databaseName>lecdatabase</databaseName>
+	</database>
+<database>
+		<userCompanyID>2</userCompanyID>
+		<databaseName>qqdatabase</databaseName>
+	</database>
+<database>
+		<userCompanyID>3</userCompanyID>
+		<databaseName>nndatabase</databaseName>
+	</database>
+</databases>
