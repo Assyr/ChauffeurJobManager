@@ -15,28 +15,13 @@ using System.Windows.Shapes;
 namespace ChauffeurJobManager
 {
     /// <summary>
-    /// Interaction logic for welcome.xaml
+    /// Interaction logic for jobManager.xaml
     /// </summary>
-    /// 
-    public partial class welcome : Window
+    public partial class jobManager : Window
     {
-
-        public IList<string> listOfDatabaseTables = new List<string>();
-
-        public welcome()
+        public jobManager()
         {
             InitializeComponent();
-            Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Welcome page loaded!");
-        }
-
-
-
-        public void updateTableList()
-        {
-            foreach(string tableName in listOfDatabaseTables)
-            {
-                tableListBox.Items.Add(tableName);
-            }
         }
     }
 }

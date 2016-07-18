@@ -55,16 +55,11 @@ namespace ChauffeurJobManager
                 {
                     //Connect to users company database and grab all tables
                     SQLManager.openConnection(SQLManager.userCompanyDatabase);
-                    IList<string> listOfDatabaseTables = SQLManager.getDatabaseTables();
-                    welcomeScreen = new welcome();
 
-                    foreach (string table  in listOfDatabaseTables)
-                    {
-                        System.Windows.Controls.Button tableButton = new Button();
-                        tableButton.Content = table;
-                        tableButton.Click += (tableSender, eTableSender) => { welcome.tableBtn_Click(sender, e, table); };
-                        welcomeScreen.tableButtons.Children.Add(tableButton);
-                    }
+                    welcomeScreen = new welcome();
+                    welcomeScreen.listOfDatabaseTables = SQLManager.getDatabaseTables();
+                    SQLManager.closeConnection();
+                    welcomeScreen.updateTableList();
                     //Switch to welcome screen
                     welcomeScreen.TextBlockName.Text = username;
                     welcomeScreen.Top = this.Top;
