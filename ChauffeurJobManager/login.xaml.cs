@@ -28,6 +28,7 @@ namespace ChauffeurJobManager
         public login()
         {
             InitializeComponent();
+            loginUsername.Focus();
         }
 
         private void buttonLogin_Click(object sender, RoutedEventArgs e)

@@ -4,7 +4,7 @@
         Title="Welcome" Height="356.538" Width="619.734"
         WindowStartupLocation="CenterOwner">
     <Grid>
-        <StackPanel Name="tableButtons" HorizontalAlignment="Left" Height="35" Margin="8,104,0,190" VerticalAlignment="Center" Width="350" Orientation="Horizontal" />
+        <StackPanel Name="tableButtons" HorizontalAlignment="Left" Height="35" Margin="8,126,0,168" VerticalAlignment="Center" Width="350" Orientation="Horizontal" />
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="WelcomeHeading" Text="Welcome:" VerticalAlignment="Top" FontSize="17" FontStretch="ExtraCondensed"/>
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="88,10,0,0" x:Name="TextBlockName"  VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" />
         <TextBlock Height="43" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="WelcomeHeading_Copy" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="348"><Run Text="Please select wh"/><Run Text="ich "/><Run Text="month"/><Run Text=" you would like to view"/><LineBreak/><Run Text="or create a new one:"/><LineBreak/><Run/></TextBlock>
