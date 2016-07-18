@@ -130,7 +130,7 @@ namespace ChauffeurJobManager
 
         }
 
-        private IList<string> getDatabaseTables()
+        public IList<String> getDatabaseTables()
         {
             List<string> tables = new List<string>();
             DataTable dt = sqlConnect.GetSchema("Tables");
