@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,11 +23,11 @@ namespace ChauffeurJobManager
     {
 
         public IList<string> listOfDatabaseTables = new List<string>();
-
         public welcome()
         {
             InitializeComponent();
             Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Welcome page loaded!");
+           
         }
 
 
@@ -35,7 +36,7 @@ namespace ChauffeurJobManager
         {
             foreach(string tableName in listOfDatabaseTables)
             {
-                tableListBox.Items.Add(tableName);
+                listViewTables.Items.Add(tableName);
             }
         }
     }

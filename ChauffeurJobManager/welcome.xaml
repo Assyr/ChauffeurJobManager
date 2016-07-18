@@ -7,6 +7,13 @@
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="WelcomeHeading" Text="Welcome:" VerticalAlignment="Top" FontSize="17" FontStretch="ExtraCondensed"/>
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="88,10,0,0" x:Name="TextBlockName"  VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" />
         <TextBlock Height="43" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="WelcomeHeading_Copy" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="348"><Run Text="Please select wh"/><Run Text="ich "/><Run Text="month"/><Run Text=" you would like to view"/><LineBreak/><Run Text="or create a new one:"/><LineBreak/><Run/></TextBlock>
-        <ListBox x:Name="tableListBox" HorizontalAlignment="Left" Height="175" Margin="29,86,0,0" VerticalAlignment="Top" Width="170"/>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="14,300,0,0" VerticalAlignment="Top" Width="74"/>
+        <ListView x:Name="listViewTables" Margin="14,86,422.5,45">
+            <ListView.Resources>
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+            </ListView.Resources>
+        </ListView>
     </Grid>
 </Window>
