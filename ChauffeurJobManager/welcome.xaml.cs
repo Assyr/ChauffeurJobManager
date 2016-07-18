@@ -28,7 +28,7 @@ namespace ChauffeurJobManager
 
         internal static void tableBtn_Click(object sender, RoutedEventArgs e, string tableName)
         {
-            MessageBox.Show("You clicked on table: " + tableName);
+            MessageBox.Show("Show add/update/delete/save as CSV page for: " + tableName);
         }
     }
 }

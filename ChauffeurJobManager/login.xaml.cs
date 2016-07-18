@@ -60,13 +60,12 @@ namespace ChauffeurJobManager
 
                     foreach (string table  in listOfDatabaseTables)
                     {
-                        System.Windows.Controls.Button newBtn = new Button();
-                        newBtn.Content = table;
-                        newBtn.Click += (sender1, e2) => { welcome.tableBtn_Click(sender, e, table); };
-                        welcomeScreen.tableButtons.Children.Add(newBtn);
+                        System.Windows.Controls.Button tableButton = new Button();
+                        tableButton.Content = table;
+                        tableButton.Click += (tableSender, eTableSender) => { welcome.tableBtn_Click(sender, e, table); };
+                        welcomeScreen.tableButtons.Children.Add(tableButton);
                     }
                     //Switch to welcome screen
-                    
                     welcomeScreen.TextBlockName.Text = username;
                     welcomeScreen.Top = this.Top;
                     welcomeScreen.Left = this.Left;
