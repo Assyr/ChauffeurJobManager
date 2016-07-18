@@ -62,6 +62,7 @@ namespace ChauffeurJobManager
                     {
                         System.Windows.Controls.Button newBtn = new Button();
                         newBtn.Content = table;
+                        newBtn.Click += (sender1, e2) => { welcome.tableBtn_Click(sender, e, table); };
                         welcomeScreen.tableButtons.Children.Add(newBtn);
                     }
                     //Switch to welcome screen

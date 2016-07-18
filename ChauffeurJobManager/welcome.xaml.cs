@@ -19,15 +19,16 @@ namespace ChauffeurJobManager
     /// </summary>
     public partial class welcome : Window
     {
+
         public welcome()
         {
             InitializeComponent();
             Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Welcome page loaded!");
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        internal static void tableBtn_Click(object sender, RoutedEventArgs e, string tableName)
         {
-
+            MessageBox.Show("You clicked on table: " + tableName);
         }
     }
 }
