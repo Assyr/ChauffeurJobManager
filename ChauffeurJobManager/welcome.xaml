@@ -1,26 +1,30 @@
 ﻿<Window x:Class="ChauffeurJobManager.welcome"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Welcome" Height="356.538" Width="619.734"
+        Title="Welcome" Height="386.538" Width="619.734"
         WindowStartupLocation="CenterOwner">
     <Grid>
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="WelcomeHeading" Text="Welcome:" VerticalAlignment="Top" FontSize="17" FontStretch="ExtraCondensed"/>
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="88,10,0,0" x:Name="TextBlockName"  VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" />
-        <TextBlock Height="43" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="WelcomeHeading_Copy" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="348"><Run Text="Please select wh"/><Run Text="ich "/><Run Text="month"/><Run Text=" you would like to view"/><LineBreak/><Run Text="or create a new one:"/><LineBreak/><Run/></TextBlock>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="10,289,0,0" VerticalAlignment="Top" Width="74" Click="btnLogout_Click"/>
-        <ListView x:Name="listViewTables" Margin="10,86,426.5,45" PreviewMouseLeftButtonUp="listView_Click">
+        <TextBlock Height="43" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="WelcomeHeading_Copy" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="348"><Run Text="Please select wh"/><Run Text="ich "/><Run Text="month"/><Run Text=" you would like to view"/><LineBreak/><Run Text="or create a new one:"/><LineBreak/><InlineUIContainer>
+            </InlineUIContainer></TextBlock>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="530,299,0,0" VerticalAlignment="Top" Width="74" Click="btnLogout_Click"/>
+        <ListView x:Name="listViewTables" Margin="10,86,426.5,80" PreviewMouseLeftButtonUp="listView_Click">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Visibility" Value="Collapsed" />
                 </Style>
             </ListView.Resources>
         </ListView>
-        <DataGrid x:Name="selectedTableDataGrid" HorizontalAlignment="Left" Margin="193,86,0,0" VerticalAlignment="Top" Height="198" Width="406" IsReadOnly="True">
+        <DataGrid x:Name="selectedTableDataGrid" HorizontalAlignment="Left" Margin="193,86,0,0" VerticalAlignment="Top" Height="178" Width="406" IsReadOnly="True">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="Copy" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
+        <Button x:Name="button1" Content="Open Table" HorizontalAlignment="Left" Margin="10,284,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button x:Name="button1_Copy" Content="Create Table" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top" Width="76" Click="button1_Copy_Click"/>
+        <Button x:Name="button1_Copy1" Content="Delete Table" HorizontalAlignment="Left" Margin="91,309,0,0" VerticalAlignment="Top" Width="76"/>
     </Grid>
 </Window>

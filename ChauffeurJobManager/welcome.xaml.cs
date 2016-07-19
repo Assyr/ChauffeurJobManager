@@ -65,7 +65,18 @@ namespace ChauffeurJobManager
         {
             
             login loginWindow = new login();
+            loginWindow.Top = this.Top;
+            loginWindow.Left = this.Left;
             loginWindow.Show();
+            Close();
+        }
+
+        private void button1_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            createTableManager tableManager = new createTableManager();
+            tableManager.Top = this.Top;
+            tableManager.Left = this.Left;
+            tableManager.Show();
             Close();
         }
     }

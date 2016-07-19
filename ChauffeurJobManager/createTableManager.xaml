@@ -1,0 +1,13 @@
+﻿<Window x:Class="ChauffeurJobManager.createTableManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChauffeurJobManager"
+        mc:Ignorable="d"
+        Title="Create Table" Height="300" Width="500">
+    <Grid>
+        <TextBlock Height="66" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="txtBlock_createTableManager" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="446"><Run Text="Create Table Manager - Create a new table "/><LineBreak/><Run Text="or use one you have previously created"/><Run Text="."/></TextBlock>
+        <Button x:Name="button" Content="Back" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="74" Click="button_Click"/>
+    </Grid>
+</Window>
