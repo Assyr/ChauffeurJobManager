@@ -23,11 +23,12 @@ namespace ChauffeurJobManager
     /// 
     public partial class welcome : Window
     {
+       // private login loginWindow;
+        private MySQLManager SQLManager = new MySQLManager();
         public string databaseName;
         public IList<string> listOfDatabaseTables = new List<string>();
 
-
-        private MySQLManager SQLManager = new MySQLManager();
+       
         
 
         public welcome()
@@ -59,6 +60,13 @@ namespace ChauffeurJobManager
                 selectedTableDataGrid.ItemsSource = dataSet.DefaultView;
 
             }
+        }
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            
+            login loginWindow = new login();
+            loginWindow.Show();
+            Close();
         }
     }
 }

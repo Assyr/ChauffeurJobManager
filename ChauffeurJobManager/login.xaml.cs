@@ -12,8 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
-
-
+using System.Runtime.InteropServices;
 
 namespace ChauffeurJobManager
 {
@@ -22,12 +21,14 @@ namespace ChauffeurJobManager
     /// </summary>
     public partial class login : Window
     {
-        MySQLManager SQLManager = new MySQLManager();
-        welcome welcomeScreen;
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool AllocConsole();
 
         public login()
         {
             InitializeComponent();
+            AllocConsole();
             loginUsername.Focus();
         }
 
@@ -48,7 +49,7 @@ namespace ChauffeurJobManager
 
                 string username = loginUsername.Text;
                 string password = loginPassword.Password; //Get password as SecureString - gets deleted from memory when not in use
-
+                MySQLManager SQLManager = new MySQLManager();
                 SQLManager.openConnection(SQLManager.loginDatabase);
                 //Not sure! Must pass it as PasswordBox for better security?
                 if(SQLManager.loginAuth(username, password)) //if auth was succesful
@@ -56,7 +57,7 @@ namespace ChauffeurJobManager
                     //Connect to users company database and grab all tables
                     SQLManager.openConnection(SQLManager.userCompanyDatabase);
 
-                    welcomeScreen = new welcome();
+                    welcome welcomeScreen = new welcome();
                     welcomeScreen.listOfDatabaseTables = SQLManager.getDatabaseTables();
                     SQLManager.closeConnection();
                     welcomeScreen.updateTableList();

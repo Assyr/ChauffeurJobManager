@@ -12,10 +12,6 @@ namespace ChauffeurJobManager
 {
     class MySQLManager
     {
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
-
         public MySqlConnection sqlConnect;
 
         private int userCompanyID;
@@ -26,11 +22,6 @@ namespace ChauffeurJobManager
         private string uid = "root";
         private string password = "test";
 
-        //Constructor
-        public MySQLManager()
-        {
-            AllocConsole();
-        }
 
         public bool openConnection(string _databaseName)
         {
