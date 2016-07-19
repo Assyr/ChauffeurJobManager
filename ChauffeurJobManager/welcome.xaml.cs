@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace ChauffeurJobManager
 {
@@ -21,8 +23,13 @@ namespace ChauffeurJobManager
     /// 
     public partial class welcome : Window
     {
-
+        public string databaseName;
         public IList<string> listOfDatabaseTables = new List<string>();
+
+
+        private MySQLManager SQLManager = new MySQLManager();
+        
+
         public welcome()
         {
             InitializeComponent();
@@ -30,13 +37,27 @@ namespace ChauffeurJobManager
            
         }
 
-
-
         public void updateTableList()
         {
             foreach(string tableName in listOfDatabaseTables)
             {
                 listViewTables.Items.Add(tableName);
+            }
+        }
+
+
+        private void listView_Click(object sender, RoutedEventArgs e)
+        {
+            object item = (sender as ListView).SelectedItem;
+            if (item != null)
+            {
+                DataTable dataSet = new DataTable();
+                SQLManager.openConnection(databaseName);
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter("select * from " + databaseName + "." + item.ToString() + ";", SQLManager.sqlConnect);
+                dataAdapter.Fill(dataSet);
+                SQLManager.closeConnection();
+                selectedTableDataGrid.ItemsSource = dataSet.DefaultView;
+
             }
         }
     }

@@ -16,7 +16,7 @@ namespace ChauffeurJobManager
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool AllocConsole();
 
-        private MySqlConnection sqlConnect;
+        public MySqlConnection sqlConnect;
 
         private int userCompanyID;
         public string userCompanyDatabase;

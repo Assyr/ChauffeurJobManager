@@ -60,6 +60,7 @@ namespace ChauffeurJobManager
                     welcomeScreen.listOfDatabaseTables = SQLManager.getDatabaseTables();
                     SQLManager.closeConnection();
                     welcomeScreen.updateTableList();
+                    welcomeScreen.databaseName = SQLManager.userCompanyDatabase;
                     //Switch to welcome screen
                     welcomeScreen.TextBlockName.Text = username;
                     welcomeScreen.Top = this.Top;
