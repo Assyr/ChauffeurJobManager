@@ -76,8 +76,7 @@ namespace ChauffeurJobManager
             createTableManager tableManager = new createTableManager();
             tableManager.Top = this.Top;
             tableManager.Left = this.Left;
-            tableManager.Show();
-            Close();
+            tableManager.ShowDialog();
         }
     }
 }

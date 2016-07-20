@@ -26,10 +26,6 @@ namespace ChauffeurJobManager
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
-            welcome welcomeScreen = new welcome();
-            welcomeScreen.Top = this.Top;
-            welcomeScreen.Left = this.Left;
-            welcomeScreen.Show();
             Close();
         }
     }
