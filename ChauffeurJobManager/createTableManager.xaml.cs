@@ -22,11 +22,25 @@ namespace ChauffeurJobManager
         public createTableManager()
         {
             InitializeComponent();
+            btn_addNewColumn.Background = Brushes.LightGreen;
+            dataTypeComboBox.Items.Add("CHAR");
+            dataTypeComboBox.Items.Add("VARCHAR");
+            dataTypeComboBox.Items.Add("INT");
+            dataTypeComboBox.Items.Add("FLOAT");
+            dataTypeComboBox.Items.Add("DATE");
+            dataTypeComboBox.Items.Add("DATE+TIME");
+            dataTypeComboBox.Items.Add("TIME");
+            dataTypeComboBox.Items.Add("YEAR");
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void btn_addNewColumn_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
