@@ -31,6 +31,13 @@ namespace ChauffeurJobManager
             dataTypeComboBox.Items.Add("DATE+TIME");
             dataTypeComboBox.Items.Add("TIME");
             dataTypeComboBox.Items.Add("YEAR");
+
+            //store object positions
+            Point comboBoxLocationOnForm = dataTypeComboBox.TranslatePoint(new Point(0, 0), this);
+            Point labelPosition = lbl_columnNumber.TranslatePoint(new Point(0, 0), this);
+
+            Console.WriteLine(comboBoxLocationOnForm);
+            Console.WriteLine(labelPosition);
         }
 
         private void button_Click(object sender, RoutedEventArgs e)

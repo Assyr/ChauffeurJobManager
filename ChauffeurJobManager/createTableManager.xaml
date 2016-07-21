@@ -10,7 +10,7 @@
         <TextBlock Height="66" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="txtBlock_createTableManager" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="446"><Run Text="Create Table Manager - Create a new table "/><LineBreak/><Run Text="or use one you have previously created"/><Run Text="."/></TextBlock>
         <Button x:Name="button" Content="Close" HorizontalAlignment="Left" Margin="10,242,0,0" VerticalAlignment="Top" Width="74" Click="button_Click"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="112,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label x:Name="label" Content="Column 1" HorizontalAlignment="Left" Margin="46,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.849,0.413"/>
+        <Label x:Name="lbl_columnNumber" Content="Column 1" HorizontalAlignment="Left" Margin="46,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.849,0.413"/>
         <ComboBox x:Name="dataTypeComboBox" HorizontalAlignment="Left" Margin="252,81,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btn_addNewColumn" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Margin="386,81,0,0" Height="22" Click="btn_addNewColumn_Click"/>
         <Label x:Name="label1" Content="Column Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,55,0,0"/>
