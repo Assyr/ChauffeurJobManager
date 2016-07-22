@@ -22,14 +22,16 @@ namespace ChauffeurJobManager
 
         private List<ComboBox> comboBoxList = new List<ComboBox>();
         private List<TextBox> textBoxList = new List<TextBox>();
+        private List<Label> labelList = new List<Label>();
 
         private int comboBoxCurrentValue = 80;
         private int comboBoxMarginOffset = 40;
+        private int columnNumber = 1;
+
 
         public createTableManager()
         {
             InitializeComponent();
-            createNewColumn();
             btn_addNewColumn.Background = Brushes.LightGreen;
 
         }
@@ -42,8 +44,6 @@ namespace ChauffeurJobManager
         private void btn_addNewColumn_Click(object sender, RoutedEventArgs e)
         {
             createNewColumn();
-            Console.WriteLine(comboBoxList[0].Text);
-            Console.WriteLine(textBoxList[0].Text);
 
             //Here we will make our new controls - textbox and combobox and then add them to array
             //so we can loop through them later and get the values.
@@ -53,20 +53,29 @@ namespace ChauffeurJobManager
         {
             Grid grid = tableManagerGrid;
 
+            Label lblcolumnNumber = new Label();
             ComboBox dataTypeComboBox = new ComboBox();
             TextBox columnNameTextBox = new TextBox();
 
+
             dataTypeComboBox.Margin = new Thickness(125, comboBoxCurrentValue, 0, 0);
             columnNameTextBox.Margin = new Thickness(-145, comboBoxCurrentValue, 0, 0);
+            lblcolumnNumber.Margin = new Thickness(30, comboBoxCurrentValue, 0, 0);
 
             dataTypeComboBox.VerticalAlignment = VerticalAlignment.Top;
             columnNameTextBox.VerticalAlignment = VerticalAlignment.Top;
+            lblcolumnNumber.VerticalAlignment = VerticalAlignment.Top;
+
 
             dataTypeComboBox.Width = 120;
             columnNameTextBox.Width = 120;
             columnNameTextBox.Height = 20;
 
             columnNameTextBox.TextWrapping = TextWrapping.Wrap;
+
+            lblcolumnNumber.Content = "Column:" + columnNumber + " ";
+
+            lblcolumnNumber.RenderTransformOrigin = new Point(1.882, 0.635);
 
             dataTypeComboBox.Items.Add("CHAR");
             dataTypeComboBox.Items.Add("VARCHAR");
@@ -79,13 +88,17 @@ namespace ChauffeurJobManager
             dataTypeComboBox.SelectedIndex = 0;
 
 
-
+            grid.Children.Add(lblcolumnNumber);
             grid.Children.Add(dataTypeComboBox);
             grid.Children.Add(columnNameTextBox);
 
+            /*Can't do this here... need to do this later.. somewhere else... adding it to our list when its empty lol
             comboBoxList.Add(dataTypeComboBox);
             textBoxList.Add(columnNameTextBox);
+            labelList.Add(lblcolumnNumber);
+            */
 
+            columnNumber++;
             comboBoxCurrentValue += comboBoxMarginOffset;
         }
     }
