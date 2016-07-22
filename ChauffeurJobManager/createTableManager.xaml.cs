@@ -99,20 +99,27 @@ namespace ChauffeurJobManager
         {
             foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
             {
-                //Make sure that the textBox is not empty
-                if (!string.IsNullOrWhiteSpace(tb.Text))
+                foreach (ComboBox cb in findControlsInCurrentWindow<ComboBox>(this))
                 {
-                    textBoxList.Add(tb);
+                    //Make sure that the textBox is not empty
+                    if (!string.IsNullOrWhiteSpace(tb.Text))
+                    {
+                        textBoxList.Add(tb);
+                        comboBoxList.Add(cb);
+                    }
                 }
             }
-            foreach (TextBox item in textBoxList)
+            /*foreach (TextBox item in textBoxList)
             {
-                Console.WriteLine("Outputting all list items: " + item.Text);
-            }
+                foreach (ComboBox comboItem in comboBoxList)
+                {
+
+
+                    Console.WriteLine("Outputting all list items - textBox Value: " + item.Text + " - comboBox Value: " + comboItem.Text);
+                }
+            }*/
 
         }
-
-
 
         public static IEnumerable<T> findControlsInCurrentWindow<T>(DependencyObject depObj) where T : DependencyObject
         {
@@ -133,7 +140,6 @@ namespace ChauffeurJobManager
                 }
             }
         }
-
 
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
