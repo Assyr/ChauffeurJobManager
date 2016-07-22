@@ -18,8 +18,7 @@ namespace ChauffeurJobManager
     /// Interaction logic for createTableManager.xaml
     /// </summary>
     public partial class createTableManager : Window
-    {
-
+    { 
         private List<ComboBox> comboBoxList = new List<ComboBox>();
         private List<TextBox> textBoxList = new List<TextBox>();
         private List<Label> labelList = new List<Label>();
@@ -32,6 +31,7 @@ namespace ChauffeurJobManager
         public createTableManager()
         {
             InitializeComponent();
+            createNewColumn();
             btn_addNewColumn.Background = Brushes.LightGreen;
 
         }
@@ -60,7 +60,7 @@ namespace ChauffeurJobManager
 
             dataTypeComboBox.Margin = new Thickness(125, comboBoxCurrentValue, 0, 0);
             columnNameTextBox.Margin = new Thickness(-145, comboBoxCurrentValue, 0, 0);
-            lblcolumnNumber.Margin = new Thickness(30, comboBoxCurrentValue, 0, 0);
+            lblcolumnNumber.Margin = new Thickness(30, comboBoxCurrentValue - 3, 0, 0);
 
             dataTypeComboBox.VerticalAlignment = VerticalAlignment.Top;
             columnNameTextBox.VerticalAlignment = VerticalAlignment.Top;
@@ -73,7 +73,7 @@ namespace ChauffeurJobManager
 
             columnNameTextBox.TextWrapping = TextWrapping.Wrap;
 
-            lblcolumnNumber.Content = "Column:" + columnNumber + " ";
+            lblcolumnNumber.Content = "Column " + columnNumber + ":";
 
             lblcolumnNumber.RenderTransformOrigin = new Point(1.882, 0.635);
 
@@ -92,14 +92,57 @@ namespace ChauffeurJobManager
             grid.Children.Add(dataTypeComboBox);
             grid.Children.Add(columnNameTextBox);
 
-            /*Can't do this here... need to do this later.. somewhere else... adding it to our list when its empty lol
-            comboBoxList.Add(dataTypeComboBox);
-            textBoxList.Add(columnNameTextBox);
-            labelList.Add(lblcolumnNumber);
-            */
-
             columnNumber++;
             comboBoxCurrentValue += comboBoxMarginOffset;
         }
+        private void btn_SaveTableTemplate_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
+            {
+                //Make sure that the textBox is not empty
+                if (!string.IsNullOrWhiteSpace(tb.Text))
+                {
+                    textBoxList.Add(tb);
+                }
+            }
+            foreach (TextBox item in textBoxList)
+            {
+                Console.WriteLine("Outputting all list items: " + item.Text);
+            }
+
+        }
+
+
+
+        public static IEnumerable<T> findControlsInCurrentWindow<T>(DependencyObject depObj) where T : DependencyObject
+        {
+            if (depObj != null)
+            {
+                for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+                {
+                    DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                    if (child != null && child is T)
+                    {
+                        yield return (T)child;
+                    }
+
+                    foreach (T childOfChild in findControlsInCurrentWindow<T>(child))
+                    {
+                        yield return childOfChild;
+                    }
+                }
+            }
+        }
+
+
+        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
+            base.OnPreviewKeyDown(e);
+        }
+
     }
 }

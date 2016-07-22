@@ -13,6 +13,7 @@
             <Button x:Name="btn_addNewColumn" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Margin="386,81,0,0" Height="22" Click="btn_addNewColumn_Click" Canvas.ZIndex="3"/>
             <Label x:Name="lbl_columnName" Content="Column Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,55,0,0"/>
             <Label x:Name="lbl_dataType" Content="Data Type" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="279,55,0,0"/>
+            <Button x:Name="btn_SaveTableTemplate" Content="Save Table &#xD;&#xA;Template" HorizontalAlignment="Left" Margin="386,108,0,0" VerticalAlignment="Top" Width="70" Height="40" Canvas.ZIndex="3" Click="btn_SaveTableTemplate_Click"/>
         </Grid>
     </ScrollViewer>
 </Window>
