@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace ChauffeurJobManager
 {
@@ -99,27 +100,44 @@ namespace ChauffeurJobManager
         {
             foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
             {
-                foreach (ComboBox cb in findControlsInCurrentWindow<ComboBox>(this))
+                //Make sure that the textBox is not empty
+                if (!string.IsNullOrWhiteSpace(tb.Text))
                 {
-                    //Make sure that the textBox is not empty
-                    if (!string.IsNullOrWhiteSpace(tb.Text))
-                    {
-                        textBoxList.Add(tb);
-                        comboBoxList.Add(cb);
-                    }
+                    //add the data to the lists
+                    textBoxList.Add(tb);
                 }
             }
-            /*foreach (TextBox item in textBoxList)
+
+            foreach (ComboBox cb in findControlsInCurrentWindow<ComboBox>(this))
             {
-                foreach (ComboBox comboItem in comboBoxList)
+
+                    //add the data to the lists
+                    comboBoxList.Add(cb);
+            }
+
+
+            XmlWriter xmlWriter = XmlWriter.Create("test.xml");
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("Column");
+            using (var e1 = textBoxList.GetEnumerator())
+            using (var e2 = comboBoxList.GetEnumerator())
+            {
+
+                while (e1.MoveNext() && e2.MoveNext())
                 {
-
-
-                    Console.WriteLine("Outputting all list items - textBox Value: " + item.Text + " - comboBox Value: " + comboItem.Text);
+                    var item1 = e1.Current;
+                    var item2 = e2.Current;
+                    xmlWriter.WriteStartElement("columnData");
+                    xmlWriter.WriteElementString("columnName", item1.Text);
+                    xmlWriter.WriteElementString("columnDataType", item2.Text);
+                    xmlWriter.WriteEndElement();
                 }
-            }*/
+            }
 
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
         }
+
 
         public static IEnumerable<T> findControlsInCurrentWindow<T>(DependencyObject depObj) where T : DependencyObject
         {
