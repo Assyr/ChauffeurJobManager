@@ -115,13 +115,13 @@ namespace ChauffeurJobManager
                     comboBoxList.Add(cb);
             }
 
-
-            XmlWriter xmlWriter = XmlWriter.Create("test.xml");
-            xmlWriter.WriteStartDocument();
-            xmlWriter.WriteStartElement("Column");
             using (var e1 = textBoxList.GetEnumerator())
             using (var e2 = comboBoxList.GetEnumerator())
             {
+
+                XmlWriter xmlWriter = XmlWriter.Create("test.xml");
+                xmlWriter.WriteStartDocument();
+                xmlWriter.WriteStartElement("Column");
 
                 while (e1.MoveNext() && e2.MoveNext())
                 {
@@ -132,10 +132,9 @@ namespace ChauffeurJobManager
                     xmlWriter.WriteElementString("columnDataType", item2.Text);
                     xmlWriter.WriteEndElement();
                 }
+                xmlWriter.WriteEndDocument();
+                xmlWriter.Close();
             }
-
-            xmlWriter.WriteEndDocument();
-            xmlWriter.Close();
         }
 
 
