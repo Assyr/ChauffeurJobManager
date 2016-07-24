@@ -100,7 +100,6 @@ namespace ChauffeurJobManager
         {
             string XMLFileName;
 
-
             foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
             {
                 //Make sure that the textBox is not empty
@@ -109,7 +108,7 @@ namespace ChauffeurJobManager
                     //add the data to the lists
                     textBoxList.Add(tb);
                 }
-                else
+                else //If any column table names are empty, spit out a message and return! - Fixes #1
                 {
                     MessageBox.Show("All columns must be given a valid name!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
