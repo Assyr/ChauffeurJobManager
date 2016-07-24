@@ -100,7 +100,23 @@ namespace ChauffeurJobManager
         {
             string XMLFileName;
 
-            if(string.IsNullOrWhiteSpace(templateFileName.Text))
+
+            foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
+            {
+                //Make sure that the textBox is not empty
+                if (!string.IsNullOrWhiteSpace(tb.Text))
+                {
+                    //add the data to the lists
+                    textBoxList.Add(tb);
+                }
+                else
+                {
+                    MessageBox.Show("All columns must be given a valid name!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(templateFileName.Text))
             {
                 MessageBox.Show("You must enter a valid template name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
                 templateFileName.Focus();
@@ -114,15 +130,6 @@ namespace ChauffeurJobManager
             }
 
 
-            foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
-            {
-                //Make sure that the textBox is not empty
-                if (!string.IsNullOrWhiteSpace(tb.Text))
-                {
-                    //add the data to the lists
-                    textBoxList.Add(tb);
-                }
-            }
 
             foreach (ComboBox cb in findControlsInCurrentWindow<ComboBox>(this))
             {
