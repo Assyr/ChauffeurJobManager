@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -98,24 +99,9 @@ namespace ChauffeurJobManager
         }
         private void btn_SaveTableTemplate_Click(object sender, RoutedEventArgs e)
         {
-            string XMLFileName;
+            string XMLFileName = new TextRange(templateFileName.Document.ContentStart, templateFileName.Document.ContentEnd).Text;
 
-            foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
-            {
-                //Make sure that the textBox is not empty
-                if (!string.IsNullOrWhiteSpace(tb.Text))
-                {
-                    //add the data to the lists
-                    textBoxList.Add(tb);
-                }
-                else //If any column table names are empty, spit out a message and return! - Fixes #1
-                {
-                    MessageBox.Show("All columns must be given a valid name!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-            }
-
-            if (string.IsNullOrWhiteSpace(templateFileName.Text))
+            if (string.IsNullOrWhiteSpace(XMLFileName))
             {
                 MessageBox.Show("You must enter a valid template name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
                 templateFileName.Focus();
@@ -123,12 +109,26 @@ namespace ChauffeurJobManager
             }
             else
             {
-                XMLFileName = templateFileName.Text;
-                MessageBox.Show(templateFileName.Text + " template has been created.");
-                templateFileName.Clear();
+
+                MessageBox.Show(XMLFileName + " template has been created.");
+                templateFileName.Document.Blocks.Clear();
             }
 
-
+            foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
+            {
+                //Make sure that the textBox is not empty
+                if (string.IsNullOrWhiteSpace(tb.Text))
+                {
+                    MessageBox.Show("All columns must be given a valid name!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
+                else //If any column table names are empty, spit out a message and return! - Fixes #1
+                {
+                    //add the data to the lists
+                    Console.WriteLine(tb.Text);
+                    textBoxList.Add(tb);
+                }
+            }
 
             foreach (ComboBox cb in findControlsInCurrentWindow<ComboBox>(this))
             {
@@ -137,11 +137,14 @@ namespace ChauffeurJobManager
                 comboBoxList.Add(cb);
             }
 
+            //Remove whitespace from richtextbox
+            string Result = XMLFileName.Trim();
+            Console.WriteLine(Result);
+
             using (var e1 = textBoxList.GetEnumerator())
             using (var e2 = comboBoxList.GetEnumerator())
             {
-
-                XmlWriter xmlWriter = XmlWriter.Create(XMLFileName + ".xml");
+                XmlWriter xmlWriter = XmlWriter.Create("Templates\\" + Result + ".xml");
                 xmlWriter.WriteStartDocument();
                 xmlWriter.WriteStartElement("Column");
 
