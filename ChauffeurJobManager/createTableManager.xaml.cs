@@ -98,6 +98,22 @@ namespace ChauffeurJobManager
         }
         private void btn_SaveTableTemplate_Click(object sender, RoutedEventArgs e)
         {
+            string XMLFileName;
+
+            if(string.IsNullOrWhiteSpace(templateFileName.Text))
+            {
+                MessageBox.Show("You must enter a valid template name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                templateFileName.Focus();
+                return;
+            }
+            else
+            {
+                XMLFileName = templateFileName.Text;
+                MessageBox.Show(templateFileName.Text + " template has been created.");
+                templateFileName.Clear();
+            }
+
+
             foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
             {
                 //Make sure that the textBox is not empty
@@ -111,15 +127,15 @@ namespace ChauffeurJobManager
             foreach (ComboBox cb in findControlsInCurrentWindow<ComboBox>(this))
             {
 
-                    //add the data to the lists
-                    comboBoxList.Add(cb);
+                //add the data to the lists
+                comboBoxList.Add(cb);
             }
 
             using (var e1 = textBoxList.GetEnumerator())
             using (var e2 = comboBoxList.GetEnumerator())
             {
 
-                XmlWriter xmlWriter = XmlWriter.Create("test.xml");
+                XmlWriter xmlWriter = XmlWriter.Create(XMLFileName + ".xml");
                 xmlWriter.WriteStartDocument();
                 xmlWriter.WriteStartElement("Column");
 
@@ -136,7 +152,6 @@ namespace ChauffeurJobManager
                 xmlWriter.Close();
             }
         }
-
 
         public static IEnumerable<T> findControlsInCurrentWindow<T>(DependencyObject depObj) where T : DependencyObject
         {
