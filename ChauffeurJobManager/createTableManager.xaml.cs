@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -35,6 +36,7 @@ namespace ChauffeurJobManager
             InitializeComponent();
             createNewColumn();
             btn_addNewColumn.Background = Brushes.LightGreen;
+            populateTemplateFileList();
 
         }
 
@@ -162,7 +164,7 @@ namespace ChauffeurJobManager
             }
         }
 
-        public static IEnumerable<T> findControlsInCurrentWindow<T>(DependencyObject depObj) where T : DependencyObject
+        private static IEnumerable<T> findControlsInCurrentWindow<T>(DependencyObject depObj) where T : DependencyObject
         {
             if (depObj != null)
             {
@@ -179,6 +181,19 @@ namespace ChauffeurJobManager
                         yield return childOfChild;
                     }
                 }
+            }
+        }
+
+        private void populateTemplateFileList()
+        {
+            string templatesDirectory = System.AppDomain.CurrentDomain.BaseDirectory + "Templates";
+            Console.WriteLine(templatesDirectory);
+            DirectoryInfo dinfo = new DirectoryInfo(templatesDirectory);
+            FileInfo[] info = dinfo.GetFiles("*.*", SearchOption.AllDirectories);
+            foreach (FileInfo file in info)
+            {
+                Console.WriteLine(file.Name);
+                listView_TemplateList.Items.Add(file.Name);
             }
         }
 
