@@ -33,7 +33,7 @@
             
             
             <Label x:Name="lbl_TemplateList" Content="Template List" HorizontalAlignment="Left" Margin="390,217,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btn_CreateTableInDatabase" Content="Create table&#xD;&#xA;in database" HorizontalAlignment="Left" Margin="382,353,0,0" VerticalAlignment="Top" Width="100" Height="41"/>
+            <Button x:Name="btn_CreateTableInDatabase" Content="Create table&#xD;&#xA;in database" HorizontalAlignment="Left" Margin="382,353,0,0" VerticalAlignment="Top" Width="100" Height="41" Click="btn_CreateTableInDatabase_Click"/>
         </Grid>
     </ScrollViewer>
 </Window>

@@ -48,9 +48,6 @@ namespace ChauffeurJobManager
         private void btn_addNewColumn_Click(object sender, RoutedEventArgs e)
         {
             createNewColumn();
-
-            //Here we will make our new controls - textbox and combobox and then add them to array
-            //so we can loop through them later and get the values.
         }
 
         private void createNewColumn()
@@ -206,5 +203,25 @@ namespace ChauffeurJobManager
             base.OnPreviewKeyDown(e);
         }
 
+        private void btn_CreateTableInDatabase_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic selectedItem = listView_TemplateList.SelectedItem;
+            string templateFileName = selectedItem;
+
+            XmlDocument file = new XmlDocument();
+            file.Load("Templates\\" + templateFileName);
+
+            XmlElement element = file.DocumentElement;
+            XmlNodeList columnNodes = element.SelectNodes("/Column/columnData");
+
+            foreach (XmlNode node in columnNodes)
+            {
+                string columnName = node["columnName"].InnerText;
+                string columnDataType = node["columnDataType"].InnerText;
+                Console.WriteLine(columnName);
+                Console.WriteLine(columnDataType);
+            }
+
+        }
     }
 }
