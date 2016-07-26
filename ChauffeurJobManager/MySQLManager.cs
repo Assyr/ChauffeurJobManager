@@ -132,7 +132,12 @@ namespace ChauffeurJobManager
             }
             return tables;
         }
-            
-        
+
+        public void sendQueryToDatabase(string query)
+        {
+            MySqlCommand sendQueryToDatabase = new MySqlCommand(query, sqlConnect);
+            sendQueryToDatabase.ExecuteNonQuery();
+        }
+
     }
 }

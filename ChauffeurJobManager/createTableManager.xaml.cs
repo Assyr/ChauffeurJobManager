@@ -30,6 +30,8 @@ namespace ChauffeurJobManager
         private int comboBoxMarginOffset = 40;
         private int columnNumber = 1;
 
+        public string databaseName;
+
 
         public createTableManager()
         {
@@ -79,7 +81,7 @@ namespace ChauffeurJobManager
             lblcolumnNumber.RenderTransformOrigin = new Point(1.882, 0.635);
 
             dataTypeComboBox.Items.Add("CHAR");
-            dataTypeComboBox.Items.Add("VARCHAR");
+            dataTypeComboBox.Items.Add("nvarchar(15)");
             dataTypeComboBox.Items.Add("INT");
             dataTypeComboBox.Items.Add("FLOAT");
             dataTypeComboBox.Items.Add("DATE");
@@ -209,17 +211,23 @@ namespace ChauffeurJobManager
             string templateFileName = selectedItem;
 
             XmlDocument file = new XmlDocument();
-            file.Load("Templates\\" + templateFileName);
+            file.Load("Templates/" + templateFileName);
 
             XmlElement element = file.DocumentElement;
             XmlNodeList columnNodes = element.SelectNodes("/Column/columnData");
 
+            MySQLManager sql = new MySQLManager() ;
+
+            Console.WriteLine("databaseName: " + databaseName); 
+            sql.openConnection(databaseName);
+
+            sql.sendQueryToDatabase("CREATE TABLE IF NOT EXISTS `IMSAugust2016` (" +"`jobID` INT AUTO_INCREMENT," + "PRIMARY KEY(jobID));");
             foreach (XmlNode node in columnNodes)
             {
                 string columnName = node["columnName"].InnerText;
                 string columnDataType = node["columnDataType"].InnerText;
-                Console.WriteLine(columnName);
-                Console.WriteLine(columnDataType);
+                Console.WriteLine("ALTER TABLE IMSAugust2016 ADD COLUMN " + columnName + " " + columnDataType);
+                sql.sendQueryToDatabase("ALTER TABLE IMSAugust2016 ADD COLUMN " + columnName + " " + columnDataType);
             }
 
         }

@@ -53,6 +53,7 @@ namespace ChauffeurJobManager
             if (item != null)
             {
                 DataTable dataSet = new DataTable();
+                Console.WriteLine(databaseName);
                 SQLManager.openConnection(databaseName);
                 MySqlDataAdapter dataAdapter = new MySqlDataAdapter("select * from " + databaseName + "." + item.ToString() + ";", SQLManager.sqlConnect);
                 dataAdapter.Fill(dataSet);
@@ -74,9 +75,11 @@ namespace ChauffeurJobManager
         private void button1_Copy_Click(object sender, RoutedEventArgs e)
         {
             createTableManager tableManager = new createTableManager();
+            tableManager.databaseName = databaseName;
             tableManager.Top = this.Top;
             tableManager.Left = this.Left;
             tableManager.ShowDialog();
         }
+
     }
 }
