@@ -71,7 +71,6 @@ namespace ChauffeurJobManager
         public bool loginAuth(string authUsername, string authPassword)
         {
             MySqlCommand selectLoginCredentials = new MySqlCommand("select * from " + loginDatabase + "._users where username = '" + authUsername + "' and password = '" + authPassword + "' ; ", sqlConnect);
-
             MySqlDataReader myReader = selectLoginCredentials.ExecuteReader();
 
             int x = 0;
@@ -118,7 +117,6 @@ namespace ChauffeurJobManager
                     userCompanyDatabase = node["databaseName"].InnerText;
                 }
             }
-
         }
 
         public IList<String> getDatabaseTables()

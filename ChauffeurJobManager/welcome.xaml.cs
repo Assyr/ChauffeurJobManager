@@ -62,9 +62,7 @@ namespace ChauffeurJobManager
                 dataAdapter.Fill(dataSet);
                 welcomeSQLManager.closeConnection();
                 selectedTableDataGrid.ItemsSource = dataSet.DefaultView;
-
             }
-            updateTableList();
         }
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
@@ -78,7 +76,7 @@ namespace ChauffeurJobManager
 
         private void button1_Copy_Click(object sender, RoutedEventArgs e)
         {
-            createTableManager tableManager = new createTableManager();
+            createTableManager tableManager = new createTableManager(this);
             tableManager.databaseName = databaseName;
             tableManager.Top = this.Top;
             tableManager.Left = this.Left;

@@ -33,9 +33,13 @@ namespace ChauffeurJobManager
 
         public string databaseName;
 
-       public createTableManager()
+        //store here
+        welcome _temp;
+                                //handler to our welcome window
+       public createTableManager(welcome temp)
         {
             InitializeComponent();
+            _temp = temp;
             createNewColumn();
             btn_addNewColumn.Background = Brushes.LightGreen;
             populateTemplateFileList();
@@ -44,7 +48,7 @@ namespace ChauffeurJobManager
 
         private void button_Click_Close(object sender, RoutedEventArgs e)
         {
-
+            //update our list view with our newly created table
             Close();
         }
 
@@ -240,7 +244,7 @@ namespace ChauffeurJobManager
 
             databaseTableName.Document.Blocks.Clear();
             Console.WriteLine("Table has been created in " + databaseName);
-
+            _temp.updateTableList(); //Update our listview table in our welcome window
 
         }
     }
