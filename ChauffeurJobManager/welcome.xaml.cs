@@ -82,5 +82,15 @@ namespace ChauffeurJobManager
             tableManager.Left = this.Left;
             tableManager.ShowDialog();
         }
+
+        private void button1_Copy1_Click(object sender, RoutedEventArgs e)
+        {
+            welcomeSQLManager.openConnection(databaseName);
+            object item = listViewTables.SelectedItem;
+            if (item != null)
+                welcomeSQLManager.sendQueryToDatabase("DROP TABLE IF EXISTS " + databaseName + "." + item.ToString());
+            welcomeSQLManager.closeConnection();
+            updateTableList();
+        }
     }
 }
