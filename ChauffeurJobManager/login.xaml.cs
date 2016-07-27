@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
+using System.ComponentModel;
 
 namespace ChauffeurJobManager
 {
@@ -49,19 +50,18 @@ namespace ChauffeurJobManager
 
                 string username = loginUsername.Text;
                 string password = loginPassword.Password; //Get password as SecureString - gets deleted from memory when not in use
-                MySQLManager SQLManager = new MySQLManager();
-                SQLManager.openConnection(SQLManager.loginDatabase);
+                MySQLManager loginSQLManager = new MySQLManager();
+                loginSQLManager.openConnection(loginSQLManager.loginDatabase);
                 //Not sure! Must pass it as PasswordBox for better security?
-                if(SQLManager.loginAuth(username, password)) //if auth was succesful
+                if(loginSQLManager.loginAuth(username, password)) //if auth was succesful
                 {
                     //Connect to users company database and grab all tables
-                    SQLManager.openConnection(SQLManager.userCompanyDatabase);
+                    loginSQLManager.openConnection(loginSQLManager.userCompanyDatabase);
 
                     welcome welcomeScreen = new welcome();
-                    welcomeScreen.listOfDatabaseTables = SQLManager.getDatabaseTables();
-                    SQLManager.closeConnection();
+                    welcomeScreen.databaseName = loginSQLManager.userCompanyDatabase;
                     welcomeScreen.updateTableList();
-                    welcomeScreen.databaseName = SQLManager.userCompanyDatabase;
+                    loginSQLManager.closeConnection();
                     //Switch to welcome screen
                     welcomeScreen.TextBlockName.Text = username;
                     welcomeScreen.Top = this.Top;

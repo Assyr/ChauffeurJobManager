@@ -26,14 +26,14 @@ namespace ChauffeurJobManager
         private List<TextBox> textBoxList = new List<TextBox>();
         private List<Label> labelList = new List<Label>();
 
+
         private int comboBoxCurrentValue = 80;
         private int comboBoxMarginOffset = 40;
         private int columnNumber = 1;
 
         public string databaseName;
 
-
-        public createTableManager()
+       public createTableManager()
         {
             InitializeComponent();
             createNewColumn();
@@ -44,6 +44,7 @@ namespace ChauffeurJobManager
 
         private void button_Click_Close(object sender, RoutedEventArgs e)
         {
+
             Close();
         }
 
@@ -161,6 +162,8 @@ namespace ChauffeurJobManager
                 xmlWriter.WriteEndDocument();
                 xmlWriter.Close();
             }
+
+            populateTemplateFileList();
         }
 
         private static IEnumerable<T> findControlsInCurrentWindow<T>(DependencyObject depObj) where T : DependencyObject
@@ -185,6 +188,7 @@ namespace ChauffeurJobManager
 
         private void populateTemplateFileList()
         {
+            listView_TemplateList.Items.Clear();
             string templatesDirectory = System.AppDomain.CurrentDomain.BaseDirectory + "Templates";
             Console.WriteLine(templatesDirectory);
             DirectoryInfo dinfo = new DirectoryInfo(templatesDirectory);
@@ -232,6 +236,7 @@ namespace ChauffeurJobManager
                 Console.WriteLine("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnDataType);
                 sql.sendQueryToDatabase("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnDataType);
             }
+            sql.closeConnection();
 
             databaseTableName.Document.Blocks.Clear();
             Console.WriteLine("Table has been created in " + databaseName);

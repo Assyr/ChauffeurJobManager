@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
 using MySql.Data.MySqlClient;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace ChauffeurJobManager
 {
@@ -23,29 +25,30 @@ namespace ChauffeurJobManager
     /// 
     public partial class welcome : Window
     {
-       // private login loginWindow;
-        private MySQLManager SQLManager = new MySQLManager();
+        //private login loginWindow;
         public string databaseName;
         public IList<string> listOfDatabaseTables = new List<string>();
 
-       
-        
+        MySQLManager welcomeSQLManager = new MySQLManager();
 
         public welcome()
         {
             InitializeComponent();
             Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Welcome page loaded!");
-           
         }
 
         public void updateTableList()
         {
-            foreach(string tableName in listOfDatabaseTables)
+            listViewTables.Items.Clear();
+            welcomeSQLManager.openConnection(databaseName);
+            listOfDatabaseTables = welcomeSQLManager.getDatabaseTables();
+            welcomeSQLManager.closeConnection();
+
+            foreach (string tableName in listOfDatabaseTables)
             {
                 listViewTables.Items.Add(tableName);
             }
         }
-
 
         private void listView_Click(object sender, RoutedEventArgs e)
         {
@@ -54,13 +57,14 @@ namespace ChauffeurJobManager
             {
                 DataTable dataSet = new DataTable();
                 Console.WriteLine(databaseName);
-                SQLManager.openConnection(databaseName);
-                MySqlDataAdapter dataAdapter = new MySqlDataAdapter("select * from " + databaseName + "." + item.ToString() + ";", SQLManager.sqlConnect);
+                welcomeSQLManager.openConnection(databaseName);
+                MySqlDataAdapter dataAdapter = new MySqlDataAdapter("select * from " + databaseName + "." + item.ToString() + ";", welcomeSQLManager.sqlConnect);
                 dataAdapter.Fill(dataSet);
-                SQLManager.closeConnection();
+                welcomeSQLManager.closeConnection();
                 selectedTableDataGrid.ItemsSource = dataSet.DefaultView;
 
             }
+            updateTableList();
         }
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
@@ -80,6 +84,5 @@ namespace ChauffeurJobManager
             tableManager.Left = this.Left;
             tableManager.ShowDialog();
         }
-
     }
 }
