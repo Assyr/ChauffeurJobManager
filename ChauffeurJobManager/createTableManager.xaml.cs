@@ -85,7 +85,7 @@ namespace ChauffeurJobManager
             dataTypeComboBox.Items.Add("INT");
             dataTypeComboBox.Items.Add("FLOAT");
             dataTypeComboBox.Items.Add("DATE");
-            dataTypeComboBox.Items.Add("DATE+TIME");
+            dataTypeComboBox.Items.Add("DATETIME");
             dataTypeComboBox.Items.Add("TIME");
             dataTypeComboBox.Items.Add("YEAR");
             dataTypeComboBox.SelectedIndex = 0;
@@ -139,13 +139,13 @@ namespace ChauffeurJobManager
             }
 
             //Remove whitespace from richtextbox
-            string Result = XMLFileName.Trim();
-            Console.WriteLine(Result);
+            XMLFileName = XMLFileName.Trim();
+            Console.WriteLine(XMLFileName);
 
             using (var e1 = textBoxList.GetEnumerator())
             using (var e2 = comboBoxList.GetEnumerator())
             {
-                XmlWriter xmlWriter = XmlWriter.Create("Templates\\" + Result + ".xml");
+                XmlWriter xmlWriter = XmlWriter.Create("Templates\\" + XMLFileName + ".xml");
                 xmlWriter.WriteStartDocument();
                 xmlWriter.WriteStartElement("Column");
 
@@ -209,6 +209,9 @@ namespace ChauffeurJobManager
         {
             dynamic selectedItem = listView_TemplateList.SelectedItem;
             string templateFileName = selectedItem;
+            string tableName = new TextRange(databaseTableName.Document.ContentStart, databaseTableName.Document.ContentEnd).Text;
+            tableName = tableName.Trim();
+            Console.WriteLine(tableName);
 
             XmlDocument file = new XmlDocument();
             file.Load("Templates/" + templateFileName);
@@ -221,14 +224,18 @@ namespace ChauffeurJobManager
             Console.WriteLine("databaseName: " + databaseName); 
             sql.openConnection(databaseName);
 
-            sql.sendQueryToDatabase("CREATE TABLE IF NOT EXISTS `IMSAugust2016` (" +"`jobID` INT AUTO_INCREMENT," + "PRIMARY KEY(jobID));");
+            sql.sendQueryToDatabase("CREATE TABLE IF NOT EXISTS " +  tableName + " (" +"`jobID` INT AUTO_INCREMENT," + "PRIMARY KEY(jobID));");
             foreach (XmlNode node in columnNodes)
             {
                 string columnName = node["columnName"].InnerText;
                 string columnDataType = node["columnDataType"].InnerText;
-                Console.WriteLine("ALTER TABLE IMSAugust2016 ADD COLUMN " + columnName + " " + columnDataType);
-                sql.sendQueryToDatabase("ALTER TABLE IMSAugust2016 ADD COLUMN " + columnName + " " + columnDataType);
+                Console.WriteLine("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnDataType);
+                sql.sendQueryToDatabase("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnDataType);
             }
+
+            databaseTableName.Document.Blocks.Clear();
+            Console.WriteLine("Table has been created in " + databaseName);
+
 
         }
     }

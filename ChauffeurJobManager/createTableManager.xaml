@@ -18,7 +18,7 @@
             <RichTextBox x:Name="templateFileName" HorizontalAlignment="Left" Height="19" Margin="390,143,0,0" VerticalAlignment="Top" Width="92">
                 <FlowDocument/>
             </RichTextBox>
-            <ListView x:Name="listView_TemplateList" HorizontalAlignment="Left" Height="100" Margin="382,248,0,0" VerticalAlignment="Top" Width="100">
+            <ListView x:Name="listView_TemplateList" HorizontalAlignment="Left" Height="100" Margin="390,238,0,0" VerticalAlignment="Top" Width="92">
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Visibility" Value="Collapsed" />
@@ -30,10 +30,14 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            
-            
-            <Label x:Name="lbl_TemplateList" Content="Template List" HorizontalAlignment="Left" Margin="390,217,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btn_CreateTableInDatabase" Content="Create table&#xD;&#xA;in database" HorizontalAlignment="Left" Margin="382,353,0,0" VerticalAlignment="Top" Width="100" Height="41" Click="btn_CreateTableInDatabase_Click"/>
+
+
+            <Label x:Name="lbl_TemplateList" Content="Template List" HorizontalAlignment="Left" Margin="398,212,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btn_CreateTableInDatabase" Content="Create table&#xD;&#xA;in database" HorizontalAlignment="Left" Margin="386,394,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="btn_CreateTableInDatabase_Click"/>
+            <RichTextBox x:Name="databaseTableName" HorizontalAlignment="Left" Height="20" Margin="390,369,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.576,-8.053">
+                <FlowDocument/>
+            </RichTextBox>
+            <Label x:Name="label_Copy" Content="Table Name" HorizontalAlignment="Left" Margin="398,343,0,0" VerticalAlignment="Top"/>
         </Grid>
     </ScrollViewer>
 </Window>
