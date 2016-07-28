@@ -92,5 +92,11 @@ namespace ChauffeurJobManager
             welcomeSQLManager.closeConnection();
             updateTableList();
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            jobManager jobManagerWindow = new jobManager();
+            jobManagerWindow.Show();
+        }
     }
 }
