@@ -37,10 +37,12 @@ namespace ChauffeurJobManager
 
         public void populateJobManagerWindow()
         {
+            string tableName = txtBlock_tableName.Text;
+
             Grid grid = jobManagerGrid;
             DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
 
-            string tableName = txtBlock_tableName.Text;
+            
 
             foreach (DataRow col in  columnInfo.Rows)
             {
