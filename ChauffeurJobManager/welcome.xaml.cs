@@ -99,6 +99,7 @@ namespace ChauffeurJobManager
             //Populate jobManagerWindow with what we need.
             jobManagerWindow.txtBlock_tableName.Text = listViewTables.SelectedItem.ToString();
             jobManagerWindow.tableDatabaseName = databaseName;
+            jobManagerWindow.populateJobManagerWindow();
             jobManagerWindow.Show();
         }
     }

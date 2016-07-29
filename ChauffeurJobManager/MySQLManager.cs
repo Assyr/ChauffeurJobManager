@@ -137,5 +137,26 @@ namespace ChauffeurJobManager
             sendQueryToDatabase.ExecuteNonQuery();
         }
 
+        public DataTable getDatabaseTableInfo(string databaseName, string tableToGetInfoFrom)
+        {
+            DataTable schema = null;
+
+            Console.WriteLine("getDatabaseTableInfo connecting to database: " + databaseName);
+            Console.WriteLine("getDatabaseTableInfo using table: " + tableToGetInfoFrom);
+            openConnection(databaseName);
+            MySqlCommand schemaCommand = new MySqlCommand("SELECT * FROM " + tableToGetInfoFrom, sqlConnect);
+
+            MySqlDataReader reader = schemaCommand.ExecuteReader(CommandBehavior.SchemaOnly);
+
+            schema = reader.GetSchemaTable();
+
+            closeConnection();
+
+            Console.WriteLine("Returning 'schema'");
+
+            return schema;
+
+        }
+
     }
 }
