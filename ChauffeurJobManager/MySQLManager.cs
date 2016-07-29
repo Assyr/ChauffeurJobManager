@@ -147,13 +147,10 @@ namespace ChauffeurJobManager
             MySqlCommand schemaCommand = new MySqlCommand("SELECT * FROM " + tableToGetInfoFrom, sqlConnect);
 
             MySqlDataReader reader = schemaCommand.ExecuteReader(CommandBehavior.SchemaOnly);
-
             schema = reader.GetSchemaTable();
 
             closeConnection();
-
             Console.WriteLine("Returning 'schema'");
-
             return schema;
 
         }

@@ -20,6 +20,8 @@ namespace ChauffeurJobManager
     /// </summary>
     public partial class jobManager : Window
     {
+        private int comboBoxCurrentValue = 80;
+        private int comboBoxMarginOffset = 40;
 
         private List<Label> labelList = new List<Label>();
 
@@ -33,16 +35,12 @@ namespace ChauffeurJobManager
             InitializeComponent();
         }
 
-
-
         public void populateJobManagerWindow()
         {
-
             Grid grid = jobManagerGrid;
+            DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
 
             string tableName = txtBlock_tableName.Text;
-            //First read in our xml and populate with the correct columns
-            DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
 
             foreach (DataRow col in  columnInfo.Rows)
             {
@@ -53,14 +51,13 @@ namespace ChauffeurJobManager
 
 
                 Label lblColumnName = new Label();
-                lblColumnName.Margin = new Thickness(30, 80, 0, 0);
+                lblColumnName.Margin = new Thickness(30, comboBoxCurrentValue += comboBoxMarginOffset, 0, 0);
                 lblColumnName.VerticalAlignment = VerticalAlignment.Top;
 
                 lblColumnName.Content = columnName + ":";
                 lblColumnName.RenderTransformOrigin = new Point(1.882, 0.635);
 
                 grid.Children.Add(lblColumnName);
-
             }
         }
     }
