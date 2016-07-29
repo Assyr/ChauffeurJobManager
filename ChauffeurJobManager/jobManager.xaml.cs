@@ -21,6 +21,8 @@ namespace ChauffeurJobManager
     public partial class jobManager : Window
     {
 
+        private List<Label> labelList = new List<Label>();
+
         MySQLManager jobManagerSQLManager = new MySQLManager();
 
         public string tableDatabaseName;
@@ -35,19 +37,31 @@ namespace ChauffeurJobManager
 
         public void populateJobManagerWindow()
         {
+
+            Grid grid = jobManagerGrid;
+
             string tableName = txtBlock_tableName.Text;
             //First read in our xml and populate with the correct columns
             DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
 
             foreach (DataRow col in  columnInfo.Rows)
             {
-                String columnName = col[columnInfo.Columns["ColumnName"]].ToString();
+                string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
                 Console.WriteLine(columnName);
-                String dataType = col[columnInfo.Columns["DataType"]].ToString();
+                string dataType = col[columnInfo.Columns["DataType"]].ToString();
                 Console.WriteLine(dataType);
 
-            }
 
+                Label lblColumnName = new Label();
+                lblColumnName.Margin = new Thickness(30, 80, 0, 0);
+                lblColumnName.VerticalAlignment = VerticalAlignment.Top;
+
+                lblColumnName.Content = columnName + ":";
+                lblColumnName.RenderTransformOrigin = new Point(1.882, 0.635);
+
+                grid.Children.Add(lblColumnName);
+
+            }
         }
     }
 }

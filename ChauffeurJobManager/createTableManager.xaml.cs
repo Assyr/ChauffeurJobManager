@@ -95,7 +95,6 @@ namespace ChauffeurJobManager
             dataTypeComboBox.Items.Add("YEAR");
             dataTypeComboBox.SelectedIndex = 0;
 
-
             grid.Children.Add(lblcolumnNumber);
             grid.Children.Add(dataTypeComboBox);
             grid.Children.Add(columnNameTextBox);
