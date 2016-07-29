@@ -93,9 +93,12 @@ namespace ChauffeurJobManager
             updateTableList();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void btn_openTable_Click(object sender, RoutedEventArgs e)
         {
             jobManager jobManagerWindow = new jobManager();
+            //Populate jobManagerWindow with what we need.
+            jobManagerWindow.txtBlock_tableName.Text = listViewTables.SelectedItem.ToString();
+            jobManagerWindow.tableDatabaseName = databaseName;
             jobManagerWindow.Show();
         }
     }

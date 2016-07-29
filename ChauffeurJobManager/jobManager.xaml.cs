@@ -19,6 +19,9 @@ namespace ChauffeurJobManager
     /// </summary>
     public partial class jobManager : Window
     {
+        public string tableDatabaseName;
+
+
         public jobManager()
         {
             InitializeComponent();
