@@ -20,8 +20,12 @@ namespace ChauffeurJobManager
     /// </summary>
     public partial class jobManager : Window
     {
-        private int comboBoxCurrentValue = 80;
-        private int comboBoxMarginOffset = 40;
+        private int labelYMarginInitial = 35;
+        private int labelYMarginCurrent = 35;
+        private int labelYMarginOffset = 40;
+
+        private int labelXMarginCurrent = 20;
+
 
         private List<Label> labelList = new List<Label>();
 
@@ -53,7 +57,16 @@ namespace ChauffeurJobManager
 
 
                 Label lblColumnName = new Label();
-                lblColumnName.Margin = new Thickness(30, comboBoxCurrentValue += comboBoxMarginOffset, 0, 0);
+
+                if (labelYMarginCurrent >= 195)
+                {
+
+                    lblColumnName.Margin = new Thickness(labelXMarginCurrent + 225, labelYMarginInitial += labelYMarginOffset, 0, 0);
+                }
+                else
+                {
+                    lblColumnName.Margin = new Thickness(labelXMarginCurrent, labelYMarginCurrent += labelYMarginOffset, 0, 0);
+                }
                 lblColumnName.VerticalAlignment = VerticalAlignment.Top;
 
                 lblColumnName.Content = columnName + ":";
