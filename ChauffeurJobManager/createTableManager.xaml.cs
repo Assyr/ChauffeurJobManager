@@ -256,5 +256,17 @@ namespace ChauffeurJobManager
             _temp.updateTableList(); //Update our listview table in our welcome window
 
         }
+
+        private void templateFileName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9a-zA-Z]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void databaseTableName_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9a-zA-Z]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
     }
 }

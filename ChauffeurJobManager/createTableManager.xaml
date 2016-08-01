@@ -15,7 +15,7 @@
             <Label x:Name="lbl_dataType" Content="Data Type" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="279,55,0,0"/>
             <Button x:Name="btn_SaveTableTemplate" Content="Save Table &#xD;&#xA;Template" HorizontalAlignment="Left" Margin="401,167,0,0" VerticalAlignment="Top" Width="70" Height="40" Canvas.ZIndex="3" Click="btn_SaveTableTemplate_Click"/>
             <Label x:Name="label" Content="Template Name:" HorizontalAlignment="Left" Margin="386,117,0,0" VerticalAlignment="Top"/>
-            <RichTextBox x:Name="templateFileName" HorizontalAlignment="Left" Height="19" Margin="390,143,0,0" VerticalAlignment="Top" Width="92">
+            <RichTextBox x:Name="templateFileName" HorizontalAlignment="Left" Height="19" Margin="390,143,0,0" VerticalAlignment="Top" Width="92" PreviewTextInput="templateFileName_PreviewTextInput">
                 <FlowDocument/>
             </RichTextBox>
             <ListView x:Name="listView_TemplateList" HorizontalAlignment="Left" Height="100" Margin="390,238,0,0" VerticalAlignment="Top" Width="92">
@@ -34,7 +34,7 @@
 
             <Label x:Name="lbl_TemplateList" Content="Template List" HorizontalAlignment="Left" Margin="398,212,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btn_CreateTableInDatabase" Content="Create table&#xD;&#xA;in database" HorizontalAlignment="Left" Margin="386,394,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="btn_CreateTableInDatabase_Click"/>
-            <RichTextBox x:Name="databaseTableName" HorizontalAlignment="Left" Height="20" Margin="390,369,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.576,-8.053">
+            <RichTextBox x:Name="databaseTableName" HorizontalAlignment="Left" Height="20" Margin="390,369,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.576,-8.053" PreviewTextInput="databaseTableName_PreviewTextInput">
                 <FlowDocument/>
             </RichTextBox>
             <Label x:Name="label_Copy" Content="Table Name" HorizontalAlignment="Left" Margin="398,343,0,0" VerticalAlignment="Top"/>
