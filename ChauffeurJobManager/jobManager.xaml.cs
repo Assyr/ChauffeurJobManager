@@ -62,10 +62,13 @@ namespace ChauffeurJobManager
                 {
 
                     lblColumnName.Margin = new Thickness(labelXMarginCurrent + 225, labelYMarginInitial += labelYMarginOffset, 0, 0);
+                    findColumnDataType(dataType);
+
                 }
                 else
                 {
                     lblColumnName.Margin = new Thickness(labelXMarginCurrent, labelYMarginCurrent += labelYMarginOffset, 0, 0);
+                    findColumnDataType(dataType);
                 }
                 lblColumnName.VerticalAlignment = VerticalAlignment.Top;
 
@@ -74,6 +77,38 @@ namespace ChauffeurJobManager
 
                 grid.Children.Add(lblColumnName);
             }
+        }
+
+        private object findColumnDataType(string columnDataType)
+        {
+            Label l = new Label();
+            switch(columnDataType)
+            {
+                case "System.String":
+                    Console.WriteLine("System.String detected");
+                    //Implement logic for handing string
+                    break;
+                case "System.Int32":
+                    Console.WriteLine("System.Int32 detected");
+                    //Implement logic for handling int32
+                    break;
+                case "System.Single":
+                    Console.WriteLine("System.Single detected");
+                    //Implement logic for handling Single
+                    break;
+                case "System.DateTime":
+                    Console.WriteLine("System.DateTime detected");
+                    //Implement logic for handling DateTime
+                    break;
+                case "System.TimeSpan":
+                    Console.WriteLine("System.TimeSpan detected");
+                    //Implement logic for handling TimeSpan
+                    break;
+
+            }
+
+
+            return l;
         }
     }
 }
