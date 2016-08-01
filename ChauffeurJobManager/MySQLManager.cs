@@ -7,6 +7,7 @@ using System.Data;
 using MySql.Data.MySqlClient;
 using System.Runtime.InteropServices;
 using System.Xml;
+using System.Windows;
 
 namespace ChauffeurJobManager
 {
@@ -70,35 +71,36 @@ namespace ChauffeurJobManager
 
         public bool loginAuth(string authUsername, string authPassword)
         {
-            MySqlCommand selectLoginCredentials = new MySqlCommand("select * from " + loginDatabase + "._users where username = '" + authUsername + "' and password = '" + authPassword + "' ; ", sqlConnect);
-            MySqlDataReader myReader = selectLoginCredentials.ExecuteReader();
+                MySqlCommand selectLoginCredentials = new MySqlCommand("select * from " + loginDatabase + "._users where username = '" + authUsername + "' and password = '" + authPassword + "' ; ", sqlConnect);
+                MySqlDataReader myReader = selectLoginCredentials.ExecuteReader();
 
-            int x = 0;
-            while (myReader.Read())
-            {
-                x++;
-            }
-            if (x == 1)
-            {
-                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Login authentication succesful, welcome " + authUsername);
-                userCompanyID += myReader.GetInt32("customer_company_id");
-                closeConnection();
-                findCustomerDatabase(userCompanyID);
-                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "userCompanyID = " + userCompanyID + " - Username = " + authUsername + " - Password = " + authPassword + " - Database = " + userCompanyDatabase);
-                return true;
-            }
-            else if (x > 1)
-            {
-                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Access denied - check for duplicate login accounts");
-                closeConnection();
-                return false;
-            }
-            else
-            {
-                Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Access denied - username and / or password is incorrect");
-                closeConnection();
-                return false;
-            }
+                int x = 0;
+                while (myReader.Read())
+                {
+                    x++;
+                }
+
+                if (x == 1)
+                {
+                    Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Login authentication succesful, welcome " + authUsername);
+                    userCompanyID += myReader.GetInt32("customer_company_id");
+                    closeConnection();
+                    findCustomerDatabase(userCompanyID);
+                    Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "userCompanyID = " + userCompanyID + " - Username = " + authUsername + " - Password = " + authPassword + " - Database = " + userCompanyDatabase);
+                    return true;
+                }
+                else if (x > 1)
+                {
+                    Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Access denied - check for duplicate login accounts");
+                    closeConnection();
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Access denied - username and / or password is incorrect");
+                    closeConnection();
+                    return false;
+                }
         }
 
         private void findCustomerDatabase(int id)
@@ -154,6 +156,5 @@ namespace ChauffeurJobManager
             return schema;
 
         }
-
     }
 }

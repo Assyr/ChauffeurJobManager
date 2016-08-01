@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -231,15 +232,24 @@ namespace ChauffeurJobManager
             Console.WriteLine("databaseName: " + databaseName); 
             sql.openConnection(databaseName);
 
-            sql.sendQueryToDatabase("CREATE TABLE IF NOT EXISTS " +  tableName + " (" +"`jobID` INT AUTO_INCREMENT," + "PRIMARY KEY(jobID));");
-            foreach (XmlNode node in columnNodes)
+            try
             {
-                string columnName = node["columnName"].InnerText;
-                string columnDataType = node["columnDataType"].InnerText;
-                Console.WriteLine("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnDataType);
-                sql.sendQueryToDatabase("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnDataType);
+                sql.sendQueryToDatabase("CREATE TABLE IF NOT EXISTS " + tableName + " (" + "`jobID` INT AUTO_INCREMENT," + "PRIMARY KEY(jobID));");
+                foreach (XmlNode node in columnNodes)
+                {
+                    string columnName = node["columnName"].InnerText;
+                    string columnDataType = node["columnDataType"].InnerText;
+                    Console.WriteLine("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnDataType);
+                    sql.sendQueryToDatabase("ALTER TABLE " + tableName + " ADD COLUMN " + columnName + " " + columnDataType);
+                }
+                sql.closeConnection();
             }
-            sql.closeConnection();
+            catch (MySqlException ex)
+            {
+                sql.sendQueryToDatabase("DROP TABLE IF EXISTS " + tableName);
+                MessageBox.Show("Table couldn't be created in database - please check to make sure that your column names are not MySQL syntax. ERROR: " + ex.Message);
+                //Can add more sophisticated checks later against a dictionary of MySQL syntax to let the user know specifically which column name is invalid.
+            }
 
             databaseTableName.Document.Blocks.Clear();
             Console.WriteLine("Table has been created in " + databaseName);
