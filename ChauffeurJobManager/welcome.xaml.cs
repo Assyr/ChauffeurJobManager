@@ -28,6 +28,7 @@ namespace ChauffeurJobManager
         //private login loginWindow;
         public string databaseName;
         public IList<string> listOfDatabaseTables = new List<string>();
+        object item;
 
         MySQLManager welcomeSQLManager = new MySQLManager();
 
@@ -48,11 +49,12 @@ namespace ChauffeurJobManager
             {
                 listViewTables.Items.Add(tableName);
             }
+
         }
 
         private void listView_Click(object sender, RoutedEventArgs e)
         {
-            object item = (sender as ListView).SelectedItem;
+            item = (sender as ListView).SelectedItem;
             if (item != null)
             {
                 DataTable dataSet = new DataTable();
@@ -95,12 +97,20 @@ namespace ChauffeurJobManager
 
         private void btn_openTable_Click(object sender, RoutedEventArgs e)
         {
-            jobManager jobManagerWindow = new jobManager();
-            //Populate jobManagerWindow with what we need.
-            jobManagerWindow.txtBlock_tableName.Text = listViewTables.SelectedItem.ToString();
-            jobManagerWindow.tableDatabaseName = databaseName;
-            jobManagerWindow.populateJobManagerWindow();
-            jobManagerWindow.Show();
+            if (item != null)
+            {
+                jobManager jobManagerWindow = new jobManager();
+                //Populate jobManagerWindow with what we need.
+                jobManagerWindow.txtBlock_tableName.Text = listViewTables.SelectedItem.ToString();
+                jobManagerWindow.tableDatabaseName = databaseName;
+                jobManagerWindow.populateJobManagerWindow();
+                jobManagerWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a table to open from the list", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
         }
     }
 }
