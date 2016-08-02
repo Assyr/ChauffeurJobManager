@@ -123,7 +123,6 @@ namespace ChauffeurJobManager
                 }
             }
 
-
             if (string.IsNullOrWhiteSpace(XMLFileName))
             {
                 MessageBox.Show("You must enter a valid template name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);

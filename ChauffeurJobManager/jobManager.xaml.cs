@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -104,11 +106,36 @@ namespace ChauffeurJobManager
                     Console.WriteLine("System.TimeSpan detected");
                     //Implement logic for handling TimeSpan
                     break;
-
             }
-
-
             return l;
+        }
+
+        public void findFullAddress()
+        {
+            string sURL;
+            sURL = "https://api.getaddress.io/v2/uk/SW1A2AA//?api-key="; //need to store API key server side and grab it.. can't be leaving it here.
+
+            WebRequest wrGETURL;
+            wrGETURL = WebRequest.Create(sURL);
+
+            WebProxy myProxy = new WebProxy("myproxy", 80);
+            myProxy.BypassProxyOnLocal = true;
+
+            Stream objStream;
+            objStream = wrGETURL.GetResponse().GetResponseStream();
+
+            StreamReader objReader = new StreamReader(objStream);
+
+            string sLine = "";
+            int i = 0;
+
+            while (sLine != null)
+            {
+                i++;
+                sLine = objReader.ReadLine();
+                if (sLine != null)
+                    Console.WriteLine("{0}:{1}", i, sLine);
+            }
         }
     }
 }

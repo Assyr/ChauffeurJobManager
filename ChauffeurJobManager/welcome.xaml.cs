@@ -104,6 +104,7 @@ namespace ChauffeurJobManager
                 jobManagerWindow.txtBlock_tableName.Text = listViewTables.SelectedItem.ToString();
                 jobManagerWindow.tableDatabaseName = databaseName;
                 jobManagerWindow.populateJobManagerWindow();
+                jobManagerWindow.findFullAddress();
                 jobManagerWindow.Show();
             }
             else
