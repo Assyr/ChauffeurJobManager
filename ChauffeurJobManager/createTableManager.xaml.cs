@@ -107,19 +107,6 @@ namespace ChauffeurJobManager
         {
             string XMLFileName = new TextRange(templateFileName.Document.ContentStart, templateFileName.Document.ContentEnd).Text;
 
-            if (string.IsNullOrWhiteSpace(XMLFileName))
-            {
-                MessageBox.Show("You must enter a valid template name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
-                templateFileName.Focus();
-                return;
-            }
-            else
-            {
-
-                MessageBox.Show(XMLFileName + " template has been created.");
-                templateFileName.Document.Blocks.Clear();
-            }
-
             foreach (TextBox tb in findControlsInCurrentWindow<TextBox>(this))
             {
                 //Make sure that the textBox is not empty
@@ -136,9 +123,22 @@ namespace ChauffeurJobManager
                 }
             }
 
+
+            if (string.IsNullOrWhiteSpace(XMLFileName))
+            {
+                MessageBox.Show("You must enter a valid template name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                templateFileName.Focus();
+                return;
+            }
+            else
+            {
+                MessageBox.Show(XMLFileName + " template has been created.");
+                templateFileName.Document.Blocks.Clear();
+            }
+
+
             foreach (ComboBox cb in findControlsInCurrentWindow<ComboBox>(this))
             {
-
                 //add the data to the lists
                 comboBoxList.Add(cb);
             }
