@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -105,6 +106,15 @@ namespace ChauffeurJobManager
                 case "System.Single":
                     Console.WriteLine("System.Single detected");
                     //Implement logic for handling Single
+                    TextBox tbFloat = new TextBox();
+                    tbFloat.PreviewTextInput += tbFloat_PreviewTextInput;
+                    tbFloat.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
+                    tbFloat.VerticalAlignment = VerticalAlignment.Top;
+                    tbFloat.Width = 120;
+                    tbFloat.Height = 20;
+                    tbFloat.TextWrapping = TextWrapping.Wrap;
+                    Panel.SetZIndex(tbFloat, 4);
+                    gridFunc.Children.Add(tbFloat);
                     break;
                 case "System.DateTime":
                     Console.WriteLine("System.DateTime detected");
@@ -121,6 +131,17 @@ namespace ChauffeurJobManager
                     //Implement logic for handling TimeSpan
                     break;
             }
+        }
+
+        private void tbFloat_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+
+        private static bool IsTextAllowed(string text)
+        {
+            Regex regex = new Regex("[^0-9.-]+"); //regex that matches disallowed text
+            return !regex.IsMatch(text);
         }
 
         public void findFullAddress()
