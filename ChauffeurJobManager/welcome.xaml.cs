@@ -100,11 +100,12 @@ namespace ChauffeurJobManager
             if (item != null)
             {
                 jobManager jobManagerWindow = new jobManager();
+
                 //Populate jobManagerWindow with what we need.
                 jobManagerWindow.txtBlock_tableName.Text = listViewTables.SelectedItem.ToString();
                 jobManagerWindow.tableDatabaseName = databaseName;
                 jobManagerWindow.populateJobManagerWindow();
-                //jobManagerWindow.findFullAddress();
+                //jobManagerWindow.findFullAddress(); call is commented out because we haven't supplied a valid API key (I'd rather keep that private)
                 jobManagerWindow.Show();
             }
             else

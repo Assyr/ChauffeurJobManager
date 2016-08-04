@@ -63,14 +63,14 @@ namespace ChauffeurJobManager
                 if (labelYMarginCurrent >= 195)
                 {
 
-                    lblColumnName.Margin = new Thickness(labelXMarginCurrent + 225, labelYMarginInitial += labelYMarginOffset, 0, 0);
-                    findColumnDataType(dataType);
+                    lblColumnName.Margin = new Thickness(labelXMarginCurrent + 325, labelYMarginInitial += labelYMarginOffset, 0, 0);
+                    findAndPlotColumnDataType(dataType, labelXMarginCurrent + 30, labelYMarginInitial, jobManagerGrid);
 
                 }
                 else
                 {
                     lblColumnName.Margin = new Thickness(labelXMarginCurrent, labelYMarginCurrent += labelYMarginOffset, 0, 0);
-                    findColumnDataType(dataType);
+                    findAndPlotColumnDataType(dataType, labelXMarginCurrent - 600, labelYMarginCurrent, jobManagerGrid);
                 }
                 lblColumnName.VerticalAlignment = VerticalAlignment.Top;
 
@@ -81,13 +81,21 @@ namespace ChauffeurJobManager
             }
         }
 
-        private object findColumnDataType(string columnDataType)
+        private void findAndPlotColumnDataType(string columnDataType, int controlXMarginCurrent, int controlYMarginInitial, Grid gridFunc)
         {
-            Label l = new Label();
-            switch(columnDataType)
+
+            switch (columnDataType)
             {
                 case "System.String":
                     Console.WriteLine("System.String detected");
+                    TextBox tb = new TextBox();
+                    tb.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
+                    tb.VerticalAlignment = VerticalAlignment.Top;
+                    tb.Width = 120;
+                    tb.Height = 20;
+                    tb.TextWrapping = TextWrapping.Wrap;
+                    Panel.SetZIndex(tb, 4);
+                    gridFunc.Children.Add(tb);
                     //Implement logic for handing string
                     break;
                 case "System.Int32":
@@ -100,20 +108,18 @@ namespace ChauffeurJobManager
                     break;
                 case "System.DateTime":
                     Console.WriteLine("System.DateTime detected");
-                    //Implement logic for handling DateTime
                     break;
                 case "System.TimeSpan":
                     Console.WriteLine("System.TimeSpan detected");
                     //Implement logic for handling TimeSpan
                     break;
             }
-            return l;
         }
 
         public void findFullAddress()
         {
             string sURL;
-            sURL = "https://api.getaddress.io/v2/uk/SW1A2AA//?api-key="; //need to store API key server side and grab it.. can't be leaving it here.
+            sURL = "https://api.getaddress.io/v2/uk/N19JY/IMS/?api-key="; //need to store API key server side and grab it.. can't be leaving it here. - API key has been removed for GitHub
 
             WebRequest wrGETURL;
             wrGETURL = WebRequest.Create(sURL);
