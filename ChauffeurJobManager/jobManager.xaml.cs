@@ -108,6 +108,13 @@ namespace ChauffeurJobManager
                     break;
                 case "System.DateTime":
                     Console.WriteLine("System.DateTime detected");
+                    DatePicker dp = new DatePicker();
+                    dp.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
+                    dp.VerticalAlignment = VerticalAlignment.Top;
+                    dp.Width = 120;
+                    dp.Height = 20;
+                    Panel.SetZIndex(dp, 4);
+                    gridFunc.Children.Add(dp);
                     break;
                 case "System.TimeSpan":
                     Console.WriteLine("System.TimeSpan detected");
