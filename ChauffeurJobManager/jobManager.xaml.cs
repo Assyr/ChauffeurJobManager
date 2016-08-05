@@ -113,15 +113,14 @@ namespace ChauffeurJobManager
                 case "System.Single":
                     Console.WriteLine("System.Single detected");
                     //Implement logic for handling Single
-                    TextBox tbFloat = new TextBox();
-                    tbFloat.PreviewTextInput += tbFloat_PreviewTextInput;
-                    tbFloat.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
-                    tbFloat.VerticalAlignment = VerticalAlignment.Top;
-                    tbFloat.Width = 120;
-                    tbFloat.Height = 20;
-                    tbFloat.TextWrapping = TextWrapping.Wrap;
-                    Panel.SetZIndex(tbFloat, 4);
-                    gridFunc.Children.Add(tbFloat);
+                    Xceed.Wpf.Toolkit.DecimalUpDown dud = new Xceed.Wpf.Toolkit.DecimalUpDown();
+                    dud.FormatString = "C2";
+                    dud.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
+                    dud.VerticalAlignment = VerticalAlignment.Top;
+                    dud.Width = 120;
+                    dud.Height = 20;
+                    Panel.SetZIndex(dud, 4);
+                    gridFunc.Children.Add(dud);
                     break;
                 case "System.DateTime":
                     Console.WriteLine("System.DateTime detected");
