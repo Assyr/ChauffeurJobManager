@@ -49,7 +49,6 @@ namespace ChauffeurJobManager
             {
                 listViewTables.Items.Add(tableName);
             }
-
         }
 
         private void listView_Click(object sender, RoutedEventArgs e)
@@ -104,7 +103,9 @@ namespace ChauffeurJobManager
                 //Populate jobManagerWindow with what we need.
                 jobManagerWindow.txtBlock_tableName.Text = listViewTables.SelectedItem.ToString();
                 jobManagerWindow.tableDatabaseName = databaseName;
+                jobManagerWindow.tableName = item;
                 jobManagerWindow.populateJobManagerWindow();
+                jobManagerWindow.populateDataGrid();
                 //jobManagerWindow.findFullAddress(); call is commented out because we haven't supplied a valid API key (I'd rather keep that private)
                 jobManagerWindow.ShowDialog();
             }

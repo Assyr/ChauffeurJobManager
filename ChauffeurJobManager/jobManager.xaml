@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChauffeurJobManager"
         mc:Ignorable="d"
-        Title="Job Manager" Height="500" Width="1000">
+        Title="Job Manager" Height="600" Width="1000">
     <Grid x:Name="jobManagerGrid">
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" FontSize="15" TextWrapping="Wrap" Text="Currently looking at table: " VerticalAlignment="Top" Height="31" Width="192"/>
         <TextBlock x:Name="txtBlock_tableName" HorizontalAlignment="Left" Margin="189,10,0,0" FontSize="15" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" Width="192"/>
         <Button x:Name="btn_Close" Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="907,11,0,0" Click="btn_Close_Click"/>
+        <DataGrid x:Name="SQLTableDataGrid" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Height="218" Width="972" IsReadOnly="True"/>
 
     </Grid>
 </Window>

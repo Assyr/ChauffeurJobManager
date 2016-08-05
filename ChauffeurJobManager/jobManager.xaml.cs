@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -35,6 +36,7 @@ namespace ChauffeurJobManager
         MySQLManager jobManagerSQLManager = new MySQLManager();
 
         public string tableDatabaseName;
+        public object tableName;
 
 
         public jobManager()
@@ -146,6 +148,17 @@ namespace ChauffeurJobManager
                     gridFunc.Children.Add(tp);
                     break;
             }
+        }
+
+        public void populateDataGrid()
+        {
+            DataTable dataSet = new DataTable();
+            Console.WriteLine(tableDatabaseName);
+            jobManagerSQLManager.openConnection(tableDatabaseName);
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter("select * from " + tableDatabaseName + "." + tableName.ToString() + ";", jobManagerSQLManager.sqlConnect);
+            dataAdapter.Fill(dataSet);
+            jobManagerSQLManager.closeConnection();
+            SQLTableDataGrid.ItemsSource = dataSet.DefaultView;
         }
 
         private void tbFloat_PreviewTextInput(object sender, TextCompositionEventArgs e)
