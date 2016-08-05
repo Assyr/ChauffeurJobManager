@@ -102,6 +102,13 @@ namespace ChauffeurJobManager
                 case "System.Int32":
                     Console.WriteLine("System.Int32 detected");
                     //Implement logic for handling int32
+                    Xceed.Wpf.Toolkit.IntegerUpDown iud = new Xceed.Wpf.Toolkit.IntegerUpDown();
+                    iud.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
+                    iud.VerticalAlignment = VerticalAlignment.Top;
+                    iud.Width = 120;
+                    iud.Height = 20;
+                    Panel.SetZIndex(iud, 4);
+                    gridFunc.Children.Add(iud);
                     break;
                 case "System.Single":
                     Console.WriteLine("System.Single detected");
