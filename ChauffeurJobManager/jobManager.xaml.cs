@@ -129,6 +129,15 @@ namespace ChauffeurJobManager
                 case "System.TimeSpan":
                     Console.WriteLine("System.TimeSpan detected");
                     //Implement logic for handling TimeSpan
+                    Xceed.Wpf.Toolkit.TimePicker tp = new Xceed.Wpf.Toolkit.TimePicker();
+                    tp.Format = Xceed.Wpf.Toolkit.DateTimeFormat.ShortTime;
+                    tp.ShowDropDownButton = false;
+                    tp.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
+                    tp.VerticalAlignment = VerticalAlignment.Top;
+                    tp.Width = 120;
+                    tp.Height = 20;
+                    Panel.SetZIndex(tp, 4);
+                    gridFunc.Children.Add(tp);
                     break;
             }
         }
