@@ -180,5 +180,10 @@ namespace ChauffeurJobManager
                     Console.WriteLine("{0}:{1}", i, sLine);
             }
         }
+
+        private void btn_Close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -106,7 +106,7 @@ namespace ChauffeurJobManager
                 jobManagerWindow.tableDatabaseName = databaseName;
                 jobManagerWindow.populateJobManagerWindow();
                 //jobManagerWindow.findFullAddress(); call is commented out because we haven't supplied a valid API key (I'd rather keep that private)
-                jobManagerWindow.Show();
+                jobManagerWindow.ShowDialog();
             }
             else
             {
