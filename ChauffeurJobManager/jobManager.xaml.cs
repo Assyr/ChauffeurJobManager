@@ -204,5 +204,24 @@ namespace ChauffeurJobManager
         {
             this.Close();
         }
+
+        private void btnInsert_Click(object sender, RoutedEventArgs e)
+        {
+            //Insert data to table implementation
+            MessageBox.Show("INSERT");
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            //Update record in table implementation
+            MessageBox.Show("UPDATE");
+        }
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            //Delete record in table implementation
+            MessageBox.Show("DELETE");
+        }
+
+        
     }
 }
