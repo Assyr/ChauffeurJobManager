@@ -31,14 +31,12 @@ namespace ChauffeurJobManager
 
         private int labelXMarginCurrent = 20;
 
-
         private List<Label> labelList = new List<Label>();
         private List<TextBox> textBoxList = new List<TextBox>();
         private List<IntegerUpDown> integerUpDownList = new List<IntegerUpDown>();
         private List<DecimalUpDown> decimalUpDownList = new List<DecimalUpDown>();
         private List<DatePicker> datePickerList = new List<DatePicker>();
         private List<TimePicker> timePickerList = new List<TimePicker>();
-
 
         MySQLManager jobManagerSQLManager = new MySQLManager();
 
@@ -58,8 +56,6 @@ namespace ChauffeurJobManager
             Grid grid = jobManagerGrid;
             DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
 
-            
-
             foreach (DataRow col in  columnInfo.Rows)
             {
                 string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
@@ -67,21 +63,19 @@ namespace ChauffeurJobManager
                 string dataType = col[columnInfo.Columns["DataType"]].ToString();
                 Console.WriteLine(dataType);
 
-
                 Label lblColumnName = new Label();
 
                 if (labelYMarginCurrent >= 195)
                 {
-
                     lblColumnName.Margin = new Thickness(labelXMarginCurrent + 325, labelYMarginInitial += labelYMarginOffset, 0, 0);
                     findAndPlotColumnDataType(dataType, labelXMarginCurrent + 30, labelYMarginInitial, jobManagerGrid);
-
                 }
                 else
                 {
                     lblColumnName.Margin = new Thickness(labelXMarginCurrent, labelYMarginCurrent += labelYMarginOffset, 0, 0);
                     findAndPlotColumnDataType(dataType, labelXMarginCurrent - 600, labelYMarginCurrent, jobManagerGrid);
                 }
+
                 lblColumnName.VerticalAlignment = VerticalAlignment.Top;
 
                 lblColumnName.Content = columnName + ":";
@@ -219,41 +213,57 @@ namespace ChauffeurJobManager
 
         private void btnInsert_Click(object sender, RoutedEventArgs e)
         {
-            //Insert data to table implementation
-            Xceed.Wpf.Toolkit.MessageBox.Show("INSERT");
-            foreach (TextBox tb in textBoxList)
-            {
-                //add the data to the lists
-                Console.WriteLine(tb.Text);
-            }
-            foreach (IntegerUpDown iud in integerUpDownList)
-            {
-                //add the data to the lists
-                Console.WriteLine(iud.Text);
-            }
-            foreach (DecimalUpDown dud in decimalUpDownList)
-            {
-                //add the data to the lists
-                Console.WriteLine(dud.Text);
-            }
-            foreach (DatePicker dp in datePickerList)
-            {
-                //add the data to the lists
-                Console.WriteLine(dp.Text);
-            }
-            foreach (TimePicker tp in timePickerList)
-            {
-                //add the data to the lists
-                Console.WriteLine(tp.Text);
-            }
+            string tableName = txtBlock_tableName.Text;
 
-    }
+            DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
+
+            jobManagerSQLManager.openConnection(tableDatabaseName);
+
+            int stringIndex = 0;
+            int intIndex = 0;
+            int singleIndex = 0;
+            int dateTimeIndex = 0;
+            int timeSpanIndex = 0;
+
+            foreach (DataRow col in columnInfo.Rows)
+            {
+                string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
+                string dataType = col[columnInfo.Columns["DataType"]].ToString();
+
+                //Grab it all and build a string to use latter to INSERT into table in one go
+                switch (dataType)
+                {
+                    case "System.String":
+                        //jobManagerSQLManager.sendQueryToDatabase("");
+                        Console.WriteLine(textBoxList[stringIndex].Text);
+                        stringIndex++;
+                        break;
+                    case "System.Int32":
+                        Console.WriteLine(integerUpDownList[intIndex].Text);
+                        intIndex++;
+                        break;
+                    case "System.Single":
+                        Console.WriteLine(decimalUpDownList[singleIndex].Text);
+                        singleIndex++;
+                        break;
+                    case "System.DateTime":
+                        Console.WriteLine(datePickerList[dateTimeIndex].Text);
+                        dateTimeIndex++;
+                        break;
+                    case "System.TimeSpan":
+                        Console.WriteLine(timePickerList[timeSpanIndex].Text);
+                        timeSpanIndex++;
+                        break;
+                }
+            }
+        }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             //Update record in table implementation
             Xceed.Wpf.Toolkit.MessageBox.Show("UPDATE");
         }
+
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             //Delete record in table implementation
