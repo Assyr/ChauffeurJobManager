@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit;
 
 namespace ChauffeurJobManager
 {
@@ -32,6 +33,12 @@ namespace ChauffeurJobManager
 
 
         private List<Label> labelList = new List<Label>();
+        private List<TextBox> textBoxList = new List<TextBox>();
+        private List<IntegerUpDown> integerUpDownList = new List<IntegerUpDown>();
+        private List<DecimalUpDown> decimalUpDownList = new List<DecimalUpDown>();
+        private List<DatePicker> datePickerList = new List<DatePicker>();
+        private List<TimePicker> timePickerList = new List<TimePicker>();
+
 
         MySQLManager jobManagerSQLManager = new MySQLManager();
 
@@ -99,23 +106,25 @@ namespace ChauffeurJobManager
                     tb.TextWrapping = TextWrapping.Wrap;
                     Panel.SetZIndex(tb, 4);
                     gridFunc.Children.Add(tb);
+                    textBoxList.Add(tb);
                     //Implement logic for handing string
                     break;
                 case "System.Int32":
                     Console.WriteLine("System.Int32 detected");
                     //Implement logic for handling int32
-                    Xceed.Wpf.Toolkit.IntegerUpDown iud = new Xceed.Wpf.Toolkit.IntegerUpDown();
+                    IntegerUpDown iud = new IntegerUpDown();
                     iud.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
                     iud.VerticalAlignment = VerticalAlignment.Top;
                     iud.Width = 120;
                     iud.Height = 20;
                     Panel.SetZIndex(iud, 4);
                     gridFunc.Children.Add(iud);
+                    integerUpDownList.Add(iud);
                     break;
                 case "System.Single":
                     Console.WriteLine("System.Single detected");
                     //Implement logic for handling Single
-                    Xceed.Wpf.Toolkit.DecimalUpDown dud = new Xceed.Wpf.Toolkit.DecimalUpDown();
+                    DecimalUpDown dud = new DecimalUpDown();
                     dud.FormatString = "C2";
                     dud.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
                     dud.VerticalAlignment = VerticalAlignment.Top;
@@ -123,6 +132,7 @@ namespace ChauffeurJobManager
                     dud.Height = 20;
                     Panel.SetZIndex(dud, 4);
                     gridFunc.Children.Add(dud);
+                    decimalUpDownList.Add(dud);
                     break;
                 case "System.DateTime":
                     Console.WriteLine("System.DateTime detected");
@@ -133,11 +143,12 @@ namespace ChauffeurJobManager
                     dp.Height = 20;
                     Panel.SetZIndex(dp, 4);
                     gridFunc.Children.Add(dp);
+                    datePickerList.Add(dp);
                     break;
                 case "System.TimeSpan":
                     Console.WriteLine("System.TimeSpan detected");
                     //Implement logic for handling TimeSpan
-                    Xceed.Wpf.Toolkit.TimePicker tp = new Xceed.Wpf.Toolkit.TimePicker();
+                    TimePicker tp = new TimePicker();
                     tp.Format = Xceed.Wpf.Toolkit.DateTimeFormat.ShortTime;
                     tp.ShowDropDownButton = false;
                     tp.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
@@ -146,6 +157,7 @@ namespace ChauffeurJobManager
                     tp.Height = 20;
                     Panel.SetZIndex(tp, 4);
                     gridFunc.Children.Add(tp);
+                    timePickerList.Add(tp);
                     break;
             }
         }
@@ -208,18 +220,44 @@ namespace ChauffeurJobManager
         private void btnInsert_Click(object sender, RoutedEventArgs e)
         {
             //Insert data to table implementation
-            MessageBox.Show("INSERT");
-        }
+            Xceed.Wpf.Toolkit.MessageBox.Show("INSERT");
+            foreach (TextBox tb in textBoxList)
+            {
+                //add the data to the lists
+                Console.WriteLine(tb.Text);
+            }
+            foreach (IntegerUpDown iud in integerUpDownList)
+            {
+                //add the data to the lists
+                Console.WriteLine(iud.Text);
+            }
+            foreach (DecimalUpDown dud in decimalUpDownList)
+            {
+                //add the data to the lists
+                Console.WriteLine(dud.Text);
+            }
+            foreach (DatePicker dp in datePickerList)
+            {
+                //add the data to the lists
+                Console.WriteLine(dp.Text);
+            }
+            foreach (TimePicker tp in timePickerList)
+            {
+                //add the data to the lists
+                Console.WriteLine(tp.Text);
+            }
+
+    }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             //Update record in table implementation
-            MessageBox.Show("UPDATE");
+            Xceed.Wpf.Toolkit.MessageBox.Show("UPDATE");
         }
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             //Delete record in table implementation
-            MessageBox.Show("DELETE");
+            Xceed.Wpf.Toolkit.MessageBox.Show("DELETE");
         }
 
         
