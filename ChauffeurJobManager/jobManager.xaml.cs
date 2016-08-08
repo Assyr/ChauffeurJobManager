@@ -214,10 +214,12 @@ namespace ChauffeurJobManager
         private void btnInsert_Click(object sender, RoutedEventArgs e)
         {
             string tableName = txtBlock_tableName.Text;
+            string sqlColumnName = "insert into " + tableDatabaseName + "." + tableName + "(";
+            string sqlColumnData = "values('";
+
+                //"insert into student.studentinfo(idStudentInfo,Name,Father_Name,Age,Semester) values('" + this.IdTextBox.Text + "','" + this.NameTextBox.Text + "','" + this.FnameTextBox.Text + "','" + this.AgeTextBox.Text + "','" + this.SemesterTextBox.Text + "');";
 
             DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
-
-            jobManagerSQLManager.openConnection(tableDatabaseName);
 
             int stringIndex = 0;
             int intIndex = 0;
@@ -230,32 +232,51 @@ namespace ChauffeurJobManager
                 string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
                 string dataType = col[columnInfo.Columns["DataType"]].ToString();
 
+                sqlColumnName += columnName + ",";
+
                 //Grab it all and build a string to use latter to INSERT into table in one go
                 switch (dataType)
                 {
                     case "System.String":
                         //jobManagerSQLManager.sendQueryToDatabase("");
                         Console.WriteLine(textBoxList[stringIndex].Text);
+                        sqlColumnData += textBoxList[stringIndex].Text + "','";
                         stringIndex++;
                         break;
                     case "System.Int32":
                         Console.WriteLine(integerUpDownList[intIndex].Text);
+                        sqlColumnData += integerUpDownList[intIndex].Text + "','";
                         intIndex++;
                         break;
                     case "System.Single":
                         Console.WriteLine(decimalUpDownList[singleIndex].Text);
+                        sqlColumnData += decimalUpDownList[singleIndex].Text + "','";
                         singleIndex++;
                         break;
                     case "System.DateTime":
                         Console.WriteLine(datePickerList[dateTimeIndex].Text);
+                        sqlColumnData += datePickerList[dateTimeIndex].Text + "','";
                         dateTimeIndex++;
                         break;
                     case "System.TimeSpan":
                         Console.WriteLine(timePickerList[timeSpanIndex].Text);
+                        sqlColumnData += timePickerList[timeSpanIndex].Text + "','";
                         timeSpanIndex++;
                         break;
                 }
             }
+
+            sqlColumnName += ") ";
+            sqlColumnData += ");";
+
+            sqlColumnName = sqlColumnName.Remove(sqlColumnName.Length - 3 , 1);
+            sqlColumnData = sqlColumnData.Remove(sqlColumnData.Length - 4, 2);
+
+            Console.WriteLine(sqlColumnName + sqlColumnData);
+
+            jobManagerSQLManager.openConnection(tableDatabaseName);
+            jobManagerSQLManager.sendQueryToDatabase(sqlColumnName + sqlColumnData);
+            jobManagerSQLManager.closeConnection();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
