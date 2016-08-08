@@ -255,7 +255,10 @@ namespace ChauffeurJobManager
                         break;
                     case "System.DateTime":
                         Console.WriteLine(datePickerList[dateTimeIndex].Text);
-                        sqlColumnData += datePickerList[dateTimeIndex].Text + "','";
+                        DateTime? date = datePickerList[dateTimeIndex].SelectedDate;
+                        string value = date.Value.ToString("yyyy-MM-dd");
+                        Console.WriteLine(value);
+                        sqlColumnData += value + "','";
                         dateTimeIndex++;
                         break;
                     case "System.TimeSpan":
