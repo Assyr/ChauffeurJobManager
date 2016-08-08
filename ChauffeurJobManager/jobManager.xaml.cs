@@ -281,6 +281,7 @@ namespace ChauffeurJobManager
             jobManagerSQLManager.sendQueryToDatabase(sqlColumnName + sqlColumnData);
             jobManagerSQLManager.closeConnection();
 
+            populateDataGrid();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
