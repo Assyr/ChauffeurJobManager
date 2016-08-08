@@ -217,8 +217,6 @@ namespace ChauffeurJobManager
             string sqlColumnName = "insert into " + tableDatabaseName + "." + tableName + "(";
             string sqlColumnData = "values('";
 
-                //"insert into student.studentinfo(idStudentInfo,Name,Father_Name,Age,Semester) values('" + this.IdTextBox.Text + "','" + this.NameTextBox.Text + "','" + this.FnameTextBox.Text + "','" + this.AgeTextBox.Text + "','" + this.SemesterTextBox.Text + "');";
-
             DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
 
             int stringIndex = 0;
