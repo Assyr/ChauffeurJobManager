@@ -250,7 +250,7 @@ namespace ChauffeurJobManager
                         break;
                     case "System.Single":
                         Console.WriteLine(decimalUpDownList[singleIndex].Text);
-                        sqlColumnData += decimalUpDownList[singleIndex].Text + "','";
+                        sqlColumnData += decimalUpDownList[singleIndex].Text.Remove(0,1) + "','";
                         singleIndex++;
                         break;
                     case "System.DateTime":
@@ -280,6 +280,7 @@ namespace ChauffeurJobManager
             jobManagerSQLManager.openConnection(tableDatabaseName);
             jobManagerSQLManager.sendQueryToDatabase(sqlColumnName + sqlColumnData);
             jobManagerSQLManager.closeConnection();
+
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
