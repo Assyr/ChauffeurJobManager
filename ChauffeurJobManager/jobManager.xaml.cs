@@ -56,7 +56,7 @@ namespace ChauffeurJobManager
             Grid grid = jobManagerGrid;
             DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
 
-            foreach (DataRow col in  columnInfo.Rows)
+            foreach (DataRow col in columnInfo.Rows)
             {
                 string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
                 Console.WriteLine(columnName);
@@ -248,7 +248,7 @@ namespace ChauffeurJobManager
                         break;
                     case "System.Single":
                         Console.WriteLine(decimalUpDownList[singleIndex].Text);
-                        sqlColumnData += decimalUpDownList[singleIndex].Text.Remove(0,1) + "','";
+                        sqlColumnData += decimalUpDownList[singleIndex].Text.Remove(0, 1) + "','";
                         singleIndex++;
                         break;
                     case "System.DateTime":
@@ -270,7 +270,7 @@ namespace ChauffeurJobManager
             sqlColumnName += ") ";
             sqlColumnData += ");";
 
-            sqlColumnName = sqlColumnName.Remove(sqlColumnName.Length - 3 , 1);
+            sqlColumnName = sqlColumnName.Remove(sqlColumnName.Length - 3, 1);
             sqlColumnData = sqlColumnData.Remove(sqlColumnData.Length - 4, 2);
 
             Console.WriteLine(sqlColumnName + sqlColumnData);
@@ -285,15 +285,21 @@ namespace ChauffeurJobManager
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             //Update record in table implementation
-            Xceed.Wpf.Toolkit.MessageBox.Show("UPDATE");
-        }
+            //string updateQuery = "update " + tableName + " set jobID='" + integerUpDownList[0].Value
+
+            
+            DataRowView drv = (DataRowView)SQLTableDataGrid.SelectedItem;
+            String result = (drv["jobID"]).ToString();
+            Console.WriteLine(result);
+
+            //^We should loop through all our column names and grab the data so we can fill it back into our inputs -- this will be implemented on the .cellClicked function
+            //datagrid. And then we can simply use that data to make an 'update' request to mysql
+        } 
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             //Delete record in table implementation
             Xceed.Wpf.Toolkit.MessageBox.Show("DELETE");
         }
-
-        
     }
 }
