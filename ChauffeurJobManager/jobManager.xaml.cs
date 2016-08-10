@@ -33,11 +33,13 @@ namespace ChauffeurJobManager
         private int tableColumnCount;
 
         private List<Label> labelList = new List<Label>();
-        private List<TextBox> textBoxList = new List<TextBox>();
+        /*private List<TextBox> textBoxList = new List<TextBox>();
         private List<IntegerUpDown> integerUpDownList = new List<IntegerUpDown>();
         private List<DecimalUpDown> decimalUpDownList = new List<DecimalUpDown>();
         private List<DatePicker> datePickerList = new List<DatePicker>();
-        private List<TimePicker> timePickerList = new List<TimePicker>();
+        private List<TimePicker> timePickerList = new List<TimePicker>();*/
+
+        private List<Control> controlTest = new List<Control>();
 
         MySQLManager jobManagerSQLManager = new MySQLManager();
 
@@ -105,7 +107,7 @@ namespace ChauffeurJobManager
                     tb.TextWrapping = TextWrapping.Wrap;
                     Panel.SetZIndex(tb, 4);
                     gridFunc.Children.Add(tb);
-                    textBoxList.Add(tb);
+                    controlTest.Add(tb);
                     //Implement logic for handing string
                     break;
                 case "System.Int32":
@@ -118,7 +120,7 @@ namespace ChauffeurJobManager
                     iud.Height = 20;
                     Panel.SetZIndex(iud, 4);
                     gridFunc.Children.Add(iud);
-                    integerUpDownList.Add(iud);
+                    controlTest.Add(iud);
                     break;
                 case "System.Single":
                     Console.WriteLine("System.Single detected");
@@ -131,7 +133,7 @@ namespace ChauffeurJobManager
                     dud.Height = 20;
                     Panel.SetZIndex(dud, 4);
                     gridFunc.Children.Add(dud);
-                    decimalUpDownList.Add(dud);
+                    controlTest.Add(dud);
                     break;
                 case "System.DateTime":
                     Console.WriteLine("System.DateTime detected");
@@ -142,7 +144,7 @@ namespace ChauffeurJobManager
                     dp.Height = 20;
                     Panel.SetZIndex(dp, 4);
                     gridFunc.Children.Add(dp);
-                    datePickerList.Add(dp);
+                    controlTest.Add(dp);
                     break;
                 case "System.TimeSpan":
                     Console.WriteLine("System.TimeSpan detected");
@@ -156,7 +158,7 @@ namespace ChauffeurJobManager
                     tp.Height = 20;
                     Panel.SetZIndex(tp, 4);
                     gridFunc.Children.Add(tp);
-                    timePickerList.Add(tp);
+                    controlTest.Add(tp);
                     break;
             }
         }
@@ -224,11 +226,7 @@ namespace ChauffeurJobManager
 
             DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
 
-            int stringIndex = 0;
-            int intIndex = 0;
-            int singleIndex = 0;
-            int dateTimeIndex = 0;
-            int timeSpanIndex = 0;
+            int ControlListindex = 0;
 
             foreach (DataRow col in columnInfo.Rows)
             {
@@ -241,33 +239,36 @@ namespace ChauffeurJobManager
                 switch (dataType)
                 {
                     case "System.String":
-                        //jobManagerSQLManager.sendQueryToDatabase("");
-                        Console.WriteLine(textBoxList[stringIndex].Text);
-                        sqlColumnData += textBoxList[stringIndex].Text + "','";
-                        stringIndex++;
+                        TextBox tb = controlTest[ControlListindex] as TextBox;
+                        Console.WriteLine(tb.Text);
+                        sqlColumnData += tb.Text + "','";
+                        ControlListindex++;
                         break;
                     case "System.Int32":
-                        Console.WriteLine(integerUpDownList[intIndex].Text);
-                        sqlColumnData += integerUpDownList[intIndex].Text + "','";
-                        intIndex++;
+                        IntegerUpDown iud = controlTest[ControlListindex] as IntegerUpDown;
+                        Console.WriteLine(iud.Text);
+                        sqlColumnData += iud.Text + "','";
+                        ControlListindex++;
                         break;
                     case "System.Single":
-                        Console.WriteLine(decimalUpDownList[singleIndex].Text);
-                        sqlColumnData += decimalUpDownList[singleIndex].Text.Remove(0, 1) + "','";
-                        singleIndex++;
+                        DecimalUpDown dud = controlTest[ControlListindex] as DecimalUpDown;
+                        Console.WriteLine(dud.Text);
+                        sqlColumnData += dud.Text.Remove(0, 1) + "','";
+                        ControlListindex++;
                         break;
                     case "System.DateTime":
-                        Console.WriteLine(datePickerList[dateTimeIndex].Text);
-                        DateTime? date = datePickerList[dateTimeIndex].SelectedDate;
+                        DatePicker dtp = controlTest[ControlListindex] as DatePicker;
+                        DateTime? date = dtp.SelectedDate;
                         string value = date.Value.ToString("yyyy-MM-dd");
                         Console.WriteLine(value);
                         sqlColumnData += value + "','";
-                        dateTimeIndex++;
+                        ControlListindex++;
                         break;
                     case "System.TimeSpan":
-                        Console.WriteLine(timePickerList[timeSpanIndex].Text);
-                        sqlColumnData += timePickerList[timeSpanIndex].Text + "','";
-                        timeSpanIndex++;
+                        TimePicker tp = controlTest[ControlListindex] as TimePicker;
+                        Console.WriteLine(tp.Text);
+                        sqlColumnData += tp.Text + "','";
+                        ControlListindex++;
                         break;
                 }
             }
@@ -298,7 +299,6 @@ namespace ChauffeurJobManager
             {
                 Console.WriteLine(drv[x].ToString());
             }
-            Console.WriteLine("Column Count: " + tableColumnCount);
 
             //^We should loop through all our column names and grab the data so we can fill it back into our inputs -- this will be implemented on the .cellClicked function
             //datagrid. And then we can simply use that data to make an 'update' request to mysql
