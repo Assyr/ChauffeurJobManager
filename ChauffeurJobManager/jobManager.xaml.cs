@@ -293,9 +293,12 @@ namespace ChauffeurJobManager
             //string updateQuery = "update " + tableName + " set jobID='" + integerUpDownList[0].Value
 
             DataRowView drv = (DataRowView)SQLTableDataGrid.SelectedItem;
+
+            for(int x = 0; x < tableColumnCount; x++)
+            {
+                Console.WriteLine(drv[x].ToString());
+            }
             Console.WriteLine("Column Count: " + tableColumnCount);
-            String result = (drv[0]).ToString();
-            Console.WriteLine(result);
 
             //^We should loop through all our column names and grab the data so we can fill it back into our inputs -- this will be implemented on the .cellClicked function
             //datagrid. And then we can simply use that data to make an 'update' request to mysql
