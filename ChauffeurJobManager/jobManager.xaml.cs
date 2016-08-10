@@ -28,8 +28,9 @@ namespace ChauffeurJobManager
         private int labelYMarginInitial = 35;
         private int labelYMarginCurrent = 35;
         private int labelYMarginOffset = 40;
-
         private int labelXMarginCurrent = 20;
+
+        private int tableColumnCount;
 
         private List<Label> labelList = new List<Label>();
         private List<TextBox> textBoxList = new List<TextBox>();
@@ -43,7 +44,8 @@ namespace ChauffeurJobManager
         public string tableDatabaseName;
         public object tableName;
 
-
+        
+        
         public jobManager()
         {
             InitializeComponent();
@@ -58,6 +60,9 @@ namespace ChauffeurJobManager
 
             foreach (DataRow col in columnInfo.Rows)
             {
+                //Get how many columns are in our table and store it later for update implementation
+                tableColumnCount++;
+
                 string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
                 Console.WriteLine(columnName);
                 string dataType = col[columnInfo.Columns["DataType"]].ToString();
@@ -287,9 +292,9 @@ namespace ChauffeurJobManager
             //Update record in table implementation
             //string updateQuery = "update " + tableName + " set jobID='" + integerUpDownList[0].Value
 
-            
             DataRowView drv = (DataRowView)SQLTableDataGrid.SelectedItem;
-            String result = (drv["jobID"]).ToString();
+            Console.WriteLine("Column Count: " + tableColumnCount);
+            String result = (drv[0]).ToString();
             Console.WriteLine(result);
 
             //^We should loop through all our column names and grab the data so we can fill it back into our inputs -- this will be implemented on the .cellClicked function
