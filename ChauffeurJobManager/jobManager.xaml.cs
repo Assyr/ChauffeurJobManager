@@ -33,20 +33,12 @@ namespace ChauffeurJobManager
         private int tableColumnCount;
 
         private List<Label> labelList = new List<Label>();
-        /*private List<TextBox> textBoxList = new List<TextBox>();
-        private List<IntegerUpDown> integerUpDownList = new List<IntegerUpDown>();
-        private List<DecimalUpDown> decimalUpDownList = new List<DecimalUpDown>();
-        private List<DatePicker> datePickerList = new List<DatePicker>();
-        private List<TimePicker> timePickerList = new List<TimePicker>();*/
-
         private List<Control> controlTest = new List<Control>();
 
         MySQLManager jobManagerSQLManager = new MySQLManager();
 
         public string tableDatabaseName;
         public object tableName;
-
-        
         
         public jobManager()
         {
@@ -298,6 +290,33 @@ namespace ChauffeurJobManager
             for(int x = 0; x < tableColumnCount; x++)
             {
                 Console.WriteLine(drv[x].ToString());
+
+                if (controlTest[x] is TextBox) 
+                {
+                    TextBox tb = controlTest[x] as TextBox;
+                    tb.Text = drv[x].ToString();
+                }
+                else if(controlTest[x] is IntegerUpDown)
+                {
+                    IntegerUpDown iud = controlTest[x] as IntegerUpDown;
+                    iud.Value = (int)drv[x];
+                }
+                else if (controlTest[x] is DecimalUpDown)
+                {
+                    DecimalUpDown dud = controlTest[x] as DecimalUpDown;
+                    dud.Text = drv[x].ToString();
+                }
+                else if (controlTest[x] is DatePicker)
+                {
+                    DatePicker dp = controlTest[x] as DatePicker;
+                    dp.Text = drv[x].ToString();
+                }
+                else if (controlTest[x] is TimePicker)
+                {
+                    TimePicker tp = controlTest[x] as TimePicker;
+                    TimeSpan ts = TimeSpan.Parse(drv[x].ToString());
+                    tp.Text = ts.ToString(@"hh\:mm");
+                }
             }
 
             //^We should loop through all our column names and grab the data so we can fill it back into our inputs -- this will be implemented on the .cellClicked function
