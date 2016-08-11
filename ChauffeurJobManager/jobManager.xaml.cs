@@ -355,12 +355,49 @@ namespace ChauffeurJobManager
             jobManagerSQLManager.closeConnection();
 
             populateDataGrid();
-        } 
+        }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             //Delete record in table implementation
-            Xceed.Wpf.Toolkit.MessageBox.Show("DELETE");
+            string deleteQuery = "delete from " + tableDatabaseName + "." + txtBlock_tableName.Text + " where jobID='";
+
+            int ControlListindex = 0;
+            int jobIDValue = 0;
+
+            DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, txtBlock_tableName.Text);
+
+            foreach (DataRow col in columnInfo.Rows)
+            {
+                string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
+                string dataType = col[columnInfo.Columns["DataType"]].ToString();
+
+                Console.WriteLine(columnName);
+                Console.WriteLine(dataType);
+                //Grab it all and build a delete string to delete from jobID
+                switch (dataType)
+                {
+                    case "System.Int32":
+                        if (columnName == "jobID")
+                        {
+                            IntegerUpDown iud = controlTest[ControlListindex] as IntegerUpDown;
+                            Console.WriteLine(iud.Text);
+                            jobIDValue = (int)iud.Value;
+                            ControlListindex++;
+                            break;
+                        }
+                        else
+                            break;
+                }
+            }
+
+            deleteQuery += jobIDValue + "';";
+
+            jobManagerSQLManager.openConnection(tableDatabaseName);
+            jobManagerSQLManager.sendQueryToDatabase(deleteQuery);
+            jobManagerSQLManager.closeConnection();
+
+            populateDataGrid();
         }
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
