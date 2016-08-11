@@ -285,18 +285,31 @@ namespace ChauffeurJobManager
             //Update record in table implementation
             //string updateQuery = "update " + tableName + " set jobID='" + integerUpDownList[0].Value
 
+
+            //^We should loop through all our column names and grab the data so we can fill it back into our inputs -- this will be implemented on the .cellClicked function
+            //datagrid. And then we can simply use that data to make an 'update' request to mysql
+        } 
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            //Delete record in table implementation
+            Xceed.Wpf.Toolkit.MessageBox.Show("DELETE");
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
             DataRowView drv = (DataRowView)SQLTableDataGrid.SelectedItem;
 
-            for(int x = 0; x < tableColumnCount; x++)
+            for (int x = 0; x < tableColumnCount; x++)
             {
                 Console.WriteLine(drv[x].ToString());
 
-                if (controlTest[x] is TextBox) 
+                if (controlTest[x] is TextBox)
                 {
                     TextBox tb = controlTest[x] as TextBox;
                     tb.Text = drv[x].ToString();
                 }
-                else if(controlTest[x] is IntegerUpDown)
+                else if (controlTest[x] is IntegerUpDown)
                 {
                     IntegerUpDown iud = controlTest[x] as IntegerUpDown;
                     iud.Value = (int)drv[x];
@@ -318,15 +331,7 @@ namespace ChauffeurJobManager
                     tp.Text = ts.ToString(@"hh\:mm");
                 }
             }
-
-            //^We should loop through all our column names and grab the data so we can fill it back into our inputs -- this will be implemented on the .cellClicked function
-            //datagrid. And then we can simply use that data to make an 'update' request to mysql
-        } 
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            //Delete record in table implementation
-            Xceed.Wpf.Toolkit.MessageBox.Show("DELETE");
         }
+
     }
 }
