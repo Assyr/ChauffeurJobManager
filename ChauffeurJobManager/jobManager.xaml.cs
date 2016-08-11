@@ -283,11 +283,78 @@ namespace ChauffeurJobManager
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             //Update record in table implementation
-            //string updateQuery = "update " + tableName + " set jobID='" + integerUpDownList[0].Value
+            string updateQuery = "update " + tableDatabaseName + "." + txtBlock_tableName.Text + " set ";
 
+            int ControlListindex = 0;
+            int jobIDValue = 0;
 
-            //^We should loop through all our column names and grab the data so we can fill it back into our inputs -- this will be implemented on the .cellClicked function
-            //datagrid. And then we can simply use that data to make an 'update' request to mysql
+            DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, txtBlock_tableName.Text);
+
+            foreach (DataRow col in columnInfo.Rows)
+            {
+                string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
+                string dataType = col[columnInfo.Columns["DataType"]].ToString();
+
+                Console.WriteLine(columnName);
+                Console.WriteLine(dataType);
+                //Grab it all and build a string to use latter to INSERT into table in one go
+                switch (dataType)
+                {
+                    case "System.String":
+                            TextBox tb = controlTest[ControlListindex] as TextBox;
+                            Console.WriteLine(tb.Text);
+                            updateQuery += "'," + columnName + "='" + tb.Text;
+                            ControlListindex++;
+                            break;
+                    case "System.Int32":
+                        if (columnName == "jobID")
+                        {
+                            IntegerUpDown iud = controlTest[ControlListindex] as IntegerUpDown;
+                            Console.WriteLine(iud.Text);
+                            jobIDValue = (int)iud.Value;
+                            updateQuery += columnName + "='" + iud.Text;
+                            ControlListindex++;
+                            break;
+                        }
+                        else
+                        {
+                            IntegerUpDown iud = controlTest[ControlListindex] as IntegerUpDown;
+                            Console.WriteLine(iud.Text);
+                            updateQuery += "'," + columnName + "='" + iud.Text;
+                            ControlListindex++;
+                            break;
+                        }
+                    case "System.Single":
+                        DecimalUpDown dud = controlTest[ControlListindex] as DecimalUpDown;
+                        Console.WriteLine(dud.Text);
+                        updateQuery += "'," + columnName + "='" + dud.Text.Remove(0,1);
+                        ControlListindex++;
+                        break;
+                    case "System.DateTime":
+                        DatePicker dtp = controlTest[ControlListindex] as DatePicker;
+                        DateTime? date = dtp.SelectedDate;
+                        string value = date.Value.ToString("yyyy-MM-dd");
+                        Console.WriteLine(value);
+                        updateQuery += "'," + columnName + "='" + value;
+                        ControlListindex++;
+                        break;
+                    case "System.TimeSpan":
+                        TimePicker tp = controlTest[ControlListindex] as TimePicker;
+                        Console.WriteLine(tp.Text);
+                        updateQuery += "'," + columnName + "='" + tp.Text;
+                        ControlListindex++;
+                        break;
+                }
+            }
+
+            updateQuery += "' where jobID='" + jobIDValue + "';";
+            Console.WriteLine(updateQuery);
+
+            jobManagerSQLManager.openConnection(tableDatabaseName);
+            jobManagerSQLManager.sendQueryToDatabase(updateQuery);
+            jobManagerSQLManager.closeConnection();
+
+            populateDataGrid();
         } 
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
