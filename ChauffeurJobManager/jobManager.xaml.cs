@@ -278,6 +278,8 @@ namespace ChauffeurJobManager
             jobManagerSQLManager.closeConnection();
 
             populateDataGrid();
+
+            clearAllControlFields();
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -355,6 +357,8 @@ namespace ChauffeurJobManager
             jobManagerSQLManager.closeConnection();
 
             populateDataGrid();
+
+            clearAllControlFields();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -398,6 +402,8 @@ namespace ChauffeurJobManager
             jobManagerSQLManager.closeConnection();
 
             populateDataGrid();
+
+            clearAllControlFields();
         }
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -439,6 +445,7 @@ namespace ChauffeurJobManager
 
         private void btnClearFields_Click(object sender, RoutedEventArgs e)
         {
+            clearAllControlFields();
         }
 
         private void clearAllControlFields()
