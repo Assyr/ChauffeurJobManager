@@ -437,5 +437,42 @@ namespace ChauffeurJobManager
             }
         }
 
+        private void btnClearFields_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void clearAllControlFields()
+        {
+
+            for (int x = 0; x < controlTest.Count; x++)
+            {
+                if (controlTest[x] is TextBox)
+                {
+                    TextBox tb = controlTest[x] as TextBox;
+                    tb.Clear();
+                }
+                else if (controlTest[x] is IntegerUpDown)
+                {
+                    IntegerUpDown iud = controlTest[x] as IntegerUpDown;
+                    iud.Value = null;
+                }
+                else if (controlTest[x] is DecimalUpDown)
+                {
+                    DecimalUpDown dud = controlTest[x] as DecimalUpDown;
+                    dud.Value = null;
+                }
+                else if (controlTest[x] is DatePicker)
+                {
+                    DatePicker dp = controlTest[x] as DatePicker;
+                    dp.Text = null;
+                }
+                else if (controlTest[x] is TimePicker)
+                {
+                    TimePicker tp = controlTest[x] as TimePicker;
+                    tp.Value = null;
+                }
+            }
+
+        }
     }
 }
