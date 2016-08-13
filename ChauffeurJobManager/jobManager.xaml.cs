@@ -212,6 +212,12 @@ namespace ChauffeurJobManager
 
         private void btnInsert_Click(object sender, RoutedEventArgs e)
         {
+            if (checkIfControlsAreEmpty())
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("ONE OR MORE INPUT FIELDS ARE EMPTY");
+                return;
+            }
+
             string tableName = txtBlock_tableName.Text;
             string sqlColumnName = "insert into " + tableDatabaseName + "." + tableName + "(";
             string sqlColumnData = "values('";
@@ -284,6 +290,13 @@ namespace ChauffeurJobManager
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+
+            if (checkIfControlsAreEmpty())
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("ONE OR MORE INPUT FIELDS ARE EMPTY");
+                return;
+            }
+
             //Update record in table implementation
             string updateQuery = "update " + tableDatabaseName + "." + txtBlock_tableName.Text + " set ";
 
@@ -363,6 +376,13 @@ namespace ChauffeurJobManager
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
+
+            if(checkIfControlsAreEmpty())
+            {
+                Xceed.Wpf.Toolkit.MessageBox.Show("ONE OR MORE INPUT FIELDS ARE EMPTY");
+                return;
+            }
+
             //Delete record in table implementation
             string deleteQuery = "delete from " + tableDatabaseName + "." + txtBlock_tableName.Text + " where jobID='";
 
@@ -480,6 +500,44 @@ namespace ChauffeurJobManager
                 }
             }
 
+        }
+
+        private bool checkIfControlsAreEmpty()
+        {
+            for (int x = 0; x < controlTest.Count; x++)
+            {
+                if (controlTest[x] is TextBox)
+                {
+                    TextBox tb = controlTest[x] as TextBox;
+                    if (tb.Text == null)
+                        return true;
+                }
+                else if (controlTest[x] is IntegerUpDown)
+                {
+                    IntegerUpDown iud = controlTest[x] as IntegerUpDown;
+                    if (iud.Value == null)
+                        return true;
+                }
+                else if (controlTest[x] is DecimalUpDown)
+                {
+                    DecimalUpDown dud = controlTest[x] as DecimalUpDown;
+                    if (dud.Value == null)
+                        return true;
+                }
+                else if (controlTest[x] is DatePicker)
+                {
+                    DatePicker dp = controlTest[x] as DatePicker;
+                    if (dp.Text == null)
+                        return true;
+                }
+                else if (controlTest[x] is TimePicker)
+                {
+                    TimePicker tp = controlTest[x] as TimePicker;
+                    if (tp.Value == null)
+                        return true;
+                }
+            }
+            return false;
         }
     }
 }
