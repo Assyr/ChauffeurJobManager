@@ -509,32 +509,47 @@ namespace ChauffeurJobManager
                 if (controlTest[x] is TextBox)
                 {
                     TextBox tb = controlTest[x] as TextBox;
-                    if (tb.Text == null)
+                    if (tb.Text == string.Empty)
+                    {
+                        Console.WriteLine("Textbox empty");
                         return true;
+                    }
                 }
                 else if (controlTest[x] is IntegerUpDown)
                 {
                     IntegerUpDown iud = controlTest[x] as IntegerUpDown;
-                    if (iud.Value == null)
+                    if (iud.Text == string.Empty)
+                    {
+                        Console.WriteLine("IntegerUpDown empty");
                         return true;
+                    }
                 }
                 else if (controlTest[x] is DecimalUpDown)
                 {
                     DecimalUpDown dud = controlTest[x] as DecimalUpDown;
-                    if (dud.Value == null)
+                    if (dud.Text == string.Empty)
+                    {
+                        Console.WriteLine("DecimalUpDown empty");
                         return true;
+                    }
                 }
                 else if (controlTest[x] is DatePicker)
                 {
                     DatePicker dp = controlTest[x] as DatePicker;
-                    if (dp.Text == null)
+                    if (dp.Text == string.Empty)
+                    {
+                        Console.WriteLine("DatePicker empty");
                         return true;
+                    }
                 }
                 else if (controlTest[x] is TimePicker)
                 {
                     TimePicker tp = controlTest[x] as TimePicker;
-                    if (tp.Value == null)
+                    if (tp.Text == string.Empty)
+                    {
+                        Console.WriteLine("TimePicker empty");
                         return true;
+                    }
                 }
             }
             return false;
