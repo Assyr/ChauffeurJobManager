@@ -92,23 +92,25 @@ namespace ChauffeurJobManager
                 case "System.String":
                     Console.WriteLine("System.String detected");
                     TextBox tb = new TextBox();
-                    Button postcodeLookup = new Button();
-                    postcodeLookup.Content = "...";
+                    Button btn_postcodeLookup = new Button();
+                    btn_postcodeLookup.Click += (s, e) => { postcodeLookup inst = new postcodeLookup(); inst.ShowDialog(); };
+                    btn_postcodeLookup.Content = "...";
                     tb.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
-                    postcodeLookup.Margin = new Thickness(controlXMarginCurrent + 160, controlYMarginInitial, 0, 0);
+                    btn_postcodeLookup.Margin = new Thickness(controlXMarginCurrent + 160, controlYMarginInitial, 0, 0);
                     tb.VerticalAlignment = VerticalAlignment.Top;
-                    postcodeLookup.VerticalAlignment = VerticalAlignment.Top;
+                    btn_postcodeLookup.VerticalAlignment = VerticalAlignment.Top;
                     tb.Width = 120;
                     tb.Height = 20;
-                    postcodeLookup.Width = 30;
-                    postcodeLookup.Height = 20;
+                    btn_postcodeLookup.Width = 30;
+                    btn_postcodeLookup.Height = 20;
                     tb.TextWrapping = TextWrapping.Wrap;
                     Panel.SetZIndex(tb, 4);
-                    Panel.SetZIndex(postcodeLookup, 4);
+                    Panel.SetZIndex(btn_postcodeLookup, 4);
                     gridFunc.Children.Add(tb);
-                    gridFunc.Children.Add(postcodeLookup);
+                    gridFunc.Children.Add(btn_postcodeLookup);
                     controlTest.Add(tb);
-                    controlTest.Add(postcodeLookup);
+                    controlTest.Add(btn_postcodeLookup);
+
                     //Implement logic for handing string
                     break;
                 case "System.Int32":
