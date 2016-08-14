@@ -187,34 +187,6 @@ namespace ChauffeurJobManager
             return !regex.IsMatch(text);
         }
 
-        public void findFullAddress()
-        {
-            string sURL;
-            sURL = "https://api.getaddress.io/v2/uk/N19JY/IMS/?api-key="; //need to store API key server side and grab it.. can't be leaving it here. - API key has been removed for GitHub
-
-            WebRequest wrGETURL;
-            wrGETURL = WebRequest.Create(sURL);
-
-            WebProxy myProxy = new WebProxy("myproxy", 80);
-            myProxy.BypassProxyOnLocal = true;
-
-            Stream objStream;
-            objStream = wrGETURL.GetResponse().GetResponseStream();
-
-            StreamReader objReader = new StreamReader(objStream);
-
-            string sLine = "";
-            int i = 0;
-
-            while (sLine != null)
-            {
-                i++;
-                sLine = objReader.ReadLine();
-                if (sLine != null)
-                    Console.WriteLine("{0}:{1}", i, sLine);
-            }
-        }
-
         private void btn_Close_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
