@@ -90,6 +90,7 @@ namespace ChauffeurJobManager
             switch (columnDataType)
             {
                 case "System.String":
+                    //Implement logic for handling string
                     Console.WriteLine("System.String detected");
                     TextBox tb = new TextBox();
                     Button btn_postcodeLookup = new Button();
@@ -109,9 +110,7 @@ namespace ChauffeurJobManager
                     gridFunc.Children.Add(tb);
                     gridFunc.Children.Add(btn_postcodeLookup);
                     controlTest.Add(tb);
-                    controlTest.Add(btn_postcodeLookup);
-
-                    //Implement logic for handing string
+                    //controlTest.Add(btn_postcodeLookup); -- causes crash. perhaps add to its own list
                     break;
                 case "System.Int32":
                     Console.WriteLine("System.Int32 detected");
