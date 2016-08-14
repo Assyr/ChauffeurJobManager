@@ -92,23 +92,23 @@ namespace ChauffeurJobManager
                 case "System.String":
                     Console.WriteLine("System.String detected");
                     TextBox tb = new TextBox();
-                    CheckBox cb = new CheckBox();
-                    cb.Content = "lookup";
+                    Button postcodeLookup = new Button();
+                    postcodeLookup.Content = "...";
                     tb.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
-                    cb.Margin = new Thickness(controlXMarginCurrent + 205, controlYMarginInitial + 2, 0, 0);
+                    postcodeLookup.Margin = new Thickness(controlXMarginCurrent + 160, controlYMarginInitial, 0, 0);
                     tb.VerticalAlignment = VerticalAlignment.Top;
-                    cb.VerticalAlignment = VerticalAlignment.Top;
+                    postcodeLookup.VerticalAlignment = VerticalAlignment.Top;
                     tb.Width = 120;
                     tb.Height = 20;
-                    cb.Width = 80;
-                    cb.Height = 40;
+                    postcodeLookup.Width = 30;
+                    postcodeLookup.Height = 20;
                     tb.TextWrapping = TextWrapping.Wrap;
                     Panel.SetZIndex(tb, 4);
-                    Panel.SetZIndex(cb, 4);
+                    Panel.SetZIndex(postcodeLookup, 4);
                     gridFunc.Children.Add(tb);
-                    gridFunc.Children.Add(cb);
+                    gridFunc.Children.Add(postcodeLookup);
                     controlTest.Add(tb);
-                    controlTest.Add(cb);
+                    controlTest.Add(postcodeLookup);
                     //Implement logic for handing string
                     break;
                 case "System.Int32":
