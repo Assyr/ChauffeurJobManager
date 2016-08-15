@@ -14,20 +14,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace ChauffeurJobManager
 {
-    public class Address
-    {
-        public string line_1 { get; set; }
-        public string line_2 { get; set; }
-    }
     /// <summary>
     /// Interaction logic for postcodeLookup.xaml
     /// </summary>
     public partial class postcodeLookup : Window
     {
+        //Struct that is used to hold information from the deserialize
+        public struct Address
+        {
+            public string line_1 { get; set; }
+            public string line_2 { get; set; }
+        }
+
         public postcodeLookup()
         {
             InitializeComponent();
@@ -35,27 +36,26 @@ namespace ChauffeurJobManager
 
         public void findFullAddress()
         {
-            string apiKey = "iddqd";
+            string apiKey = "iddqd"; //need to store my API key in database and retrieve.
             string postcode = txtBox_Postcode.Text;
             string baseUrl = "https://api.ideal-postcodes.co.uk/v1/postcodes/";
 
-            string json = get_web_content(baseUrl + postcode + "?api_key=" + apiKey);
+            string json = getAllTextFromURL(baseUrl + postcode + "?api_key=" + apiKey);
 
-            //remove useless stuff
+            //Remove useless stuff from json response.
             json = json.Remove(json.Length - 33);
             json = json.Remove(0, 10);
 
-            Console.WriteLine(json);
+            List<Address> addressList = JsonConvert.DeserializeObject<List<Address>>(json);
 
-            var list = JsonConvert.DeserializeObject<List<Address>>(json);
-
-            foreach (Address a in list)
+            foreach (Address listLoopInst in addressList)
             {
-                Console.WriteLine(a.line_1 + " , " + a.line_2);
+                Console.WriteLine(listLoopInst.line_1 + ", " + listLoopInst.line_2);
             }
         }
 
-        public string get_web_content(string url)
+        //Grabs all text from URL page supplied and return
+        public string getAllTextFromURL(string url)
         {
             Uri uri = new Uri(url);
             HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
