@@ -13,9 +13,16 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ChauffeurJobManager
 {
+    public class Address
+    {
+        public string line_1 { get; set; }
+        public string line_2 { get; set; }
+    }
     /// <summary>
     /// Interaction logic for postcodeLookup.xaml
     /// </summary>
@@ -32,31 +39,33 @@ namespace ChauffeurJobManager
             string postcode = txtBox_Postcode.Text;
             string baseUrl = "https://api.ideal-postcodes.co.uk/v1/postcodes/";
 
-            WebRequest wrGetURL;
+            string json = get_web_content(baseUrl + postcode + "?api_key=" + apiKey);
 
-            wrGetURL = WebRequest.Create(baseUrl + postcode + "?api_key=" + apiKey);
+            //remove useless stuff
+            json = json.Remove(json.Length - 33);
+            json = json.Remove(0, 10);
 
-            WebProxy proxy = new WebProxy("myproxy", 80);
-            proxy.BypassProxyOnLocal = true;
+            Console.WriteLine(json);
 
-            wrGetURL.Proxy = WebProxy.GetDefaultProxy();
+            var list = JsonConvert.DeserializeObject<List<Address>>(json);
 
-            Stream objStream = wrGetURL.GetResponse().GetResponseStream();
-
-            StreamReader objReader = new StreamReader(objStream);
-
-            string sLine = "";
-
-            int i = 0;
-
-            while (sLine != null)
+            foreach (Address a in list)
             {
-                i++;
-                sLine = objReader.ReadLine();
-                if (sLine != null)
-                    Console.WriteLine("{0}:{1}", i, sLine);
-                Console.WriteLine(sLine);
+                Console.WriteLine(a.line_1 + " , " + a.line_2);
             }
+        }
+
+        public string get_web_content(string url)
+        {
+            Uri uri = new Uri(url);
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(uri);
+            request.Method = WebRequestMethods.Http.Get;
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+            string output = reader.ReadToEnd();
+            response.Close();
+
+            return output;
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
