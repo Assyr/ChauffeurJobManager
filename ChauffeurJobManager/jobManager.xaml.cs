@@ -94,6 +94,8 @@ namespace ChauffeurJobManager
                     Console.WriteLine("System.String detected");
                     TextBox tb = new TextBox();
                     Button btn_postcodeLookup = new Button();
+                    tb.HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
+                    tb.VerticalScrollBarVisibility = ScrollBarVisibility.Visible;
                     btn_postcodeLookup.Click += (s, e) => { postcodeLookup inst = new postcodeLookup(); inst.ShowDialog(); tb.Text = inst.addressToReturn; };
                     btn_postcodeLookup.Content = "...";
                     tb.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
@@ -101,9 +103,10 @@ namespace ChauffeurJobManager
                     tb.VerticalAlignment = VerticalAlignment.Top;
                     btn_postcodeLookup.VerticalAlignment = VerticalAlignment.Top;
                     tb.Width = 120;
-                    tb.Height = 20;
+                    tb.Height = 30;
                     btn_postcodeLookup.Width = 30;
                     btn_postcodeLookup.Height = 20;
+                    tb.TextAlignment = TextAlignment.Left;
                     tb.TextWrapping = TextWrapping.Wrap;
                     Panel.SetZIndex(tb, 4);
                     Panel.SetZIndex(btn_postcodeLookup, 4);
