@@ -41,7 +41,6 @@ namespace ChauffeurJobManager
             string apiKey = "iddqd"; //need to store my API key in database and retrieve.
             string postcode = txtBox_Postcode.Text;
             string baseUrl = "https://api.ideal-postcodes.co.uk/v1/postcodes/";
-
             string json = getAllTextFromURL(baseUrl + postcode + "?api_key=" + apiKey);
 
             //Remove useless stuff from json response.
@@ -50,9 +49,11 @@ namespace ChauffeurJobManager
 
             List<Address> addressList = JsonConvert.DeserializeObject<List<Address>>(json);
 
+            comboBox_addressList.Items.Clear();
+
             foreach (Address listLoopInst in addressList)
             {
-                Console.WriteLine(listLoopInst.line_1 + ", " + listLoopInst.line_2 + ", " + listLoopInst.post_town + ", " + listLoopInst.postcode);
+                comboBox_addressList.Items.Add(listLoopInst.line_1 + ", " + listLoopInst.line_2 + ", " + listLoopInst.post_town + ", " + listLoopInst.postcode);
             }
         }
 
