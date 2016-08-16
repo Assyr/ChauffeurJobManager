@@ -22,6 +22,9 @@ namespace ChauffeurJobManager
     /// </summary>
     public partial class postcodeLookup : Window
     {
+
+        public string addressToReturn = "test";
+
         //Struct that is used to hold information from the deserialize
         public struct Address
         {
@@ -72,9 +75,15 @@ namespace ChauffeurJobManager
             return output;
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void btn_getAddress_Click(object sender, RoutedEventArgs e)
         {
             findFullAddress();
+        }
+
+        private void btn_Insert_Click(object sender, RoutedEventArgs e)
+        {
+            addressToReturn = comboBox_addressList.SelectedItem.ToString();
+            Close();
         }
     }
 }

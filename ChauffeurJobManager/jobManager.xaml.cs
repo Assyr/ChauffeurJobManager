@@ -94,7 +94,7 @@ namespace ChauffeurJobManager
                     Console.WriteLine("System.String detected");
                     TextBox tb = new TextBox();
                     Button btn_postcodeLookup = new Button();
-                    btn_postcodeLookup.Click += (s, e) => { postcodeLookup inst = new postcodeLookup(); inst.ShowDialog(); };
+                    btn_postcodeLookup.Click += (s, e) => { postcodeLookup inst = new postcodeLookup(); inst.ShowDialog(); tb.Text = inst.addressToReturn; };
                     btn_postcodeLookup.Content = "...";
                     tb.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
                     btn_postcodeLookup.Margin = new Thickness(controlXMarginCurrent + 160, controlYMarginInitial, 0, 0);

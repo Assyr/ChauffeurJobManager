@@ -87,7 +87,7 @@ namespace ChauffeurJobManager
             lblcolumnNumber.RenderTransformOrigin = new Point(1.882, 0.635);
 
             dataTypeComboBox.Items.Add("CHAR");
-            dataTypeComboBox.Items.Add("nvarchar(15)");
+            dataTypeComboBox.Items.Add("nvarchar(100)");
             dataTypeComboBox.Items.Add("INT");
             dataTypeComboBox.Items.Add("FLOAT");
             dataTypeComboBox.Items.Add("DATE");
