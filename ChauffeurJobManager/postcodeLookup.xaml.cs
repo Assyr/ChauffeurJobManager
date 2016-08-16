@@ -27,6 +27,8 @@ namespace ChauffeurJobManager
         {
             public string line_1 { get; set; }
             public string line_2 { get; set; }
+            public string post_town { get; set; }
+            public string postcode { get; set; }
         }
 
         public postcodeLookup()
@@ -50,7 +52,7 @@ namespace ChauffeurJobManager
 
             foreach (Address listLoopInst in addressList)
             {
-                Console.WriteLine(listLoopInst.line_1 + ", " + listLoopInst.line_2);
+                Console.WriteLine(listLoopInst.line_1 + ", " + listLoopInst.line_2 + ", " + listLoopInst.post_town + ", " + listLoopInst.postcode);
             }
         }
 
