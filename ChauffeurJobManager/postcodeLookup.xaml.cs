@@ -55,6 +55,7 @@ namespace ChauffeurJobManager
             {
                 comboBox_addressList.Items.Add(listLoopInst.line_1 + ", " + listLoopInst.line_2 + ", " + listLoopInst.post_town + ", " + listLoopInst.postcode);
             }
+            comboBox_addressList.SelectedIndex = 0;
         }
 
         //Grabs all text from URL page supplied and return

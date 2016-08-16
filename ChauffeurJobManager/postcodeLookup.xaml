@@ -5,15 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChauffeurJobManager"
         mc:Ignorable="d"
-        Title="Postcode Lookup" Height="200" Width="300">
+        Title="Postcode Lookup" Height="250" Width="350">
     <Grid>
-        <TextBox x:Name="txtBox_Postcode" HorizontalAlignment="Left" Height="18" Margin="74,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="txtBox_Postcode" HorizontalAlignment="Left" Height="21" Margin="74,66,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="75"/>
         <Label x:Name="label" Content="Postcode:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6,61,0,0" Width="61" FontSize="12"/>
         <Label x:Name="lbl_header" Content="Please enter a postcode and &#xD;&#xA;choose and address from the list" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,10,0,0" Width="186" FontSize="12"/>
-        <Button x:Name="button" Content="Get addresses" HorizontalAlignment="Left" Margin="154,66,0,0" VerticalAlignment="Top" Width="78" Height="20" FontSize="12" Click="button_Click"/>
-        <ComboBox x:Name="comboBox_addressList" HorizontalAlignment="Left" Margin="72,98,0,0" VerticalAlignment="Top" Width="210" Height="18"/>
-        <Label x:Name="label_Copy" Content="Addresses:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,92,0,0" Width="71" FontSize="12"/>
-        <Button x:Name="btn_Insert" Content="Insert" HorizontalAlignment="Left" Margin="74,123,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="button" Content="Get addresses" HorizontalAlignment="Left" Margin="154,66,0,0" VerticalAlignment="Top" Width="78" Height="21" FontSize="12" Click="button_Click"/>
+        <ComboBox x:Name="comboBox_addressList" HorizontalAlignment="Left" Margin="72,100,0,0" VerticalAlignment="Top" Width="260" Height="24"/>
+        <Label x:Name="label_Copy" Content="Addresses:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4,98,0,0" Width="71" FontSize="12"/>
+        <Button x:Name="btn_Insert" Content="Insert" HorizontalAlignment="Left" Margin="74,133,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
