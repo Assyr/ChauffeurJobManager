@@ -25,6 +25,6 @@
         </DataGrid>
         <Button x:Name="btn_openTable" Content="Open Table" HorizontalAlignment="Left" Margin="10,284,0,0" VerticalAlignment="Top" Width="76" Click="btn_openTable_Click"/>
         <Button x:Name="button1_Copy" Content="Create Table" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top" Width="76" Click="button1_Copy_Click"/>
-        <Button x:Name="button1_Copy1" Content="Delete Table" HorizontalAlignment="Left" Margin="91,309,0,0" VerticalAlignment="Top" Width="76" Click="button1_Copy1_Click"/>
+        <Button x:Name="btn_DeleteTable" Content="Delete Table" HorizontalAlignment="Left" Margin="91,309,0,0" VerticalAlignment="Top" Width="76" Click="btn_DeleteTable_Click"/>
     </Grid>
 </Window>

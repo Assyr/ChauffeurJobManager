@@ -28,7 +28,6 @@ namespace ChauffeurJobManager
         //private login loginWindow;
         public string databaseName;
         public IList<string> listOfDatabaseTables = new List<string>();
-        object item;
 
         MySQLManager welcomeSQLManager = new MySQLManager();
 
@@ -53,7 +52,7 @@ namespace ChauffeurJobManager
 
         private void listView_Click(object sender, RoutedEventArgs e)
         {
-            item = (sender as ListView).SelectedItem;
+            object item = (sender as ListView).SelectedItem;
             if (item != null)
             {
                 DataTable dataSet = new DataTable();
@@ -84,18 +83,27 @@ namespace ChauffeurJobManager
             tableManager.ShowDialog();
         }
 
-        private void button1_Copy1_Click(object sender, RoutedEventArgs e)
+        private void btn_DeleteTable_Click(object sender, RoutedEventArgs e)
         {
             welcomeSQLManager.openConnection(databaseName);
             object item = listViewTables.SelectedItem;
             if (item != null)
+            {
                 welcomeSQLManager.sendQueryToDatabase("DROP TABLE IF EXISTS " + databaseName + "." + item.ToString());
-            welcomeSQLManager.closeConnection();
-            updateTableList();
+                welcomeSQLManager.closeConnection();
+                selectedTableDataGrid.ItemsSource = null;
+                updateTableList();
+            }
+            else
+            {
+                MessageBox.Show("Please select a table to delete from the list", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
         }
 
         private void btn_openTable_Click(object sender, RoutedEventArgs e)
         {
+            object item = listViewTables.SelectedItem;
             if (item != null)
             {
                 jobManager jobManagerWindow = new jobManager();
@@ -106,7 +114,6 @@ namespace ChauffeurJobManager
                 jobManagerWindow.tableName = item;
                 jobManagerWindow.populateJobManagerWindow();
                 jobManagerWindow.populateDataGrid();
-                //jobManagerWindow.findFullAddress(); call is commented out because we haven't supplied a valid API key (I'd rather keep that private)
                 jobManagerWindow.ShowDialog();
             }
             else
