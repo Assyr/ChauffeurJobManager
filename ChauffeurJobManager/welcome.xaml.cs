@@ -74,7 +74,7 @@ namespace ChauffeurJobManager
             Close();
         }
 
-        private void button1_Copy_Click(object sender, RoutedEventArgs e)
+        private void btn_CreateTable_Click(object sender, RoutedEventArgs e)
         {
             createTableManager tableManager = new createTableManager(this);
             tableManager.databaseName = databaseName;
@@ -122,5 +122,6 @@ namespace ChauffeurJobManager
                 return;
             }
         }
+
     }
 }

@@ -254,6 +254,7 @@ namespace ChauffeurJobManager
             Console.WriteLine("Table has been created in " + databaseName);
             _temp.updateTableList(); //Update our listview table in our welcome window
 
+            this.Close();
         }
 
         private void templateFileName_PreviewTextInput(object sender, TextCompositionEventArgs e)

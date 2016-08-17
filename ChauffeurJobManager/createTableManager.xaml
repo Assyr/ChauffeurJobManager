@@ -30,8 +30,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-
-
             <Label x:Name="lbl_TemplateList" Content="Template List" HorizontalAlignment="Left" Margin="398,212,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btn_CreateTableInDatabase" Content="Create table&#xD;&#xA;in database" HorizontalAlignment="Left" Margin="386,394,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="btn_CreateTableInDatabase_Click"/>
             <RichTextBox x:Name="databaseTableName" HorizontalAlignment="Left" Height="20" Margin="390,369,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.576,-8.053" PreviewTextInput="databaseTableName_PreviewTextInput">
