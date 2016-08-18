@@ -135,17 +135,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="XML\databases.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Templates\IMSTemplate.xml" />
-    <Resource Include="Templates\test.xml" />
-    <Resource Include="Templates\test2.xml" />
-    <Resource Include="Templates\test3.xml" />
-    <Resource Include="Templates\test4.xml" />
-    <Resource Include="Templates\test5.xml" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

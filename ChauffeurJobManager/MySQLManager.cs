@@ -78,9 +78,8 @@ namespace ChauffeurJobManager
                 if (x == 1)
                 {
                     Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Login authentication succesful, welcome " + authUsername);
-                    userCompanyID += myReader.GetInt32("customer_company_id");
+                    userCompanyDatabase += myReader.GetString("customer_database_name");
                     closeConnection();
-                    findCustomerDatabase(userCompanyID);
                     Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "userCompanyID = " + userCompanyID + " - Username = " + authUsername + " - Password = " + authPassword + " - Database = " + userCompanyDatabase);
                     return true;
                 }
@@ -96,24 +95,6 @@ namespace ChauffeurJobManager
                     closeConnection();
                     return false;
                 }
-        }
-
-        private void findCustomerDatabase(int id)
-        {
-            XmlDocument file = new XmlDocument();
-            file.Load("databases.xml");
-            XmlElement element = file.DocumentElement;
-            XmlNodeList databaseNodes = element.SelectNodes("/databases/database");
-
-            foreach (XmlNode node in databaseNodes)
-            {
-                string userCompanyID = node["userCompanyID"].InnerText;
-                int intUserCompanyID = int.Parse(userCompanyID);
-                if (intUserCompanyID == id)
-                {
-                    userCompanyDatabase = node["databaseName"].InnerText;
-                }
-            }
         }
 
         public IList<String> getDatabaseTables()
