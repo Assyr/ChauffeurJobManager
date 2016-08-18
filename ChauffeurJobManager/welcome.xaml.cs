@@ -41,9 +41,9 @@ namespace ChauffeurJobManager
             }
         }
 
-        private void listView_Click(object sender, RoutedEventArgs e)
+        public void updateDataGrid()
         {
-            object item = (sender as ListView).SelectedItem;
+            object item = listViewTables.SelectedItem;
             if (item != null)
             {
                 DataTable dataSet = new DataTable();
@@ -54,6 +54,11 @@ namespace ChauffeurJobManager
                 welcomeSQLManager.closeConnection();
                 selectedTableDataGrid.ItemsSource = dataSet.DefaultView;
             }
+        }
+
+        private void listView_Click(object sender, RoutedEventArgs e)
+        {
+            updateDataGrid();
         }
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
@@ -106,6 +111,7 @@ namespace ChauffeurJobManager
                 jobManagerWindow.populateJobManagerWindow();
                 jobManagerWindow.populateDataGrid();
                 jobManagerWindow.ShowDialog();
+                updateDataGrid();
             }
             else
             {
@@ -118,24 +124,32 @@ namespace ChauffeurJobManager
         {
             selectedTableDataGrid.SelectAllCells();
             selectedTableDataGrid.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
-            DataObject obj = new DataObject();
-            ApplicationCommands.Copy.Execute(obj, selectedTableDataGrid);
+            ApplicationCommands.Copy.Execute(null, selectedTableDataGrid);
         }
 
         private void btn_exportToCSV_Click(object sender, RoutedEventArgs e)
         {
-            copyDataGridToClipboard();
-            Microsoft.Office.Interop.Excel.Application xlexcel;
-            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
-            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
-            object missingValue = System.Reflection.Missing.Value;
-            xlexcel = new Microsoft.Office.Interop.Excel.Application();
-            xlexcel.Visible = true;
-            xlWorkBook = xlexcel.Workbooks.Add(missingValue);
-            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
-            Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[1, 1];
-            CR.Select();
-            xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+            object item = listViewTables.SelectedItem;
+            if (item != null)
+            {
+                copyDataGridToClipboard();
+                Microsoft.Office.Interop.Excel.Application xlexcel;
+                Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+                Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+                object missingValue = System.Reflection.Missing.Value;
+                xlexcel = new Microsoft.Office.Interop.Excel.Application();
+                xlexcel.Visible = true;
+                xlWorkBook = xlexcel.Workbooks.Add(missingValue);
+                xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);         //index to paste at..
+                Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[6, 1];
+                CR.Select();
+                xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+            }
+            else
+            {
+                MessageBox.Show("Please select a table before trying to export to CSV", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
         }
     }
 }

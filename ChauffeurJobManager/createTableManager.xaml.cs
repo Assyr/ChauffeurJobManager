@@ -20,8 +20,6 @@ namespace ChauffeurJobManager
         private List<ComboBox> comboBoxList = new List<ComboBox>();
         private List<TextBox> textBoxList = new List<TextBox>();
         private List<Label> labelList = new List<Label>();
-
-
         private int comboBoxCurrentValue = 80;
         private int comboBoxMarginOffset = 40;
         private int columnNumber = 1;
