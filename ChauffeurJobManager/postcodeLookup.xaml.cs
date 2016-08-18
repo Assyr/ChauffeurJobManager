@@ -29,12 +29,11 @@ namespace ChauffeurJobManager
             InitializeComponent();
         }
 
-        public void findFullAddress()
+        public void findFullAddress(string pCode)
         {
             string apiKey = "iddqd"; //need to store my API key in database and retrieve.
-            string postcode = txtBox_Postcode.Text;
             string baseUrl = "https://api.ideal-postcodes.co.uk/v1/postcodes/";
-            string json = getAllTextFromURL(baseUrl + postcode + "?api_key=" + apiKey);
+            string json = getAllTextFromURL(baseUrl + pCode + "?api_key=" + apiKey);
 
             //Remove useless stuff from json response.
             json = json.Remove(json.Length - 33);
@@ -67,7 +66,12 @@ namespace ChauffeurJobManager
 
         private void btn_getAddress_Click(object sender, RoutedEventArgs e)
         {
-            findFullAddress();
+            string postCodeText = txtBox_Postcode.Text;
+            postCodeText = postCodeText.Trim();
+            postCodeText = postCodeText.Replace(" ", "");
+            postCodeText = postCodeText.Insert(postCodeText.Length - 3, " ");
+            txtBox_Postcode.Text = postCodeText;
+            findFullAddress(postCodeText);
         }
 
         private void btn_Insert_Click(object sender, RoutedEventArgs e)
