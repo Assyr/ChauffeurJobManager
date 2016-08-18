@@ -8,7 +8,7 @@
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="88,10,0,0" x:Name="TextBlockName"  VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" />
         <TextBlock Height="43" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="WelcomeHeading_Copy" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="348"><Run Text="Please select wh"/><Run Text="ich "/><Run Text="month"/><Run Text=" you would like to view"/><LineBreak/><Run Text="or create a new one:"/><LineBreak/><InlineUIContainer>
             </InlineUIContainer></TextBlock>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="530,299,0,0" VerticalAlignment="Top" Width="74" Click="btnLogout_Click"/>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="528,309,0,0" VerticalAlignment="Top" Width="74" Click="btnLogout_Click"/>
         <ListView x:Name="listViewTables" Margin="10,86,426.5,80" PreviewMouseLeftButtonUp="listView_Click">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
@@ -26,5 +26,6 @@
         <Button x:Name="btn_openTable" Content="Open Table" HorizontalAlignment="Left" Margin="10,284,0,0" VerticalAlignment="Top" Width="76" Click="btn_openTable_Click"/>
         <Button x:Name="btn_CreateTable" Content="Create Table" HorizontalAlignment="Left" Margin="10,309,0,0" VerticalAlignment="Top" Width="76" Click="btn_CreateTable_Click"/>
         <Button x:Name="btn_DeleteTable" Content="Delete Table" HorizontalAlignment="Left" Margin="91,309,0,0" VerticalAlignment="Top" Width="76" Click="btn_DeleteTable_Click"/>
+        <Button x:Name="btn_exportToCSV" Content="Export to CSV" HorizontalAlignment="Left" Margin="517,284,0,0" VerticalAlignment="Top" Width="85" Click="btn_exportToCSV_Click"/>
     </Grid>
 </Window>
