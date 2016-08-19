@@ -52,6 +52,7 @@ namespace ChauffeurJobManager
                 MySqlDataAdapter dataAdapter = new MySqlDataAdapter("select * from " + databaseName + "." + item.ToString() + ";", welcomeSQLManager.sqlConnect);
                 dataAdapter.Fill(dataSet);
                 welcomeSQLManager.closeConnection();
+                dataSet.Columns.RemoveAt(0);
                 selectedTableDataGrid.ItemsSource = dataSet.DefaultView;
             }
         }
@@ -123,7 +124,7 @@ namespace ChauffeurJobManager
         private void copyDataGridToClipboard()
         {
             selectedTableDataGrid.SelectAllCells();
-            selectedTableDataGrid.ClipboardCopyMode = DataGridClipboardCopyMode.IncludeHeader;
+            selectedTableDataGrid.ClipboardCopyMode = DataGridClipboardCopyMode.ExcludeHeader;
             ApplicationCommands.Copy.Execute(null, selectedTableDataGrid);
         }
 
@@ -139,9 +140,9 @@ namespace ChauffeurJobManager
                 object missingValue = System.Reflection.Missing.Value;
                 xlexcel = new Microsoft.Office.Interop.Excel.Application();
                 xlexcel.Visible = true;
-                xlWorkBook = xlexcel.Workbooks.Add(missingValue);
+                xlWorkBook = xlexcel.Workbooks.Open("C:\\Users\\Leon\\Desktop/imsInvoiceTemplate.XLSM");
                 xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);         //index to paste at..
-                Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[6, 1];
+                Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[8, 1];
                 CR.Select();
                 xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
             }

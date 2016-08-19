@@ -20,7 +20,6 @@ namespace ChauffeurJobManager
         {
             public string line_1 { get; set; }
             public string line_2 { get; set; }
-            public string post_town { get; set; }
             public string postcode { get; set; }
         }
 
@@ -45,7 +44,7 @@ namespace ChauffeurJobManager
 
             foreach (Address listLoopInst in addressList)
             {
-                comboBox_addressList.Items.Add(listLoopInst.line_1 + ", " + listLoopInst.line_2 + ", " + listLoopInst.post_town + ", " + listLoopInst.postcode);
+                comboBox_addressList.Items.Add(listLoopInst.line_1 + ", " + listLoopInst.line_2 +  ", " + listLoopInst.postcode);
             }
             comboBox_addressList.SelectedIndex = 0;
         }
