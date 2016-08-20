@@ -26,6 +26,7 @@ namespace ChauffeurJobManager
         {
             InitializeComponent();
             Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Welcome page loaded!");
+            populateExcelFileList();
         }
 
         public void updateTableList()
@@ -61,6 +62,7 @@ namespace ChauffeurJobManager
         {
             updateDataGrid();
         }
+
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             
@@ -121,6 +123,20 @@ namespace ChauffeurJobManager
             }
         }
 
+        private void populateExcelFileList()
+        {
+            listView_ExcelList.Items.Clear();
+            string templatesDirectory = AppDomain.CurrentDomain.BaseDirectory + "Excel";
+            Console.WriteLine(templatesDirectory);
+            DirectoryInfo dinfo = new DirectoryInfo(templatesDirectory);
+            FileInfo[] info = dinfo.GetFiles("*.*", SearchOption.AllDirectories);
+            foreach (FileInfo file in info)
+            {
+                Console.WriteLine(file.Name);
+                listView_ExcelList.Items.Add(file.Name);
+            }
+        }
+
         private void copyDataGridToClipboard()
         {
             selectedTableDataGrid.SelectAllCells();
@@ -140,7 +156,8 @@ namespace ChauffeurJobManager
                 object missingValue = System.Reflection.Missing.Value;
                 xlexcel = new Microsoft.Office.Interop.Excel.Application();
                 xlexcel.Visible = true;
-                xlWorkBook = xlexcel.Workbooks.Open("C:\\Users\\Leon\\Desktop/imsInvoiceTemplate.XLSM");
+                Console.WriteLine(listView_ExcelList.SelectedItem.ToString());
+                xlWorkBook = xlexcel.Workbooks.Open(System.Environment.CurrentDirectory + "\\Excel\\" + listView_ExcelList.SelectedItem.ToString());
                 xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);         //index to paste at..
                 Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[8, 1];
                 CR.Select();
