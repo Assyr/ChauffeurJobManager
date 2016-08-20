@@ -146,8 +146,9 @@ namespace ChauffeurJobManager
 
         private void btn_exportToCSV_Click(object sender, RoutedEventArgs e)
         {
-            object item = listViewTables.SelectedItem;
-            if (item != null)
+            object Tableitem = listViewTables.SelectedItem;
+            object InvoiceItem = listView_ExcelList.SelectedItem;
+            if (Tableitem != null && InvoiceItem != null)
             {
                 copyDataGridToClipboard();
                 Microsoft.Office.Interop.Excel.Application xlexcel;
@@ -165,7 +166,7 @@ namespace ChauffeurJobManager
             }
             else
             {
-                MessageBox.Show("Please select a table before trying to export to CSV", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a table/invoice before trying to export to CSV", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
         }
