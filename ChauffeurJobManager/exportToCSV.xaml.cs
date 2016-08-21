@@ -44,6 +44,12 @@ namespace ChauffeurJobManager
 
         private void btn_exportToExcel_Click(object sender, RoutedEventArgs e)
         {
+            if (listView_ExcelList.SelectedItem == null)
+            {
+                MessageBox.Show("Please select an excel invoice before trying to export", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             dg.SelectAllCells();
             dg.ClipboardCopyMode = DataGridClipboardCopyMode.ExcludeHeader;
             ApplicationCommands.Copy.Execute(null, dg);
