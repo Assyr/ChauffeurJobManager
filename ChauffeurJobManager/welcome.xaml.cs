@@ -26,7 +26,6 @@ namespace ChauffeurJobManager
         {
             InitializeComponent();
             Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Welcome page loaded!");
-            populateExcelFileList();
         }
 
         public void updateTableList()
@@ -123,50 +122,19 @@ namespace ChauffeurJobManager
             }
         }
 
-        private void populateExcelFileList()
-        {
-            listView_ExcelList.Items.Clear();
-            string templatesDirectory = AppDomain.CurrentDomain.BaseDirectory + "Excel";
-            Console.WriteLine(templatesDirectory);
-            DirectoryInfo dinfo = new DirectoryInfo(templatesDirectory);
-            FileInfo[] info = dinfo.GetFiles("*.*", SearchOption.AllDirectories);
-            foreach (FileInfo file in info)
-            {
-                Console.WriteLine(file.Name);
-                listView_ExcelList.Items.Add(file.Name);
-            }
-        }
-
-        private void copyDataGridToClipboard()
-        {
-            selectedTableDataGrid.SelectAllCells();
-            selectedTableDataGrid.ClipboardCopyMode = DataGridClipboardCopyMode.ExcludeHeader;
-            ApplicationCommands.Copy.Execute(null, selectedTableDataGrid);
-        }
-
         private void btn_exportToCSV_Click(object sender, RoutedEventArgs e)
         {
             object Tableitem = listViewTables.SelectedItem;
-            object InvoiceItem = listView_ExcelList.SelectedItem;
-            if (Tableitem != null && InvoiceItem != null)
+            if (Tableitem != null)
             {
-                copyDataGridToClipboard();
-                Microsoft.Office.Interop.Excel.Application xlexcel;
-                Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
-                Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
-                object missingValue = System.Reflection.Missing.Value;
-                xlexcel = new Microsoft.Office.Interop.Excel.Application();
-                xlexcel.Visible = true;
-                Console.WriteLine(listView_ExcelList.SelectedItem.ToString());
-                xlWorkBook = xlexcel.Workbooks.Open(System.Environment.CurrentDirectory + "\\Excel\\" + listView_ExcelList.SelectedItem.ToString());
-                xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);         //index to paste at..
-                Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[8, 1];
-                CR.Select();
-                xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
+                exportToCSV CSVExport = new exportToCSV();
+                CSVExport.dg = selectedTableDataGrid;
+                CSVExport.lbl_Header.Content = "Please select the excel template you" + Environment.NewLine + "would like to export " + listViewTables.SelectedItem.ToString() + " table to.";
+                CSVExport.ShowDialog();
             }
             else
             {
-                MessageBox.Show("Please select a table/invoice before trying to export to CSV", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a table to export a CSV from", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
         }

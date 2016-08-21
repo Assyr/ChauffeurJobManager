@@ -27,18 +27,6 @@
         <Button x:Name="btn_CreateTable" Content="Create Table" HorizontalAlignment="Left" Margin="10,325,0,0" VerticalAlignment="Top" Width="76" Click="btn_CreateTable_Click"/>
         <Button x:Name="btn_DeleteTable" Content="Delete Table" HorizontalAlignment="Left" Margin="91,325,0,0" VerticalAlignment="Top" Width="76" Click="btn_DeleteTable_Click"/>
         <Button x:Name="btn_exportToCSV" Content="Export to CSV" HorizontalAlignment="Left" Margin="91,300,0,0" VerticalAlignment="Top" Width="76" Click="btn_exportToCSV_Click"/>
-        <ListView x:Name="listView_ExcelList" HorizontalAlignment="Left" Height="87" Margin="188,273,0,0" VerticalAlignment="Top" Width="95">
-            <ListView.Resources>
-                <Style TargetType="GridViewColumnHeader">
-                    <Setter Property="Visibility" Value="Collapsed" />
-                </Style>
-            </ListView.Resources>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
     </Grid>
 
 </Window>

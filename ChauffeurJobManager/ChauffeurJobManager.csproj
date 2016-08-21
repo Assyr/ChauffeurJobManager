@@ -74,6 +74,9 @@
     <Compile Include="createTableManager.xaml.cs">
       <DependentUpon>createTableManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="exportToCSV.xaml.cs">
+      <DependentUpon>exportToCSV.xaml</DependentUpon>
+    </Compile>
     <Compile Include="jobManager.xaml.cs">
       <DependentUpon>jobManager.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,10 @@
       <DependentUpon>welcome.xaml</DependentUpon>
     </Compile>
     <Page Include="createTableManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="exportToCSV.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
