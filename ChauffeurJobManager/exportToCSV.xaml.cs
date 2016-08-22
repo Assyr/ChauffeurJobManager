@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit;
 
 namespace ChauffeurJobManager
 {
@@ -21,11 +22,19 @@ namespace ChauffeurJobManager
     public partial class exportToCSV : Window
     {
         public DataGrid dg = new DataGrid();
-
+        IntegerUpDown iud = new IntegerUpDown();
         public exportToCSV()
         {
             InitializeComponent();
             populateExcelFileList();
+
+            //Place our IntegerUpDown control
+            iud.Margin = new Thickness(32, 130, 0, 0);
+            iud.VerticalAlignment = VerticalAlignment.Top;
+            iud.Width = 45;
+            iud.Height = 20;
+            Panel.SetZIndex(iud, 4);
+            exportToCSVGrid.Children.Add(iud);
         }
 
         private void populateExcelFileList()
@@ -42,13 +51,30 @@ namespace ChauffeurJobManager
             }
         }
 
+
+        private int findAlphabetIndexNumber()
+        {
+            int i = 1;
+            for (char c = 'A'; c <= 'Z'; c++)
+            {
+                Console.WriteLine(i);
+                if (txtBox_Column.Text == c.ToString())
+                    break;
+                i++;
+            }
+
+            return i;
+        }
+
         private void btn_exportToExcel_Click(object sender, RoutedEventArgs e)
         {
             if (listView_ExcelList.SelectedItem == null)
             {
-                MessageBox.Show("Please select an excel invoice before trying to export", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show("Please select an excel invoice before trying to export", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
+
+            int index = findAlphabetIndexNumber();
 
             dg.SelectAllCells();
             dg.ClipboardCopyMode = DataGridClipboardCopyMode.ExcludeHeader;
@@ -64,7 +90,7 @@ namespace ChauffeurJobManager
             Console.WriteLine(listView_ExcelList.SelectedItem.ToString());
             xlWorkBook = xlexcel.Workbooks.Open(System.Environment.CurrentDirectory + "\\Excel\\" + listView_ExcelList.SelectedItem.ToString());
             xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);         //index to paste at..
-            Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[8, 1];
+            Microsoft.Office.Interop.Excel.Range CR = (Microsoft.Office.Interop.Excel.Range)xlWorkSheet.Cells[iud.Value, index];
             CR.Select();
             xlWorkSheet.PasteSpecial(CR, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true);
         }
