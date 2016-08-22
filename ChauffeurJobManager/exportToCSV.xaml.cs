@@ -33,6 +33,8 @@ namespace ChauffeurJobManager
             iud.VerticalAlignment = VerticalAlignment.Top;
             iud.Width = 45;
             iud.Height = 20;
+            iud.Minimum = 1;
+            iud.Value = 1;
             Panel.SetZIndex(iud, 4);
             exportToCSVGrid.Children.Add(iud);
         }
@@ -71,6 +73,12 @@ namespace ChauffeurJobManager
             if (listView_ExcelList.SelectedItem == null)
             {
                 System.Windows.MessageBox.Show("Please select an excel invoice before trying to export", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            if(iud.Text == String.Empty || txtBox_Column.Text == String.Empty)
+            {
+                System.Windows.MessageBox.Show("Please make sure you have entered a column and row value", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
