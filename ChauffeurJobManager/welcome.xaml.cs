@@ -10,18 +10,12 @@ using Microsoft.Office.Interop;
 
 namespace ChauffeurJobManager
 {
-
     /// <summary>
     /// Interaction logic for welcome.xaml
     /// </summary>
     /// 
     public partial class welcome : Window
     {
-        private int labelYMarginInitial = 35;
-        private int labelYMarginCurrent = 35;
-        private int labelYMarginOffset = 40;
-        private int labelXMarginCurrent = 20;
-
         //private login loginWindow;
         public string databaseName;
         public IList<string> listOfDatabaseTables = new List<string>();
@@ -44,31 +38,6 @@ namespace ChauffeurJobManager
             foreach (string tableName in listOfDatabaseTables)
             {
                 listViewTables.Items.Add(tableName);
-            }
-        }
-
-        public void populateNextWorkingDay()
-        {
-            List<string> rowStrings = new List<string>();
-            foreach (var lvi in listViewTables.Items)
-            {
-                DataTable dt = welcomeSQLManager.getDatabaseTableInfo(databaseName, lvi.ToString());
-
-                foreach (DataRow col in dt.Rows)
-                {
-                    string columnName = col[dt.Columns["ColumnName"]].ToString();
-                    string dataType = col[dt.Columns["DataType"]].ToString();
-
-                    if(dataType == "System.DateTime")
-                    {
-                        rowStrings.Add(welcomeSQLManager.getDatabaseTableInfoByDate(databaseName, lvi.ToString(), DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"), columnName));
-                    }
-                }
-            }
-
-            foreach (var rowStringComplete in rowStrings)
-            {
-                txtBlock_tomorrowJobs.Text += rowStringComplete + Environment.NewLine;
             }
         }
 

@@ -1,40 +1,32 @@
 ﻿<Window x:Class="ChauffeurJobManager.welcome"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Welcome" Height="390.538" Width="850.734"
+        Title="Welcome" Height="410.538" Width="595.734"
         WindowStartupLocation="CenterOwner">
-    <Grid x:Name="welcomeGrid">
+    <Grid>
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="WelcomeHeading" Text="Welcome:" VerticalAlignment="Top" FontSize="17" FontStretch="ExtraCondensed"/>
         <TextBlock Height="23" HorizontalAlignment="Left" Margin="88,10,0,0" x:Name="TextBlockName"  VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" />
-        <TextBlock Height="43" HorizontalAlignment="Left" Margin="10,34,0,0" x:Name="WelcomeHeading_Copy" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="348"><Run Text="Please select wh"/><Run Text="ich "/><Run Text="month"/><Run Text=" you would like to view"/><LineBreak/><Run Text="or create a new one:"/><LineBreak/><InlineUIContainer>
-                <Label x:Name="label" Content="Label"/>
-            </InlineUIContainer><InlineUIContainer>
-                <Label x:Name="label1" Content="Label"/>
-            </InlineUIContainer><InlineUIContainer/></TextBlock>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="759,320,0,0" VerticalAlignment="Top" Width="74" Click="btnLogout_Click"/>
-        <ListView x:Name="listViewTables" Margin="10,101,700,10" PreviewMouseLeftButtonUp="listView_Click">
+        <TextBlock Height="43" HorizontalAlignment="Left" Margin="10,38,0,0" x:Name="WelcomeHeading_Copy" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="348"><Run Text="Please select wh"/><Run Text="ich "/><Run Text="month"/><Run Text=" you would like to view"/><LineBreak/><Run Text="or create a new one:"/><LineBreak/><InlineUIContainer>
+            </InlineUIContainer></TextBlock>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="504,340,0,0" VerticalAlignment="Top" Width="74" Click="btnLogout_Click"/>
+        <ListView x:Name="listViewTables" Margin="10,86,445,85" PreviewMouseLeftButtonUp="listView_Click">
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Visibility" Value="Collapsed" />
                 </Style>
             </ListView.Resources>
         </ListView>
-        <DataGrid x:Name="selectedTableDataGrid" HorizontalAlignment="Left" Margin="148,101,0,0" VerticalAlignment="Top" Height="189" Width="418" IsReadOnly="True">
+        <DataGrid x:Name="selectedTableDataGrid" HorizontalAlignment="Left" Margin="148,86,0,0" VerticalAlignment="Top" Height="178" Width="406" IsReadOnly="True">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="Copy" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-        <Button x:Name="btn_openTable" Content="Open Table" HorizontalAlignment="Left" Margin="148,295,0,0" VerticalAlignment="Top" Width="76" Click="btn_openTable_Click"/>
-        <Button x:Name="btn_CreateTable" Content="Create Table" HorizontalAlignment="Left" Margin="148,320,0,0" VerticalAlignment="Top" Width="76" Click="btn_CreateTable_Click"/>
-        <Button x:Name="btn_DeleteTable" Content="Delete Table" HorizontalAlignment="Left" Margin="227,295,0,0" VerticalAlignment="Top" Width="76" Click="btn_DeleteTable_Click"/>
-        <Button x:Name="btn_exportToCSV" Content="Export to CSV" HorizontalAlignment="Left" Margin="227,320,0,0" VerticalAlignment="Top" Width="76" Click="btn_exportToCSV_Click"/>
-        <Label x:Name="lbl_tomorrowJobs" Content="Tomorrow's Jobs" HorizontalAlignment="Left" Margin="653,75,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_tablePreview" Content="Table Preview" HorizontalAlignment="Left" Margin="305,75,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lbl_tables" Content="Tables" HorizontalAlignment="Left" Margin="53,75,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="txtBlock_tomorrowJobs" HorizontalAlignment="Left" Margin="571,101,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="189" Width="262"/>
-
+        <Button x:Name="btn_openTable" Content="Open Table" HorizontalAlignment="Left" Margin="10,300,0,0" VerticalAlignment="Top" Width="76" Click="btn_openTable_Click"/>
+        <Button x:Name="btn_CreateTable" Content="Create Table" HorizontalAlignment="Left" Margin="10,325,0,0" VerticalAlignment="Top" Width="76" Click="btn_CreateTable_Click"/>
+        <Button x:Name="btn_DeleteTable" Content="Delete Table" HorizontalAlignment="Left" Margin="91,325,0,0" VerticalAlignment="Top" Width="76" Click="btn_DeleteTable_Click"/>
+        <Button x:Name="btn_exportToCSV" Content="Export to CSV" HorizontalAlignment="Left" Margin="91,300,0,0" VerticalAlignment="Top" Width="76" Click="btn_exportToCSV_Click"/>
     </Grid>
 
 </Window>
