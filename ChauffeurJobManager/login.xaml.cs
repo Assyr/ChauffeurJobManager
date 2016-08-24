@@ -53,6 +53,7 @@ namespace ChauffeurJobManager
                     welcomeScreen.TextBlockName.Text = username;
                     welcomeScreen.Top = this.Top;
                     welcomeScreen.Left = this.Left;
+                    welcomeScreen.populateNextWorkingDay();
                     welcomeScreen.Show();
                     Close();
                 }

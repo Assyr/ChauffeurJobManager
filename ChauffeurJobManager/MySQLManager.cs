@@ -132,5 +132,25 @@ namespace ChauffeurJobManager
             return schema;
 
         }
+
+        public string getDatabaseTableInfoByDate(string databaseName, string tableToGetInfoFrom, string tomorrowDate, string columnName)
+        {
+            openConnection(databaseName);
+            Console.WriteLine("SELECT * FROM " + tableToGetInfoFrom + " WHERE " + columnName + " = '" + tomorrowDate + "'");
+            MySqlCommand schemaCommand = new MySqlCommand("SELECT * FROM " + tableToGetInfoFrom + " WHERE " + columnName + " = '" + tomorrowDate + "'", sqlConnect);
+            MySqlDataReader reader;
+            reader = schemaCommand.ExecuteReader();
+            string row = "";
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount; i++)
+                    row += reader.GetValue(i).ToString() + ", ";
+                break;
+            }
+
+            closeConnection();
+
+            return row;
+        }
     }
 }
