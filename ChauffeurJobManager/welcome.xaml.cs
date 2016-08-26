@@ -31,6 +31,11 @@ namespace ChauffeurJobManager
             Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Welcome page loaded!");
             this.Closed += new EventHandler(welcomeWindowClosing);
         }
+        private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+        }
 
         void welcomeWindowClosing(object sender, EventArgs e)
         {

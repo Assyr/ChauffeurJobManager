@@ -16,7 +16,7 @@
                 </Style>
             </ListView.Resources>
         </ListView>
-        <DataGrid x:Name="selectedTableDataGrid" HorizontalAlignment="Left" Margin="153,86,0,0" VerticalAlignment="Top" Height="178" Width="430" IsReadOnly="True">
+        <DataGrid x:Name="selectedTableDataGrid" HorizontalAlignment="Left" Margin="153,86,0,0" VerticalAlignment="Top" Height="178" Width="430" AutoGeneratingColumn="OnAutoGeneratingColumn" IsReadOnly="True">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="Copy" />

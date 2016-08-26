@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChauffeurJobManager"
         mc:Ignorable="d"
-        Title="Next Working Day" Height="205" Width="430">
+        Title="Next Working Day" Height="209.339" Width="500">
     <Grid>
-        <DataGrid x:Name="selectedTableDataGrid" HorizontalAlignment="Left" Margin="0,0,-135,0" VerticalAlignment="Top" Height="178" Width="430" IsReadOnly="True">
+        <DataGrid x:Name="selectedTableDataGrid" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top" Height="178" Width="485" AutoGeneratingColumn="OnAutoGeneratingColumn" IsReadOnly="True">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Command="Copy" />

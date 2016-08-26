@@ -35,6 +35,12 @@ namespace ChauffeurJobManager
             InitializeComponent();
         }
 
+        private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyType == typeof(System.DateTime))
+                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd/MM/yyyy";
+        }
+
         public void populateJobManagerWindow()
         {
             string tableName = txtBlock_tableName.Text;
