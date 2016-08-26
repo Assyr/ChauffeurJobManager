@@ -109,6 +109,16 @@ namespace ChauffeurJobManager
             return tables;
         }
 
+        public DataTable getDataTable(string database, string tableInDatabase)
+        {
+            DataTable dataSet = new DataTable();
+            openConnection(database);
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter("SELECT * FROM " + tableInDatabase + ";", sqlConnect);
+            dataAdapter.Fill(dataSet);
+
+            return dataSet;
+        }
+
         public void sendQueryToDatabase(string query)
         {
             MySqlCommand sendQueryToDatabase = new MySqlCommand(query, sqlConnect);
@@ -118,9 +128,6 @@ namespace ChauffeurJobManager
         public DataTable getDatabaseTableInfo(string databaseName, string tableToGetInfoFrom)
         {
             DataTable schema = null;
-
-            Console.WriteLine("getDatabaseTableInfo connecting to database: " + databaseName);
-            Console.WriteLine("getDatabaseTableInfo using table: " + tableToGetInfoFrom);
             openConnection(databaseName);
             MySqlCommand schemaCommand = new MySqlCommand("SELECT * FROM " + tableToGetInfoFrom, sqlConnect);
 

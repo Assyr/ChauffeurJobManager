@@ -54,12 +54,7 @@ namespace ChauffeurJobManager
         {
             if (listViewTables.SelectedItem != null)
             {
-                DataTable dataSet = new DataTable();
-                Console.WriteLine(databaseName);
-                welcomeSQLManager.openConnection(databaseName);
-                MySqlDataAdapter dataAdapter = new MySqlDataAdapter("select * from " + databaseName + "." + listViewTables.SelectedItem.ToString() + ";", welcomeSQLManager.sqlConnect);
-                dataAdapter.Fill(dataSet);
-                welcomeSQLManager.closeConnection();
+                DataTable dataSet = welcomeSQLManager.getDataTable(databaseName, listViewTables.SelectedItem.ToString());
                 dataSet.Columns.RemoveAt(0);
                 selectedTableDataGrid.ItemsSource = dataSet.DefaultView;
             }
