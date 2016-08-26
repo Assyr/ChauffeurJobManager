@@ -81,6 +81,9 @@
       <DependentUpon>jobManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="MySQLManager.cs" />
+    <Compile Include="nextWorkingDay.xaml.cs">
+      <DependentUpon>nextWorkingDay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="postcodeLookup.xaml.cs">
       <DependentUpon>postcodeLookup.xaml</DependentUpon>
     </Compile>
@@ -110,6 +113,10 @@
     <Compile Include="login.xaml.cs">
       <DependentUpon>login.xaml</DependentUpon>
     </Compile>
+    <Page Include="nextWorkingDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="postcodeLookup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

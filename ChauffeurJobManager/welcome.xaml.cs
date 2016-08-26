@@ -20,12 +20,21 @@ namespace ChauffeurJobManager
         public string databaseName;
         public IList<string> listOfDatabaseTables = new List<string>();
 
-        MySQLManager welcomeSQLManager = new MySQLManager();
+        private MySQLManager welcomeSQLManager = new MySQLManager();
+
+        private nextWorkingDay nWD = new nextWorkingDay();
+        private bool showNextWorkingDay = false;
 
         public welcome()
         {
             InitializeComponent();
             Console.WriteLine(DateTime.Now.ToString("h:mm:ss tt - ") + "Welcome page loaded!");
+            this.Closed += new EventHandler(welcomeWindowClosing);
+        }
+
+        void welcomeWindowClosing(object sender, EventArgs e)
+        {
+            nWD.Close();
         }
 
         public void updateTableList()
@@ -125,6 +134,22 @@ namespace ChauffeurJobManager
                 CSVExport.dg = selectedTableDataGrid;
                 CSVExport.lbl_Header.Content = "Please select the excel template you" + Environment.NewLine + "would like to export " + listViewTables.SelectedItem.ToString() + " table to.";
                 CSVExport.ShowDialog();
+        }
+
+        private void btn_toggleNextWorkingDay_Click(object sender, RoutedEventArgs e)
+        {
+            if(!showNextWorkingDay)
+            {
+                btn_toggleNextWorkingDay.Content = "Hide Next " + Environment.NewLine + "Working Day";
+                showNextWorkingDay = true;
+                nWD.Show();
+            }
+            else
+            {
+                btn_toggleNextWorkingDay.Content = "Show Next " + Environment.NewLine + "Working Day";
+                showNextWorkingDay = false;
+                nWD.Hide();
+            }
         }
     }
 }

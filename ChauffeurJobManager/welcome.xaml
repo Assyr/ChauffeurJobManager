@@ -27,6 +27,7 @@
         <Button x:Name="btn_CreateTable" Content="Create Table" HorizontalAlignment="Left" Margin="234,269,0,0" VerticalAlignment="Top" Width="76" Click="btn_CreateTable_Click"/>
         <Button x:Name="btn_DeleteTable" Content="Delete Table" HorizontalAlignment="Left" Margin="153,294,0,0" VerticalAlignment="Top" Width="76" Click="btn_DeleteTable_Click"/>
         <Button x:Name="btn_exportToCSV" Content="Export to CSV" HorizontalAlignment="Left" Margin="234,294,0,0" VerticalAlignment="Top" Width="76" Click="btn_exportToCSV_Click" RenderTransformOrigin="0.5,0.5"/>
+        <Button x:Name="btn_toggleNextWorkingDay" Content="Show Next &#xD;&#xA;Working Day" HorizontalAlignment="Left" Margin="315,269,0,0" VerticalAlignment="Top" Width="76" Height="45" Click="btn_toggleNextWorkingDay_Click"/>
     </Grid>
 
 </Window>
