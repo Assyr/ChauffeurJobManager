@@ -119,13 +119,23 @@ namespace ChauffeurJobManager
             return dataSet;
         }
 
+        public DataTable getDataTableFilteredByDate(string database, string tableInDatabase, string tomorrowDate, string columnName)
+        {
+            DataTable dataSet = new DataTable();
+            openConnection(database);
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter("SELECT * FROM " + tableInDatabase + " WHERE " + columnName + " = '" + tomorrowDate + "'", sqlConnect);
+            dataAdapter.Fill(dataSet);
+
+            return dataSet;
+        }
+
         public void sendQueryToDatabase(string query)
         {
             MySqlCommand sendQueryToDatabase = new MySqlCommand(query, sqlConnect);
             sendQueryToDatabase.ExecuteNonQuery();
         }
 
-        public DataTable getDatabaseTableInfo(string databaseName, string tableToGetInfoFrom)
+        public DataTable getTableStructureInfo(string databaseName, string tableToGetInfoFrom)
         {
             DataTable schema = null;
             openConnection(databaseName);

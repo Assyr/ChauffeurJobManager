@@ -50,24 +50,38 @@ namespace ChauffeurJobManager
             }
         }
 
-        public void updateDataGrid()
+        public void updateDataGrids()
         {
             if (listViewTables.SelectedItem != null)
             {
                 DataTable dataSet = welcomeSQLManager.getDataTable(databaseName, listViewTables.SelectedItem.ToString());
                 dataSet.Columns.RemoveAt(0);
                 selectedTableDataGrid.ItemsSource = dataSet.DefaultView;
+
+                if (showNextWorkingDay)
+                {
+                    DataTable dt = welcomeSQLManager.getTableStructureInfo(databaseName, listViewTables.SelectedItem.ToString());
+                    foreach(DataRow col in dt.Rows)
+                    {
+                        string columnName = col[dt.Columns["ColumnName"]].ToString();
+                        string dataType = col[dt.Columns["DataType"]].ToString();
+
+                        if (dataType == "System.DateTime")
+                        {
+                            nWD.populateDataGridByDate(databaseName, listViewTables.SelectedItem.ToString(), columnName);
+                        }
+                    }
+                }
             }
         }
 
         private void listView_Click(object sender, RoutedEventArgs e)
         {
-            updateDataGrid();
+            updateDataGrids();
         }
 
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
-            
             login loginWindow = new login();
             loginWindow.Top = this.Top;
             loginWindow.Left = this.Left;
@@ -115,7 +129,7 @@ namespace ChauffeurJobManager
                 jobManagerWindow.populateJobManagerWindow();
                 jobManagerWindow.populateDataGrid();
                 jobManagerWindow.ShowDialog();
-                updateDataGrid();
+                updateDataGrids();
         }
 
         private void btn_exportToCSV_Click(object sender, RoutedEventArgs e)

@@ -40,7 +40,7 @@ namespace ChauffeurJobManager
             string tableName = txtBlock_tableName.Text;
 
             Grid grid = jobManagerGrid;
-            DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
+            DataTable columnInfo = jobManagerSQLManager.getTableStructureInfo(tableDatabaseName, tableName);
 
             foreach (DataRow col in columnInfo.Rows)
             {
@@ -197,7 +197,7 @@ namespace ChauffeurJobManager
             string sqlColumnName = "insert into " + tableDatabaseName + "." + tableName + "(";
             string sqlColumnData = "values('";
 
-            DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, tableName);
+            DataTable columnInfo = jobManagerSQLManager.getTableStructureInfo(tableDatabaseName, tableName);
 
             int ControlListindex = 0;
 
@@ -278,7 +278,7 @@ namespace ChauffeurJobManager
             int ControlListindex = 0;
             int jobIDValue = 0;
 
-            DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, txtBlock_tableName.Text);
+            DataTable columnInfo = jobManagerSQLManager.getTableStructureInfo(tableDatabaseName, txtBlock_tableName.Text);
 
             foreach (DataRow col in columnInfo.Rows)
             {
@@ -364,7 +364,7 @@ namespace ChauffeurJobManager
             int ControlListindex = 0;
             int jobIDValue = 0;
 
-            DataTable columnInfo = jobManagerSQLManager.getDatabaseTableInfo(tableDatabaseName, txtBlock_tableName.Text);
+            DataTable columnInfo = jobManagerSQLManager.getTableStructureInfo(tableDatabaseName, txtBlock_tableName.Text);
 
             foreach (DataRow col in columnInfo.Rows)
             {
