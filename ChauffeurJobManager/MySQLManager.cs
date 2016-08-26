@@ -128,7 +128,6 @@ namespace ChauffeurJobManager
 
             return dataSet;
         }
-
         public void sendQueryToDatabase(string query)
         {
             MySqlCommand sendQueryToDatabase = new MySqlCommand(query, sqlConnect);

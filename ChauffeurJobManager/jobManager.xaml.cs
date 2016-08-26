@@ -41,28 +41,25 @@ namespace ChauffeurJobManager
 
             Grid grid = jobManagerGrid;
             DataTable columnInfo = jobManagerSQLManager.getTableStructureInfo(tableDatabaseName, tableName);
-
             foreach (DataRow col in columnInfo.Rows)
             {
                 //Get how many columns are in our table and store it later for update implementation
                 tableColumnCount++;
 
                 string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
-                Console.WriteLine(columnName);
                 string dataType = col[columnInfo.Columns["DataType"]].ToString();
-                Console.WriteLine(dataType);
 
                 Label lblColumnName = new Label();
 
                 if (labelYMarginCurrent >= 195)
                 {
                     lblColumnName.Margin = new Thickness(labelXMarginCurrent + 325, labelYMarginInitial += labelYMarginOffset, 0, 0);
-                    findAndPlotColumnDataType(dataType, labelXMarginCurrent + 30, labelYMarginInitial, jobManagerGrid);
+                    findAndPlotColumnDataType(dataType, labelXMarginCurrent + 30, labelYMarginInitial, jobManagerGrid, columnName);
                 }
                 else
                 {
                     lblColumnName.Margin = new Thickness(labelXMarginCurrent, labelYMarginCurrent += labelYMarginOffset, 0, 0);
-                    findAndPlotColumnDataType(dataType, labelXMarginCurrent - 600, labelYMarginCurrent, jobManagerGrid);
+                    findAndPlotColumnDataType(dataType, labelXMarginCurrent - 600, labelYMarginCurrent, jobManagerGrid, columnName);
                 }
 
                 lblColumnName.VerticalAlignment = VerticalAlignment.Top;
@@ -74,7 +71,7 @@ namespace ChauffeurJobManager
             }
         }
 
-        private void findAndPlotColumnDataType(string columnDataType, int controlXMarginCurrent, int controlYMarginInitial, Grid gridFunc)
+        private void findAndPlotColumnDataType(string columnDataType, int controlXMarginCurrent, int controlYMarginInitial, Grid gridFunc, string columnName)
         {
 
             switch (columnDataType)
@@ -109,6 +106,10 @@ namespace ChauffeurJobManager
                     Console.WriteLine("System.Int32 detected");
                     //Implement logic for handling int32
                     IntegerUpDown iud = new IntegerUpDown();
+
+                    if (columnName == "jobID")
+                        iud.IsEnabled = false;
+
                     iud.Margin = new Thickness(controlXMarginCurrent, controlYMarginInitial, 0, 0);
                     iud.VerticalAlignment = VerticalAlignment.Top;
                     iud.Width = 120;
@@ -199,12 +200,15 @@ namespace ChauffeurJobManager
 
             DataTable columnInfo = jobManagerSQLManager.getTableStructureInfo(tableDatabaseName, tableName);
 
-            int ControlListindex = 0;
+            int ControlListindex = 1;
 
             foreach (DataRow col in columnInfo.Rows)
             {
                 string columnName = col[columnInfo.Columns["ColumnName"]].ToString();
                 string dataType = col[columnInfo.Columns["DataType"]].ToString();
+
+                if (columnName == "jobID")
+                    continue;
 
                 sqlColumnName += columnName + ",";
 
@@ -218,6 +222,7 @@ namespace ChauffeurJobManager
                         ControlListindex++;
                         break;
                     case "System.Int32":
+
                         IntegerUpDown iud = controlTest[ControlListindex] as IntegerUpDown;
                         Console.WriteLine(iud.Text);
                         sqlColumnData += iud.Text + "','";
@@ -479,7 +484,7 @@ namespace ChauffeurJobManager
 
         private bool checkIfControlsAreEmpty()
         {
-            for (int x = 0; x < controlTest.Count; x++)
+            for (int x = 1; x < controlTest.Count; x++)
             {
                 if (controlTest[x] is TextBox)
                 {
