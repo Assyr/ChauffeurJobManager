@@ -112,6 +112,12 @@ namespace ChauffeurJobManager
                 return;
             }
 
+            MessageBoxResult result = MessageBox.Show("Are you sure you would like to delete table " + listViewTables.SelectedItem.ToString() + "?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+
             welcomeSQLManager.sendQueryToDatabase("DROP TABLE IF EXISTS " + databaseName + "." + listViewTables.SelectedItem.ToString());
             welcomeSQLManager.closeConnection();
             selectedTableDataGrid.ItemsSource = null;
