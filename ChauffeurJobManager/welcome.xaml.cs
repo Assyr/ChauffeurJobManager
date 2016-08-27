@@ -156,6 +156,7 @@ namespace ChauffeurJobManager
             {
                 btn_toggleNextWorkingDay.Content = "Hide Next " + Environment.NewLine + "Working Day";
                 showNextWorkingDay = true;
+                updateDataGrids();
                 nWD.Show();
             }
             else
