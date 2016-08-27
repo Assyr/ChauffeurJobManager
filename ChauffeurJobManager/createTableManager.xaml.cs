@@ -206,8 +206,12 @@ namespace ChauffeurJobManager
 
         private void btn_CreateTableInDatabase_Click(object sender, RoutedEventArgs e)
         {
-            dynamic selectedItem = listView_TemplateList.SelectedItem;
-            string templateFileName = selectedItem;
+            if(listView_TemplateList.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a template to create a table from!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            string templateFileName = listView_TemplateList.SelectedItem.ToString();
             string tableName = new TextRange(databaseTableName.Document.ContentStart, databaseTableName.Document.ContentEnd).Text;
             tableName = tableName.Trim();
             Console.WriteLine(tableName);
