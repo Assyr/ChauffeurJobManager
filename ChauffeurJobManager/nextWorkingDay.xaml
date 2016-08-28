@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ChauffeurJobManager"
         mc:Ignorable="d"
         Loaded="nextWorkingDayWindow_Loaded"
-        Title="Next Working Day" Height="209.339" Width="500">
+        Title="Next Working Day" Height="225.339" Width="500">
     <Grid>
         <DataGrid x:Name="selectedTableDataGrid" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top" Height="178" Width="485" AutoGeneratingColumn="OnAutoGeneratingColumn" IsReadOnly="True">
             <DataGrid.ContextMenu>
