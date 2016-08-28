@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChauffeurJobManager"
         mc:Ignorable="d"
-        Title="Create Table" Height="450" Width="600">
+        Title="Create Table" Height="450" Width="610">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <Grid x:Name="tableManagerGrid">
             <TextBlock Height="66" HorizontalAlignment="Left" Margin="10,10,0,0" x:Name="txtBlock_createTableManager" VerticalAlignment="Top" FontSize="15" FontStretch="ExtraCondensed" Width="446"><Run Text="Create Table Manager - Create a new table "/><LineBreak/><Run Text="or use one you have previously created"/><Run Text="."/></TextBlock>
-            <Button x:Name="btn_Close" Content="Close" HorizontalAlignment="Left" Margin="511,10,0,0" VerticalAlignment="Top" Width="74" Click="button_Click_Close"/>
-            <Button x:Name="btn_addNewColumn" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Margin="386,81,0,0" Height="22" Click="btn_addNewColumn_Click" Canvas.ZIndex="3"/>
+            <Button x:Name="btn_Close" Content="Close" HorizontalAlignment="Left" Margin="500,10,0,0" VerticalAlignment="Top" Width="74" Click="button_Click_Close"/>
+            <Button x:Name="btn_addNewColumn" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Width="24" Margin="423,81,0,0" Height="22" Click="btn_addNewColumn_Click" Canvas.ZIndex="3"/>
             <Label x:Name="lbl_columnName" Content="Column Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="127,55,0,0"/>
             <Label x:Name="lbl_dataType" Content="Data Type" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="279,55,0,0"/>
-            <Button x:Name="btn_SaveTableTemplate" Content="Save Table &#xD;&#xA;Template" HorizontalAlignment="Left" Margin="471,131,0,0" VerticalAlignment="Top" Width="70" Height="40" Canvas.ZIndex="3" Click="btn_SaveTableTemplate_Click"/>
-            <Label x:Name="label" Content="Template Name:" HorizontalAlignment="Left" Margin="456,76,0,0" VerticalAlignment="Top"/>
-            <RichTextBox x:Name="templateFileName" HorizontalAlignment="Left" Height="19" Margin="456,107,0,0" VerticalAlignment="Top" Width="100" PreviewTextInput="templateFileName_PreviewTextInput">
+            <Button x:Name="btn_SaveTableTemplate" Content="Save Table &#xD;&#xA;Template" HorizontalAlignment="Left" Margin="489,133,0,0" VerticalAlignment="Top" Width="70" Height="40" Canvas.ZIndex="3" Click="btn_SaveTableTemplate_Click"/>
+            <Label x:Name="label" Content="Template Name:" HorizontalAlignment="Left" Margin="474,76,0,0" VerticalAlignment="Top"/>
+            <RichTextBox x:Name="templateFileName" HorizontalAlignment="Left" Height="19" Margin="474,107,0,0" VerticalAlignment="Top" Width="100" PreviewTextInput="templateFileName_PreviewTextInput">
                 <FlowDocument/>
             </RichTextBox>
-            <ListView x:Name="listView_TemplateList" HorizontalAlignment="Left" Height="100" Margin="460,202,0,0" VerticalAlignment="Top" Width="92">
+            <ListView x:Name="listView_TemplateList" HorizontalAlignment="Left" Height="100" Margin="478,202,0,0" VerticalAlignment="Top" Width="92">
                 <ListView.Resources>
                     <Style TargetType="GridViewColumnHeader">
                         <Setter Property="Visibility" Value="Collapsed" />
@@ -30,12 +30,12 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Label x:Name="lbl_TemplateList" Content="Template List" HorizontalAlignment="Left" Margin="468,176,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btn_CreateTableInDatabase" Content="Create table&#xD;&#xA;in database" HorizontalAlignment="Left" Margin="456,358,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="btn_CreateTableInDatabase_Click"/>
-            <RichTextBox x:Name="databaseTableName" HorizontalAlignment="Left" Height="20" Margin="456,333,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.576,-8.053" PreviewTextInput="databaseTableName_PreviewTextInput">
+            <Label x:Name="lbl_TemplateList" Content="Template List" HorizontalAlignment="Left" Margin="486,176,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btn_CreateTableInDatabase" Content="Create table&#xD;&#xA;in database" HorizontalAlignment="Left" Margin="474,358,0,0" VerticalAlignment="Top" Width="100" Height="40" Click="btn_CreateTableInDatabase_Click"/>
+            <RichTextBox x:Name="databaseTableName" HorizontalAlignment="Left" Height="20" Margin="474,333,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.576,-8.053" PreviewTextInput="databaseTableName_PreviewTextInput">
                 <FlowDocument/>
             </RichTextBox>
-            <Label x:Name="label_Copy" Content="Table Name" HorizontalAlignment="Left" Margin="468,307,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label_Copy" Content="Table Name" HorizontalAlignment="Left" Margin="486,307,0,0" VerticalAlignment="Top"/>
         </Grid>
     </ScrollViewer>
 </Window>

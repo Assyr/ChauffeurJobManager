@@ -20,7 +20,7 @@ namespace ChauffeurJobManager
         private List<ComboBox> comboBoxList = new List<ComboBox>();
         private List<TextBox> textBoxList = new List<TextBox>();
         private List<Label> labelList = new List<Label>();
-        private int comboBoxCurrentValue = 80;
+        private int comboBoxCurrentValue = 85;
         private int comboBoxMarginOffset = 40;
         private int columnNumber = 1;
 
@@ -59,8 +59,8 @@ namespace ChauffeurJobManager
             TextBox columnNameTextBox = new TextBox();
 
 
-            dataTypeComboBox.Margin = new Thickness(125, comboBoxCurrentValue, 0, 0);
-            columnNameTextBox.Margin = new Thickness(-145, comboBoxCurrentValue, 0, 0);
+            dataTypeComboBox.Margin = new Thickness(35, comboBoxCurrentValue, 0, 0);
+            columnNameTextBox.Margin = new Thickness(-260, comboBoxCurrentValue, 0, 0);
             lblcolumnNumber.Margin = new Thickness(30, comboBoxCurrentValue - 3, 0, 0);
 
             dataTypeComboBox.VerticalAlignment = VerticalAlignment.Top;
@@ -104,7 +104,7 @@ namespace ChauffeurJobManager
                 //Make sure that the textBox is not empty
                 if (string.IsNullOrWhiteSpace(tb.Text))
                 {
-                    MessageBox.Show("All columns must be given a valid name!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                    Xceed.Wpf.Toolkit.MessageBox.Show("All columns must be given a valid name!", "", MessageBoxButton.OK, MessageBoxImage.Information);
                     return;
                 }
                 else //If any column table names are empty, spit out a message and return! - Fixes #1
@@ -116,14 +116,14 @@ namespace ChauffeurJobManager
             }
 
             if (string.IsNullOrWhiteSpace(XMLFileName))
-            {
-                MessageBox.Show("You must enter a valid template name", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+            { 
+                Xceed.Wpf.Toolkit.MessageBox.Show("You must enter a valid template name", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 templateFileName.Focus();
                 return;
             }
             else
             {
-                MessageBox.Show(XMLFileName + " template has been created.");
+                Xceed.Wpf.Toolkit.MessageBox.Show(XMLFileName + " template has been created.", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 templateFileName.Document.Blocks.Clear();
             }
 
@@ -208,7 +208,7 @@ namespace ChauffeurJobManager
         {
             if(listView_TemplateList.SelectedItem == null)
             {
-                MessageBox.Show("Please select a template to create a table from!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Please select a template to create a table from!", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             string templateFileName = listView_TemplateList.SelectedItem.ToString();
@@ -242,7 +242,7 @@ namespace ChauffeurJobManager
             catch (MySqlException ex)
             {
                 sql.sendQueryToDatabase("DROP TABLE IF EXISTS " + tableName);
-                MessageBox.Show("Table couldn't be created in database - please check to make sure that your column names are not MySQL syntax. ERROR: " + ex.Message);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Table couldn't be created in database - please check to make sure that your column names are not MySQL syntax. ERROR: " + ex.Message, "", MessageBoxButton.OK, MessageBoxImage.Question);
                 //Can add more sophisticated checks later against a dictionary of MySQL syntax to let the user know specifically which column name is invalid.
             }
 

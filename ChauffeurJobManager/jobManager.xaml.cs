@@ -196,7 +196,7 @@ namespace ChauffeurJobManager
         {
             if (checkIfControlsAreEmpty())
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show("ONE OR MORE INPUT FIELDS ARE EMPTY");
+                Xceed.Wpf.Toolkit.MessageBox.Show("A field is empty, unable to insert data", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -279,7 +279,7 @@ namespace ChauffeurJobManager
 
             if (checkIfControlsAreEmpty())
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show("ONE OR MORE INPUT FIELDS ARE EMPTY");
+                Xceed.Wpf.Toolkit.MessageBox.Show("A field is empty, unable to update data", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
@@ -365,7 +365,7 @@ namespace ChauffeurJobManager
 
             if(checkIfControlsAreEmpty())
             {
-                Xceed.Wpf.Toolkit.MessageBox.Show("ONE OR MORE INPUT FIELDS ARE EMPTY");
+                Xceed.Wpf.Toolkit.MessageBox.Show("A field is empty, unable to delete data", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 

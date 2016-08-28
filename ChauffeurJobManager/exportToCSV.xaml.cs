@@ -72,13 +72,13 @@ namespace ChauffeurJobManager
         {
             if (listView_ExcelList.SelectedItem == null)
             {
-                System.Windows.MessageBox.Show("Please select an excel invoice before trying to export", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Please select an excel invoice before trying to export", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 
             if(iud.Text == String.Empty || txtBox_Column.Text == String.Empty)
             {
-                System.Windows.MessageBox.Show("Please make sure you have entered a column and row value", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                Xceed.Wpf.Toolkit.MessageBox.Show("Please make sure you have entered a column and row value", "", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 

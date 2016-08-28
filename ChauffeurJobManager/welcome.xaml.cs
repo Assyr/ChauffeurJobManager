@@ -108,15 +108,13 @@ namespace ChauffeurJobManager
             welcomeSQLManager.openConnection(databaseName);
             if (listViewTables.SelectedItem == null)
             {
-                MessageBox.Show("Please select a table to delete from the list", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBoxResult messageBoxResult = Xceed.Wpf.Toolkit.MessageBox.Show("Please select a table to delete from the list", "", MessageBoxButton.OK, MessageBoxImage.Question);
                 return;
             }
 
-            MessageBoxResult result = MessageBox.Show("Are you sure you would like to delete table " + listViewTables.SelectedItem.ToString() + "?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.No)
-            {
+            MessageBoxResult messageBoxResultYESNO = Xceed.Wpf.Toolkit.MessageBox.Show("Are you sure you would like to delete table " + listViewTables.SelectedItem.ToString() + "?", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (messageBoxResultYESNO == MessageBoxResult.No)
                 return;
-            }
 
             welcomeSQLManager.sendQueryToDatabase("DROP TABLE IF EXISTS " + databaseName + "." + listViewTables.SelectedItem.ToString());
             welcomeSQLManager.closeConnection();
@@ -128,7 +126,7 @@ namespace ChauffeurJobManager
         {
             if (listViewTables.SelectedItem == null)
             {
-                MessageBox.Show("Please select a table to open from the list", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBoxResult messageBoxResult = Xceed.Wpf.Toolkit.MessageBox.Show("Please select a table to open from the list", "", MessageBoxButton.OK, MessageBoxImage.Question);
                 return;
             }
                 jobManager jobManagerWindow = new jobManager();
@@ -147,7 +145,7 @@ namespace ChauffeurJobManager
         {
             if (listViewTables.SelectedItem == null)
             {
-                MessageBox.Show("Please select a table to export a CSV from", "ERROR", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBoxResult messageBoxResult = Xceed.Wpf.Toolkit.MessageBox.Show("Please select a table to export a CSV from", "", MessageBoxButton.OK, MessageBoxImage.Question);
                 return;
             }
                 exportToCSV CSVExport = new exportToCSV();
